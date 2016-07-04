@@ -36,6 +36,7 @@ namespace OwnApt.Api
         {
             // Add framework services.
             services.AddMvc();
+            services.AddRouting();
             services.AddOwnAptDependencies(Configuration);
         }
 

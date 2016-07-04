@@ -8,6 +8,6 @@
     }
   },
   "Mongo": {
-    "ConnectionString": ""
+    "ConnectionString": "mongodb://localhost:27017"
   }
 }

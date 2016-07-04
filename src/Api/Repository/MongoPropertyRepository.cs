@@ -11,8 +11,8 @@ namespace OwnApt.Api.Repository
 {
     public class MongoPropertyRepository : IPropertyRepository
     {
-        private IMapper mapper;
-        private IMongoDatabase propertyDatabase;
+        private readonly IMapper mapper;
+        private readonly IMongoDatabase propertyDatabase;
 
         IMongoCollection<PropertyEntity> PropertiesCollection => this.propertyDatabase.GetCollection<PropertyEntity>("Property");
 
@@ -72,14 +72,15 @@ namespace OwnApt.Api.Repository
 
         public PropertyModel ReadProperty(string id)
         {
-            var propertyModel = this.PropertiesCollection.Find(p => p.Id == id);
+            var propertyModel = this.PropertiesCollection.Find(p => p.Id == id).FirstOrDefault();
             return this.mapper.Map<PropertyModel>(propertyModel);
         }
 
         public async Task<PropertyModel> ReadPropertyAsync(string id)
         {
-            var property = await this.PropertiesCollection.FindAsync(p => p.Id == id);
-            return this.mapper.Map<PropertyModel>(property);
+            var asyncCursor = await this.PropertiesCollection.FindAsync(p => p.Id == id);
+            var propertyEntity = await asyncCursor.FirstOrDefaultAsync();
+            return this.mapper.Map<PropertyEntity, PropertyModel>(propertyEntity);
         }
 
         public void UpdateProperty(PropertyModel property)
