@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Api.Repository.Entity
+namespace OwnApt.Api.Repository.Entity
 {
 	public class FeaturesEntity
 	{

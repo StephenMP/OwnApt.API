@@ -1,4 +1,4 @@
-﻿namespace Api.Domain.Model
+﻿namespace OwnApt.Api.Domain.Model
 {
     public class ZipModel
     {

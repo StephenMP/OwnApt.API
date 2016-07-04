@@ -1,6 +1,6 @@
-﻿using Api.Domain.Enum;
+﻿using OwnApt.Api.Domain.Enum;
 
-namespace Api.Repository.Entity
+namespace OwnApt.Api.Repository.Entity
 {
     public class AmmentityEntity
     {

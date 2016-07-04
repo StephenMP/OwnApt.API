@@ -1,7 +1,7 @@
-﻿using Api.Domain.Enum;
+﻿using OwnApt.Api.Domain.Enum;
 using System.Collections.Generic;
 
-namespace Api.Repository.Entity
+namespace OwnApt.Api.Repository.Entity
 {
     public class PropertyEntity
 	{

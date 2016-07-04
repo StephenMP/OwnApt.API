@@ -1,6 +1,6 @@
-﻿using Api.Domain.Enum;
+﻿using OwnApt.Api.Domain.Enum;
 
-namespace Api.Domain.Model
+namespace OwnApt.Api.Domain.Model
 {
     public class ParkingModel
     {

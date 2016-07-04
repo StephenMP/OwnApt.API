@@ -1,7 +1,7 @@
-﻿using Api.Domain.Enum;
+﻿using OwnApt.Api.Domain.Enum;
 using System.Collections.Generic;
 
-namespace Api.Domain.Model
+namespace OwnApt.Api.Domain.Model
 {
     public class PropertyModel
 	{
