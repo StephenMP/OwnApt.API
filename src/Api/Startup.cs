@@ -15,9 +15,17 @@ namespace OwnApt.Api
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
-            var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables();
+            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddJsonFile("developmentAppSettings.json");
+            }
+
+            else {
+                builder.AddJsonFile("appsettings.json");
+            }
+
             Configuration = builder.Build();
         }
 
@@ -28,6 +36,7 @@ namespace OwnApt.Api
         {
             // Add framework services.
             services.AddMvc();
+            services.AddOwnAptDependencies(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

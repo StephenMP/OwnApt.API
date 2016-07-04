@@ -14,11 +14,11 @@ namespace OwnApt.Api.Repository
         private IMapper mapper;
         private IMongoDatabase propertyDatabase;
 
-        IMongoCollection<PropertyEntity> PropertiesCollection => this.propertyDatabase.GetCollection<PropertyEntity>("Properties");
+        IMongoCollection<PropertyEntity> PropertiesCollection => this.propertyDatabase.GetCollection<PropertyEntity>("Property");
 
-        public MongoPropertyRepository(IMongoDatabase propertyDatabase, IMapper mapper)
+        public MongoPropertyRepository(IMongoClient mongoClient, IMapper mapper)
         {
-            this.propertyDatabase = propertyDatabase;
+            this.propertyDatabase = mongoClient.GetDatabase("Core");
             this.mapper = mapper;
         }
 
