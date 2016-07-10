@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OwnApt.Api
+namespace OwnApt.Api.Extensions
 {
     public static class ObjectExtensions
     {

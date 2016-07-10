@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace OwnApt.Api
+namespace OwnApt.Api.Domain.Dto
 {
-    public abstract class Equatable<T> : IEquatable<T>
+    public abstract class Equatable<TDto> : IEquatable<TDto>
     {
         #region Public Methods
 
-        public bool Equals(T other)
+        public bool Equals(TDto other)
         {
             return this.GetHashCode() == other.GetHashCode();
         }

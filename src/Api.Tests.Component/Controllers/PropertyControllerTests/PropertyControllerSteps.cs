@@ -4,7 +4,6 @@ using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Domain.Service;
-using OwnApt.Api.Repository.Entity;
 using OwnApt.Api.Repository.Interface;
 using System;
 using System.Net;
@@ -22,11 +21,10 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
         private IActionResult controllerIActionResult;
         private PropertyModel mockedPropertyModel;
         private PropertyController propertyController;
-        private PropertyEntity propertyEntity;
         private string propertyId;
-        private PropertyModel propertyModelResponse;
         private IPropertyRepository propertyRepository;
         private IPropertyService propertyService;
+
         private Random random = new Random();
 
         #endregion Private Fields
@@ -36,7 +34,12 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
         internal void GivenIHaveAMockedPropertyRepository()
         {
             var mockedPropertyRepository = new Mock<IPropertyRepository>();
+            mockedPropertyRepository.Setup(p => p.CreateAsync(this.mockedPropertyModel)).Returns(Task.FromResult(this.mockedPropertyModel));
             mockedPropertyRepository.Setup(p => p.ReadAsync(this.propertyId)).Returns(Task.FromResult(this.mockedPropertyModel));
+            mockedPropertyRepository.Setup(p => p.ReadPropertiesForOwnerAsync(this.propertyId)).Returns(Task.FromResult(new PropertyModel[] { this.mockedPropertyModel }));
+            mockedPropertyRepository.Setup(p => p.ReadPropertiesForTenantAsync(this.propertyId)).Returns(Task.FromResult(new PropertyModel[] { this.mockedPropertyModel }));
+            mockedPropertyRepository.Setup(p => p.UpdateAsync(this.mockedPropertyModel)).Returns(Task.FromResult(true));
+            mockedPropertyRepository.Setup(p => p.DeleteAsync(this.propertyId)).Returns(Task.FromResult(true));
 
             this.propertyRepository = mockedPropertyRepository.Object;
         }
@@ -64,6 +67,14 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             this.propertyService = new PropertyService(this.propertyRepository);
         }
 
+        internal void ThenICanVerifyICreateProperty()
+        {
+            var propertyModel = this.controllerContent as PropertyModel;
+
+            Assert.NotNull(propertyModel);
+            Assert.Equal(this.propertyId, propertyModel.Id);
+        }
+
         internal void ThenICanVerifyIReadProperty()
         {
             var propertyModel = this.controllerContent as PropertyModel;
@@ -82,12 +93,37 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
                     this.controllerContent = content.Value;
                     Assert.Equal((int)statusCode, content.StatusCode.Value);
                 }
+                else
+                {
+                    Assert.IsType<HttpOkResult>(this.controllerIActionResult);
+                }
             }
+            else if (statusCode == HttpStatusCode.Created)
+            {
+                var content = Assert.IsType<CreatedResult>(this.controllerIActionResult);
+                this.controllerContent = content.Value;
+                Assert.Equal((int)statusCode, content.StatusCode.Value);
+            }
+        }
+
+        internal async Task WhenICallCreateProperty()
+        {
+            this.controllerIActionResult = await this.propertyController.CreateProperty(this.mockedPropertyModel);
+        }
+
+        internal async Task WhenICallDeleteProperty()
+        {
+            this.controllerIActionResult = await this.propertyController.DeleteProperty(this.propertyId);
         }
 
         internal async Task WhenICallReadProperty()
         {
             this.controllerIActionResult = await this.propertyController.ReadProperty(this.propertyId);
+        }
+
+        internal async Task WhenICallUpdateProperty()
+        {
+            this.controllerIActionResult = await this.propertyController.UpdateProperty(this.propertyId, this.mockedPropertyModel);
         }
 
         #endregion Internal Methods

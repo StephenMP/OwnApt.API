@@ -1,4 +1,5 @@
 ﻿using System;
+using OwnApt.Api.Extensions;
 
 namespace OwnApt.Api.Domain.Dto
 {
