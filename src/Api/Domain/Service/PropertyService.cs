@@ -1,9 +1,7 @@
 ﻿using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Interface;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Service
@@ -17,14 +15,14 @@ namespace OwnApt.Api.Domain.Service
             this.propertyRepository = propertyRepository;
         }
 
-        public async Task CreatePropertyAsync(PropertyModel property)
+        public async Task<PropertyModel> CreateAsync(PropertyModel property)
         {
-            await this.propertyRepository.CreatePropertyAsync(property);
+            return await this.propertyRepository.CreateAsync(property);
         }
 
-        public async Task<PropertyModel> ReadPropertyAsync(string id)
+        public async Task<PropertyModel> ReadAsync(string id)
         {
-            return await this.propertyRepository.ReadPropertyAsync(id);
+            return await this.propertyRepository.ReadAsync(id);
         }
 
         public async Task<IEnumerable<PropertyModel>> ReadPropertiesForOwnerAsync(string ownerId)
@@ -37,14 +35,14 @@ namespace OwnApt.Api.Domain.Service
             return await this.propertyRepository.ReadPropertiesForTenantAsync(tenantId);
         }
 
-        public async Task UpdatePropertyAsync(PropertyModel property)
+        public async Task UpdateAsync(PropertyModel property)
         {
-            await this.propertyRepository.UpdatePropertyAsync(property);
+            await this.propertyRepository.UpdateAsync(property);
         }
 
-        public async Task DeletePropertyAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            await this.propertyRepository.DeletePropertyAsync(id);
+            await this.propertyRepository.DeleteAsync(id);
         }
     }
 }

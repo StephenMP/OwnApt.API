@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
+﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OwnApt.Api.AppStart;
 
 namespace OwnApt.Api
 {
@@ -19,10 +16,10 @@ namespace OwnApt.Api
 
             if (env.IsDevelopment())
             {
-                builder.AddJsonFile("developmentAppSettings.json");
+                builder.AddJsonFile("appSettings_Dev.json");
             }
-
-            else {
+            else
+            {
                 builder.AddJsonFile("appsettings.json");
             }
 

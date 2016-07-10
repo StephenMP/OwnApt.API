@@ -1,98 +1,66 @@
-﻿using OwnApt.Api.Repository.Interface;
+﻿using AutoMapper;
+using MongoDB.Driver;
+using OwnApt.Api.Domain.Model;
+using OwnApt.Api.Repository.Entity;
+using OwnApt.Api.Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OwnApt.Api.Domain.Model;
-using MongoDB.Driver;
-using AutoMapper;
-using OwnApt.Api.Repository.Entity;
 
 namespace OwnApt.Api.Repository
 {
     public class MongoPropertyRepository : IPropertyRepository
     {
         private readonly IMapper mapper;
-        private readonly IMongoDatabase propertyDatabase;
+        private readonly IMongoDatabase coreDatabase;
 
-        IMongoCollection<PropertyEntity> PropertiesCollection => this.propertyDatabase.GetCollection<PropertyEntity>("Property");
+        private IMongoCollection<PropertyEntity> PropertiesCollection => this.coreDatabase.GetCollection<PropertyEntity>("Property");
 
         public MongoPropertyRepository(IMongoClient mongoClient, IMapper mapper)
         {
-            this.propertyDatabase = mongoClient.GetDatabase("Core");
+            this.coreDatabase = mongoClient.GetDatabase("Core");
             this.mapper = mapper;
         }
 
-        public void CreateProperty(PropertyModel property)
+        public async Task<PropertyModel> CreateAsync(PropertyModel model)
         {
-            var propertyEntity = this.mapper.Map<PropertyEntity>(property);
-            this.PropertiesCollection.InsertOne(propertyEntity);
-        }
-
-        public async Task CreatePropertyAsync(PropertyModel property)
-        {
-            var propertyEntity = this.mapper.Map<PropertyEntity>(property);
+            model.Id = Guid.NewGuid().ToString("N");
+            var propertyEntity = this.mapper.Map<PropertyEntity>(model);
             await this.PropertiesCollection.InsertOneAsync(propertyEntity);
+            return model;
         }
 
-        public void DeleteProperty(string id)
-        {
-            this.PropertiesCollection.DeleteOne(p => p.Id == id);
-        }
-
-        public async Task DeletePropertyAsync(string id)
+        public async Task DeleteAsync(string id)
         {
             await this.PropertiesCollection.DeleteOneAsync(p => p.Id == id);
         }
 
-        public IEnumerable<PropertyModel> ReadPropertiesForOwner(string ownerId)
-        {
-            var propertyModels = this.PropertiesCollection.Find(p => p.Owners.Where(o => o.Id == ownerId).Any()).ToList();
-            return this.mapper.Map<List<PropertyModel>>(propertyModels);
-        }
-
         public async Task<IEnumerable<PropertyModel>> ReadPropertiesForOwnerAsync(string ownerId)
         {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.Owners.Where(o => o.Id == ownerId).Any());
+            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.OwnerIds.Where(o => o.Contains(ownerId)).Any());
             var propertyModels = await propertyEntities.ToListAsync();
-            return this.mapper.Map<List<PropertyModel>>(propertyModels);
-        }
-
-        public IEnumerable<PropertyModel> ReadPropertiesForTenant(string tenantId)
-        {
-            var propertyModels = this.PropertiesCollection.Find(p => p.Owners.Where(o => o.Id == tenantId).Any()).ToList();
             return this.mapper.Map<List<PropertyModel>>(propertyModels);
         }
 
         public async Task<IEnumerable<PropertyModel>> ReadPropertiesForTenantAsync(string tenantId)
         {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.Owners.Where(o => o.Id == tenantId).Any());
+            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.TenantIds.Where(t => t.Contains(tenantId)).Any());
             var propertyModels = await propertyEntities.ToListAsync();
             return this.mapper.Map<List<PropertyModel>>(propertyModels);
         }
 
-        public PropertyModel ReadProperty(string id)
-        {
-            var propertyModel = this.PropertiesCollection.Find(p => p.Id == id).FirstOrDefault();
-            return this.mapper.Map<PropertyModel>(propertyModel);
-        }
-
-        public async Task<PropertyModel> ReadPropertyAsync(string id)
+        public async Task<PropertyModel> ReadAsync(string id)
         {
             var asyncCursor = await this.PropertiesCollection.FindAsync(p => p.Id == id);
             var propertyEntity = await asyncCursor.FirstOrDefaultAsync();
-            return this.mapper.Map<PropertyEntity, PropertyModel>(propertyEntity);
+            return this.mapper.Map<PropertyModel>(propertyEntity);
         }
 
-        public void UpdateProperty(PropertyModel property)
+        public async Task UpdateAsync(PropertyModel model)
         {
-            var propertyEntity = this.mapper.Map<PropertyEntity>(property);
-            this.PropertiesCollection.ReplaceOne(p => p.Id == property.Id, propertyEntity);
-        }
-
-        public async Task UpdatePropertyAsync(PropertyModel property)
-        {
-            var propertyEntity = this.mapper.Map<PropertyEntity>(property);
-            await this.PropertiesCollection.ReplaceOneAsync(p => p.Id == property.Id, propertyEntity);
+            var propertyEntity = this.mapper.Map<PropertyEntity>(model);
+            await this.PropertiesCollection.ReplaceOneAsync(p => p.Id == model.Id, propertyEntity);
         }
     }
 }

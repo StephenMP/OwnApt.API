@@ -4,11 +4,11 @@ using OwnApt.Api.Repository.Entity;
 
 namespace OwnApt.Api.Domain.Mapping
 {
-    public class PropertyProfile : Profile
+    public class PersonProfile : Profile
     {
         #region Public Constructors
 
-        public PropertyProfile()
+        public PersonProfile()
         {
             ConfigureEntityToModel();
             ConfigureModelToEntity();
@@ -20,12 +20,12 @@ namespace OwnApt.Api.Domain.Mapping
 
         private void ConfigureEntityToModel()
         {
-            CreateMap<PropertyEntity, PropertyModel>();
+            CreateMap<PersonEntity, PersonModel>();
         }
 
         private void ConfigureModelToEntity()
         {
-            CreateMap<PropertyModel, PropertyEntity>();
+            CreateMap<PersonModel, PersonEntity>();
         }
 
         #endregion Private Methods

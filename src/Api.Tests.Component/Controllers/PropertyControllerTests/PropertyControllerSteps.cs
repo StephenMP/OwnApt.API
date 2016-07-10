@@ -1,38 +1,67 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.AspNet.Mvc;
 using Moq;
-using OwnApt.Api;
-using OwnApt.Api.Domain.Model;
-using OwnApt.Api.Repository.Entity;
-using System;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using OwnApt.Api.Repository.Interface;
-using OwnApt.Api.Repository;
-using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
-using Microsoft.AspNet.Mvc;
+using OwnApt.Api.Domain.Model;
+using OwnApt.Api.Domain.Service;
+using OwnApt.Api.Repository.Entity;
+using OwnApt.Api.Repository.Interface;
+using System;
 using System.Net;
-using Xunit;
 using System.Reflection;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
     internal class PropertyControllerSteps
     {
-        private string propertyId;
-        private PropertyModel propertyModel;
-        private Random random = new Random();
+        #region Private Fields
+
+        private object controllerContent;
+        private IActionResult controllerIActionResult;
+        private PropertyModel mockedPropertyModel;
+        private PropertyController propertyController;
         private PropertyEntity propertyEntity;
+        private string propertyId;
+        private PropertyModel propertyModelResponse;
+        private IPropertyRepository propertyRepository;
+        private IPropertyService propertyService;
+        private Random random = new Random();
 
-        internal void GivenIHaveAMockedMongoCoreDatabase()
+        #endregion Private Fields
+
+        #region Internal Methods
+
+        internal void GivenIHaveAMockedPropertyRepository()
         {
-            var mockedMongoCoreDatabase = new Mock<IMongoDatabase>();
-            mockedMongoCoreDatabase.Setup(s => s.GetCollection<PropertyEntity>("Property", null)).Returns(this.propertyCollection);
+            var mockedPropertyRepository = new Mock<IPropertyRepository>();
+            mockedPropertyRepository.Setup(p => p.ReadAsync(this.propertyId)).Returns(Task.FromResult(this.mockedPropertyModel));
 
-            this.mongoCoreDatabase = mockedMongoCoreDatabase.Object;
+            this.propertyRepository = mockedPropertyRepository.Object;
+        }
+
+        internal void GivenIHaveAPropertyController()
+        {
+            this.propertyController = new PropertyController(this.propertyService);
+        }
+
+        internal void GivenIHaveAPropertyId()
+        {
+            this.propertyId = random.Next().ToString();
+        }
+
+        internal void GivenIHaveAPropertyModel()
+        {
+            this.mockedPropertyModel = new PropertyModel
+            {
+                Id = this.propertyId
+            };
+        }
+
+        internal void GivenIHaveAPropertyService()
+        {
+            this.propertyService = new PropertyService(this.propertyRepository);
         }
 
         internal void ThenICanVerifyIReadProperty()
@@ -61,68 +90,6 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             this.controllerIActionResult = await this.propertyController.ReadProperty(this.propertyId);
         }
 
-        internal void GivenIHaveAPropertyController()
-        {
-            this.propertyController = new PropertyController(this.propertyService);
-        }
-
-        internal void GivenIHaveAPropertyService()
-        {
-            this.propertyService = new PropertyService(this.propertyRepository);
-        }
-
-        internal void GivenIHaveAPropertyRepository()
-        {
-            this.propertyRepository = new MongoPropertyRepository(this.mongoClient, this.mapper);
-        }
-
-        internal void GivenIHaveAnAutoMapper()
-        {
-            this.mapper = StartupExtensions.BuildMapper();
-        }
-
-        internal void GivenIHaveAMockedMongoClient()
-        {
-            var mockedMongoClient = new Mock<IMongoClient>();
-            mockedMongoClient.Setup(s => s.GetDatabase("Core", null)).Returns(this.mongoCoreDatabase);
-
-            this.mongoClient = mockedMongoClient.Object;
-        }
-
-        private IMongoCollection<PropertyEntity> propertyCollection;
-        private IMongoDatabase mongoCoreDatabase;
-        private IMongoClient mongoClient;
-        private IMapper mapper;
-        private IPropertyRepository propertyRepository;
-        private IPropertyService propertyService;
-        private PropertyController propertyController;
-        private IActionResult controllerIActionResult;
-        private object controllerContent;
-
-        internal void GivenIHaveAPropertyId()
-        {
-            this.propertyId = random.Next().ToString();
-        }
-
-        internal void GivenIHaveAMockedPropertyCollection()
-        {
-            var mockedAsyncCursor = new Mock<IAsyncCursor<PropertyEntity>>();
-
-            // Can't mock it this way :( Need to figure out how to mock mongo driver
-            mockedAsyncCursor.Setup(s => s.FirstOrDefaultAsync(default(CancellationToken))).Returns(Task.FromResult(this.propertyEntity));
-
-            var mockedPropertyCollection = new Mock<IMongoCollection<PropertyEntity>>();
-            mockedPropertyCollection.Setup(s => s.FindAsync(It.IsAny<Expression<Func<PropertyEntity, bool>>>(), null, default(CancellationToken))).Returns(Task.FromResult(mockedAsyncCursor.Object));
-
-            this.propertyCollection = mockedPropertyCollection.Object;
-        }
-
-        internal void GivenIHaveAPropertyEntity()
-        {
-            this.propertyEntity = new PropertyEntity
-            {
-                Id = this.propertyId
-            };
-        }
+        #endregion Internal Methods
     }
 }

@@ -1,9 +1,0 @@
-﻿namespace OwnApt.Api.Repository.Entity
-{
-    public class NameEntity
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-    }
-}
