@@ -1,21 +1,24 @@
 ﻿using OwnApt.Api.Domain.Model;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface
 {
     public interface IPropertyService
     {
+        #region Public Methods
+
         Task<PropertyModel> CreateAsync(PropertyModel property);
+
+        Task DeleteAsync(string id);
 
         Task<PropertyModel> ReadAsync(string id);
 
-        Task<IEnumerable<PropertyModel>> ReadPropertiesForOwnerAsync(string ownerId);
+        Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId);
 
-        Task<IEnumerable<PropertyModel>> ReadPropertiesForTenantAsync(string tenantId);
+        Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId);
 
         Task UpdateAsync(PropertyModel property);
 
-        Task DeleteAsync(string id);
+        #endregion Public Methods
     }
 }
