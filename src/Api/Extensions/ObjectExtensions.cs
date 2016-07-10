@@ -9,12 +9,7 @@ namespace OwnApt.Api.Extensions
 
         public static int GetHashCodeSafe(this object obj)
         {
-            if (obj == null)
-            {
-                return 0;
-            }
-
-            return obj.GetHashCode();
+            return obj == null ? 0 : obj.GetHashCode();
         }
 
         public static int GetHashCodeSafe<T>(this IEnumerable<T> enumerable)
