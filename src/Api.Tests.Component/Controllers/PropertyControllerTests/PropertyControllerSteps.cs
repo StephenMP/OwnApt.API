@@ -15,7 +15,7 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
     internal class PropertyControllerSteps
     {
-        #region Private Fields
+        #region Private Fields + Properties
 
         private object controllerContent;
         private IActionResult controllerIActionResult;
@@ -27,7 +27,7 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 
         private Random random = new Random();
 
-        #endregion Private Fields
+        #endregion Private Fields + Properties
 
         #region Internal Methods
 

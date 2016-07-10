@@ -1,16 +1,15 @@
-﻿using System;
-using OwnApt.Api.Extensions;
+﻿using OwnApt.Api.Extensions;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class ContactDto : Equatable<ContactDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string Email { get; set; }
         public PhoneDto[] Phones { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

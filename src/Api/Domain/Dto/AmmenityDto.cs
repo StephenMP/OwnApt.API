@@ -1,17 +1,16 @@
 ﻿using OwnApt.Api.Domain.Enum;
 using OwnApt.Api.Extensions;
-using System;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class AmmenityDto : Equatable<AmmenityDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string Description { get; set; }
         public AmmenityType Type { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

@@ -1,16 +1,15 @@
 ﻿using OwnApt.Api.Extensions;
-using System;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class ZipDto : Equatable<ZipDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string Base { get; set; }
         public string Extension { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

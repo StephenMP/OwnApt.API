@@ -1,12 +1,12 @@
 ﻿using OwnApt.Api.Domain.Dto;
-using OwnApt.Api.Extensions;
 using OwnApt.Api.Domain.Enum;
+using OwnApt.Api.Extensions;
 
 namespace OwnApt.Api.Repository.Entity
 {
     public class PersonEntity : Equatable<PersonEntity>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public int Age { get; set; }
         public ContactDto Contact { get; set; }
@@ -17,7 +17,7 @@ namespace OwnApt.Api.Repository.Entity
         public string[] PropertyIds { get; set; }
         public PersonType Type { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

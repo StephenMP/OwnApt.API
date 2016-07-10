@@ -10,16 +10,25 @@ namespace OwnApt.Api.Repository
 {
     public class MongoPersonRepository : IPersonRepository
     {
-        private readonly IMapper mapper;
-        private readonly IMongoDatabase coreDatabase;
+        #region Private Fields + Properties
 
         private IMongoCollection<PersonEntity> PersonCollection => this.coreDatabase.GetCollection<PersonEntity>("Person");
+        private readonly IMongoDatabase coreDatabase;
+        private readonly IMapper mapper;
+
+        #endregion Private Fields + Properties
+
+        #region Public Constructors + Destructors
 
         public MongoPersonRepository(IMongoClient mongoClient, IMapper mapper)
         {
             this.coreDatabase = mongoClient.GetDatabase("Core");
             this.mapper = mapper;
         }
+
+        #endregion Public Constructors + Destructors
+
+        #region Public Methods
 
         public async Task<PersonModel> CreateAsync(PersonModel model)
         {
@@ -47,5 +56,7 @@ namespace OwnApt.Api.Repository
             var personEntity = this.mapper.Map<PersonEntity>(model);
             await this.PersonCollection.ReplaceOneAsync(p => p.Id == model.Id, personEntity);
         }
+
+        #endregion Public Methods
     }
 }

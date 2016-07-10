@@ -1,11 +1,10 @@
 ﻿using OwnApt.Api.Extensions;
-using System;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class FeaturesDto : Equatable<FeaturesDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public AmmenityDto[] Ammentities { get; set; }
         public double Bathrooms { get; set; }
@@ -13,7 +12,7 @@ namespace OwnApt.Api.Domain.Dto
         public ParkingDto Parking { get; set; }
         public int Rooms { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

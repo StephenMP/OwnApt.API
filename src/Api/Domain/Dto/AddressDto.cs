@@ -1,12 +1,11 @@
 ﻿using OwnApt.Api.Domain.Enum;
 using OwnApt.Api.Extensions;
-using System;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class AddressDto : Equatable<AddressDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -15,7 +14,7 @@ namespace OwnApt.Api.Domain.Dto
         public State State { get; set; }
         public ZipDto Zip { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

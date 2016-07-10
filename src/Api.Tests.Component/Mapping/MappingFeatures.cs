@@ -1,15 +1,14 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace Api.Tests.Component.Mapping
 {
     public class MappingFeatures
     {
-        #region Private Fields
+        #region Private Fields + Properties
 
         private MappingSteps steps = new MappingSteps();
 
-        #endregion Private Fields
+        #endregion Private Fields + Properties
 
         #region Public Methods
 

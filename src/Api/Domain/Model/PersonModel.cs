@@ -1,13 +1,12 @@
 ﻿using OwnApt.Api.Domain.Dto;
-using OwnApt.Api.Extensions;
 using OwnApt.Api.Domain.Enum;
-using System;
+using OwnApt.Api.Extensions;
 
 namespace OwnApt.Api.Domain.Model
 {
     public class PersonModel : Equatable<PersonModel>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public int Age { get; set; }
         public ContactDto Contact { get; set; }
@@ -18,7 +17,7 @@ namespace OwnApt.Api.Domain.Model
         public string[] PropertyIds { get; set; }
         public PersonType Type { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

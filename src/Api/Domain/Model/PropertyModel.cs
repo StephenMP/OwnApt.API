@@ -1,13 +1,12 @@
 ﻿using OwnApt.Api.Domain.Dto;
-using OwnApt.Api.Extensions;
 using OwnApt.Api.Domain.Enum;
-using System;
+using OwnApt.Api.Extensions;
 
 namespace OwnApt.Api.Domain.Model
 {
     public class PropertyModel : Equatable<PropertyModel>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public AddressDto Address { get; set; }
         public FeaturesDto Features { get; set; }
@@ -16,7 +15,7 @@ namespace OwnApt.Api.Domain.Model
         public PropertyType PropertyType { get; set; }
         public string[] TenantIds { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

@@ -9,6 +9,14 @@ namespace OwnApt.Api
 {
     public class Startup
     {
+        #region Public Fields + Properties
+
+        public IConfigurationRoot Configuration { get; set; }
+
+        #endregion Public Fields + Properties
+
+        #region Public Constructors + Destructors
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -26,16 +34,12 @@ namespace OwnApt.Api
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        #endregion Public Constructors + Destructors
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            services.AddMvc();
-            services.AddRouting();
-            services.AddOwnAptDependencies(Configuration);
-        }
+        #region Public Methods
+
+        // Entry point for the application.
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -50,7 +54,15 @@ namespace OwnApt.Api
             app.UseMvc();
         }
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
+            services.AddRouting();
+            services.AddOwnAptDependencies(Configuration);
+        }
+
+        #endregion Public Methods
     }
 }

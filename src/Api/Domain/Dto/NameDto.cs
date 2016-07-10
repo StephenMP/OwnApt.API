@@ -1,17 +1,16 @@
 ﻿using OwnApt.Api.Extensions;
-using System;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class NameDto : Equatable<NameDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

@@ -8,12 +8,22 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PropertyController : Controller
     {
+        #region Private Fields + Properties
+
         private readonly IPropertyService propertyService;
+
+        #endregion Private Fields + Properties
+
+        #region Public Constructors + Destructors
 
         public PropertyController(IPropertyService propertyService)
         {
             this.propertyService = propertyService;
         }
+
+        #endregion Public Constructors + Destructors
+
+        #region Public Methods
 
         [HttpPost]
         public async Task<IActionResult> CreateProperty([FromBody] PropertyModel model)
@@ -29,16 +39,28 @@ namespace OwnApt.Api.Controllers
             return Created(resourceUri, propertyModel);
         }
 
-        [HttpGet("{propertyId}")]
-        public async Task<IActionResult> ReadProperty(string propertyId)
+        [HttpDelete("{propertyId}")]
+        public async Task<IActionResult> DeleteProperty(string propertyId)
         {
             if (string.IsNullOrEmpty(propertyId))
             {
                 return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
             }
 
-            var propertyModel = await this.propertyService.ReadAsync(propertyId);
-            return Ok(propertyModel);
+            await this.propertyService.DeleteAsync(propertyId);
+            return Ok();
+        }
+
+        [HttpGet("owner/{ownerId}")]
+        public async Task<IActionResult> ReadPropertiesForOwner(string ownerId)
+        {
+            if (string.IsNullOrEmpty(ownerId))
+            {
+                return new BadRequestObjectResult($"{nameof(ownerId)} is null or empty");
+            }
+
+            var propertyModelList = await this.propertyService.ReadPropertiesForOwnerAsync(ownerId);
+            return Ok(propertyModelList);
         }
 
         [HttpGet("tenant/{tenantId}")]
@@ -53,16 +75,16 @@ namespace OwnApt.Api.Controllers
             return Ok(propertyModelList);
         }
 
-        [HttpGet("owner/{ownerId}")]
-        public async Task<IActionResult> ReadPropertiesForOwner(string ownerId)
+        [HttpGet("{propertyId}")]
+        public async Task<IActionResult> ReadProperty(string propertyId)
         {
-            if (string.IsNullOrEmpty(ownerId))
+            if (string.IsNullOrEmpty(propertyId))
             {
-                return new BadRequestObjectResult($"{nameof(ownerId)} is null or empty");
+                return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
             }
 
-            var propertyModelList = await this.propertyService.ReadPropertiesForOwnerAsync(ownerId);
-            return Ok(propertyModelList);
+            var propertyModel = await this.propertyService.ReadAsync(propertyId);
+            return Ok(propertyModel);
         }
 
         [HttpPut("{propertyId}")]
@@ -82,17 +104,7 @@ namespace OwnApt.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("{propertyId}")]
-        public async Task<IActionResult> DeleteProperty(string propertyId)
-        {
-            if (string.IsNullOrEmpty(propertyId))
-            {
-                return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
-            }
-
-            await this.propertyService.DeleteAsync(propertyId);
-            return Ok();
-        }
+        #endregion Public Methods
 
         //[HttpGet("insert")]
         //public async Task<IActionResult> InsertTestCrap()

@@ -1,6 +1,5 @@
 ﻿using OwnApt.Api.Domain.Dto;
 using OwnApt.Api.Domain.Enum;
-using System;
 using Xunit;
 
 namespace Api.Tests.Component.Equatable

@@ -1,17 +1,17 @@
-﻿using OwnApt.Api.AppStart;
+﻿using AutoMapper;
+using OwnApt.Api.AppStart;
+using OwnApt.Api.Domain.Dto;
 using OwnApt.Api.Domain.Enum;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Entity;
 using System;
-using AutoMapper;
 using Xunit;
-using OwnApt.Api.Domain.Dto;
 
 namespace Api.Tests.Component.Mapping
 {
     internal class MappingSteps
     {
-        #region Private Fields
+        #region Private Fields + Properties
 
         private IMapper mapper;
 
@@ -21,7 +21,7 @@ namespace Api.Tests.Component.Mapping
         private PropertyModel propertyModel;
         private Random random = new Random();
 
-        #endregion Private Fields
+        #endregion Private Fields + Properties
 
         #region Internal Methods
 

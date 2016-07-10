@@ -13,6 +13,8 @@ namespace OwnApt.Api.AppStart
 {
     public static class StartupExtensions
     {
+        #region Public Methods
+
         public static void AddOwnAptDependencies(this IServiceCollection services, IConfigurationRoot configuration)
         {
             services.AddInstance<IMongoClient>(BuildMongoClient(configuration));
@@ -34,22 +36,28 @@ namespace OwnApt.Api.AppStart
             }).CreateMapper();
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static MongoClient BuildMongoClient(IConfigurationRoot configuration)
         {
             var coreDbName = configuration["MongoCore:Name"];
             var username = configuration["MongoCore:Username"];
             var password = configuration["MongoCore:Password"];
             var host = configuration["MongoCore:Host"];
-            var port = configuration["MongoCore:Port"];
+            var port = Convert.ToInt32(configuration["MongoCore:Port"]);
 
             var mongoClientSettings = new MongoClientSettings()
             {
                 Credentials = new MongoCredential[] { MongoCredential.CreateCredential(coreDbName, username, password) },
                 ConnectionMode = ConnectionMode.Direct,
-                Server = new MongoServerAddress(host, Convert.ToInt32(port))
+                Server = new MongoServerAddress(host, port)
             };
 
             return new MongoClient(mongoClientSettings);
         }
+
+        #endregion Private Methods
     }
 }

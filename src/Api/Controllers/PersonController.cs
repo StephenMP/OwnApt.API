@@ -8,12 +8,22 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PersonController : Controller
     {
+        #region Private Fields + Properties
+
         private IPersonService personService;
+
+        #endregion Private Fields + Properties
+
+        #region Public Constructors + Destructors
 
         public PersonController(IPersonService personService)
         {
             this.personService = personService;
         }
+
+        #endregion Public Constructors + Destructors
+
+        #region Public Methods
 
         [HttpPost]
         public async Task<IActionResult> CreatePerson([FromBody] PersonModel model)
@@ -27,6 +37,18 @@ namespace OwnApt.Api.Controllers
             var resourceUri = Request == null ? "" : $"{Request.Host}{Request.Path}/{model.Id}";
 
             return Created(resourceUri, personModel);
+        }
+
+        [HttpDelete("{personId}")]
+        public async Task<IActionResult> DeletePerson(string personId)
+        {
+            if (string.IsNullOrEmpty(personId))
+            {
+                return new BadRequestObjectResult($"{nameof(personId)} is null or empty");
+            }
+
+            await this.personService.DeleteAsync(personId);
+            return Ok();
         }
 
         [HttpGet("{personId}")]
@@ -58,16 +80,6 @@ namespace OwnApt.Api.Controllers
             return Ok();
         }
 
-        [HttpDelete("{personId}")]
-        public async Task<IActionResult> DeletePerson(string personId)
-        {
-            if (string.IsNullOrEmpty(personId))
-            {
-                return new BadRequestObjectResult($"{nameof(personId)} is null or empty");
-            }
-
-            await this.personService.DeleteAsync(personId);
-            return Ok();
-        }
+        #endregion Public Methods
     }
 }

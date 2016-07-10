@@ -1,17 +1,16 @@
-﻿using System;
+﻿using OwnApt.Api.Domain.Enum;
 using OwnApt.Api.Extensions;
-using OwnApt.Api.Domain.Enum;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class ParkingDto : Equatable<ParkingDto>
     {
-        #region Public Properties
+        #region Public Fields + Properties
 
         public string Description { get; set; }
         public ParkingType Type { get; set; }
 
-        #endregion Public Properties
+        #endregion Public Fields + Properties
 
         #region Public Methods
 

@@ -8,11 +8,11 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
     public class PropertyControllerFeatures
     {
-        #region Private Fields
+        #region Private Fields + Properties
 
         private PropertyControllerSteps steps = new PropertyControllerSteps();
 
-        #endregion Private Fields
+        #endregion Private Fields + Properties
 
         #region Public Methods
 
