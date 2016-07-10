@@ -1,23 +1,37 @@
 ﻿using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Interface;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Service
 {
     public class PropertyService : IPropertyService
     {
+        #region Private Fields
+
         private readonly IPropertyRepository propertyRepository;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public PropertyService(IPropertyRepository propertyRepository)
         {
             this.propertyRepository = propertyRepository;
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
         public async Task<PropertyModel> CreateAsync(PropertyModel property)
         {
             return await this.propertyRepository.CreateAsync(property);
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            await this.propertyRepository.DeleteAsync(id);
         }
 
         public async Task<PropertyModel> ReadAsync(string id)
@@ -25,12 +39,12 @@ namespace OwnApt.Api.Domain.Service
             return await this.propertyRepository.ReadAsync(id);
         }
 
-        public async Task<IEnumerable<PropertyModel>> ReadPropertiesForOwnerAsync(string ownerId)
+        public async Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId)
         {
             return await this.propertyRepository.ReadPropertiesForOwnerAsync(ownerId);
         }
 
-        public async Task<IEnumerable<PropertyModel>> ReadPropertiesForTenantAsync(string tenantId)
+        public async Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId)
         {
             return await this.propertyRepository.ReadPropertiesForTenantAsync(tenantId);
         }
@@ -40,9 +54,6 @@ namespace OwnApt.Api.Domain.Service
             await this.propertyRepository.UpdateAsync(property);
         }
 
-        public async Task DeleteAsync(string id)
-        {
-            await this.propertyRepository.DeleteAsync(id);
-        }
+        #endregion Public Methods
     }
 }
