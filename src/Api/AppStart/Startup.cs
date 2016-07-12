@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OwnApt.Api.AppStart;
+using OwnApt.Api.Domain.Filters;
 
 namespace OwnApt.Api
 {
@@ -58,7 +59,9 @@ namespace OwnApt.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(c =>
+                c.Filters.Add(new AuthenticationFilter())
+            );
             services.AddRouting();
             services.AddOwnAptDependencies(Configuration);
         }

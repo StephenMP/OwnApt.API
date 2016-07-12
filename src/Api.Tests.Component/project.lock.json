@@ -2,7 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNX,Version=v4.6": {
+    "DNX,Version=v4.5.1": {
       "Api/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -1446,7 +1446,7 @@
           "lib/net45/MongoDB.Driver.Core.dll": {}
         }
       },
-      "Moq/4.5.10": {
+      "Moq/4.5.13": {
         "type": "package",
         "dependencies": {
           "Castle.Core": "3.3.3"
@@ -1556,17 +1556,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -1794,7 +1788,7 @@
         }
       }
     },
-    "DNX,Version=v4.6/win7-x86": {
+    "DNX,Version=v4.5.1/win7-x86": {
       "Api/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -3241,7 +3235,7 @@
           "lib/net45/MongoDB.Driver.Core.dll": {}
         }
       },
-      "Moq/4.5.10": {
+      "Moq/4.5.13": {
         "type": "package",
         "dependencies": {
           "Castle.Core": "3.3.3"
@@ -3351,17 +3345,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -3589,7 +3577,7 @@
         }
       }
     },
-    "DNX,Version=v4.6/win7-x64": {
+    "DNX,Version=v4.5.1/win7-x64": {
       "Api/1.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
@@ -5036,7 +5024,7 @@
           "lib/net45/MongoDB.Driver.Core.dll": {}
         }
       },
-      "Moq/4.5.10": {
+      "Moq/4.5.13": {
         "type": "package",
         "dependencies": {
           "Castle.Core": "3.3.3"
@@ -5146,17 +5134,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -6534,14 +6516,14 @@
         "MongoDB.Driver.Core.nuspec"
       ]
     },
-    "Moq/4.5.10": {
+    "Moq/4.5.13": {
       "type": "package",
-      "sha512": "Tt00mMHd99mCL/NSvQLmmlu/vSergn4b23wrYc7NgJhjM0+pjS1JP4k5pq/a8wb4kiuaZnbQ2VSaBbSQNmUowQ==",
+      "sha512": "vwi8eVkcs51MkmgKhawUq77pbczQYH+vbBq7My+Gii9DCB8nVmH5uFpnQGxGpZ9y2Q0pqyUr4qSVlWoYdwKGOg==",
       "files": [
         "lib/net45/Moq.dll",
         "lib/net45/Moq.xml",
-        "Moq.4.5.10.nupkg",
-        "Moq.4.5.10.nupkg.sha512",
+        "Moq.4.5.13.nupkg",
+        "Moq.4.5.13.nupkg.sha512",
         "Moq.nuspec"
       ]
     },
@@ -7508,10 +7490,10 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
-      "Moq >= 4.5.10",
+      "Moq >= 4.5.13",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-build204"
     ],
-    "DNX,Version=v4.6": []
+    "DNX,Version=v4.5.1": []
   }
 }
