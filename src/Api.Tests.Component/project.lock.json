@@ -5,7 +5,7 @@
     "DNX,Version=v4.6": {
       "Api/1.0.0": {
         "type": "project",
-        "framework": "DNX,Version=v4.6",
+        "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
@@ -1797,7 +1797,7 @@
     "DNX,Version=v4.6/win7-x86": {
       "Api/1.0.0": {
         "type": "project",
-        "framework": "DNX,Version=v4.6",
+        "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
@@ -3592,7 +3592,7 @@
     "DNX,Version=v4.6/win7-x64": {
       "Api/1.0.0": {
         "type": "project",
-        "framework": "DNX,Version=v4.6",
+        "framework": "DNX,Version=v4.5.1",
         "dependencies": {
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",

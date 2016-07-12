@@ -2,7 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNX,Version=v4.6": {
+    "DNX,Version=v4.5.1": {
       "AutoMapper/5.0.0": {
         "type": "package",
         "compile": {
@@ -1480,17 +1480,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -1609,7 +1603,7 @@
         }
       }
     },
-    "DNX,Version=v4.6/win7-x86": {
+    "DNX,Version=v4.5.1/win7-x86": {
       "AutoMapper/5.0.0": {
         "type": "package",
         "compile": {
@@ -3090,17 +3084,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -3219,7 +3207,7 @@
         }
       }
     },
-    "DNX,Version=v4.6/win7-x64": {
+    "DNX,Version=v4.5.1/win7-x64": {
       "AutoMapper/5.0.0": {
         "type": "package",
         "compile": {
@@ -4700,17 +4688,11 @@
       },
       "System.Numerics.Vectors/4.1.1-beta-23516": {
         "type": "package",
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System.Numerics"
-        ],
         "compile": {
-          "ref/net46/_._": {},
-          "ref/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         },
         "runtime": {
-          "lib/net46/_._": {},
-          "lib/net46/System.Numerics.Vectors.dll": {}
+          "lib/portable-net45+win8/System.Numerics.Vectors.dll": {}
         }
       },
       "System.Reflection/4.0.0": {
@@ -6735,6 +6717,6 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0-rc1-final",
       "MongoDB.Driver >= 2.2.4"
     ],
-    "DNX,Version=v4.6": []
+    "DNX,Version=v4.5.1": []
   }
 }
