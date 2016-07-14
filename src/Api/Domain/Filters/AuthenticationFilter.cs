@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Authentication.Domain.Interface;
+using Authentication.Domain.Service;
+using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +19,7 @@ namespace OwnApt.Api.Domain.Filters
         #region Private Fields + Properties
 
         private Dictionary<string, string> allowedApps;
+        private IHmacService hmacService;
 
         #endregion Private Fields + Properties
 
@@ -23,6 +27,7 @@ namespace OwnApt.Api.Domain.Filters
 
         public AuthenticationFilter()
         {
+            this.hmacService = new HmacService();
             this.allowedApps = new Dictionary<string, string>
             {
                 {"abcd1234", "1234abcd"}
@@ -52,15 +57,23 @@ namespace OwnApt.Api.Domain.Filters
                 return;
             }
 
-            var authValues = ParseAuthHeaderValues(authHeaderValues[1]);
-            if (authValues == null)
+            // Run the values through our HMAC algorithm
+            var appId = authHeaderValues[1].Split(':')[0];
+            var appIsRecognized = await ValidateAppId(appId);
+            if (!appIsRecognized)
             {
                 context.Result = new HttpUnauthorizedResult();
                 return;
             }
 
-            // Run the values through our HMAC algorithm
-            await ValidateHmac(context, authValues);
+            var secretKey = this.allowedApps[appId];
+            var requestBody = await this.ReadRequestBody(context.HttpContext.Request.Body);
+            var isValid = await this.hmacService.ValidateHmacStringAsync(authHeaderValues[1], secretKey, requestBody);
+            if (!isValid)
+            {
+                context.Result = new HttpUnauthorizedResult();
+                return;
+            }
         }
 
         #endregion Public Methods
@@ -78,7 +91,7 @@ namespace OwnApt.Api.Domain.Filters
             return await Task.FromResult(this.allowedApps.ContainsKey(appId));
         }
 
-        private async Task<bool> ValidateBody(Stream body, string[] authValues)
+        private async Task<string> ReadRequestBody(Stream body)
         {
             string requestBody;
             body.Position = 0;
@@ -87,77 +100,7 @@ namespace OwnApt.Api.Domain.Filters
                 requestBody = await reader.ReadToEndAsync();
             }
 
-            // No body, nothing to do
-            if (string.IsNullOrWhiteSpace(requestBody))
-            {
-                return await Task.FromResult(true);
-            }
-
-            // If there is a body, caller must provide the MD5 signed body
-            if (authValues.Length < 5)
-            {
-                return await Task.FromResult(false);
-            }
-
-            var providedBase64SignedBody = authValues[4];
-            var byteBodyString = Encoding.UTF8.GetBytes(requestBody);
-            byte[] md5SignedBody;
-
-            using (var md5 = MD5.Create())
-            {
-                md5SignedBody = md5.ComputeHash(byteBodyString);
-            }
-
-            var computedBase64SignedBody = Convert.ToBase64String(md5SignedBody);
-            return await Task.FromResult(computedBase64SignedBody == providedBase64SignedBody);
-        }
-
-        private async Task ValidateHmac(AuthorizationContext context, string[] authValues)
-        {
-            /* 1. Parse the values from the auth header
-             * 2. Check if there is a body (all bodies must be signed using an MD5 hash), and if so, validate it's signature
-             * 3. Check if the appId is allowed
-             * 4. Validate time to live
-             * 5. Check that the combined signed hash using the secret matches */
-            var appId = authValues[0];
-            var providedSignedSecretKey = authValues[1];
-            var timeStamp = authValues[2];
-            var guidSignature = authValues[3];
-
-            var isValid = await ValidateBody(context.HttpContext.Request.Body, authValues)
-                       && await ValidateAppId(appId)
-                       && await ValidateTimeToLive(timeStamp)
-                       && await ValidateSignedSecretKey(appId, timeStamp, guidSignature, providedSignedSecretKey);
-
-            if (!isValid)
-            {
-                context.Result = new HttpUnauthorizedResult();
-                return;
-            }
-        }
-
-        private async Task<bool> ValidateSignedSecretKey(string appId, string timeStamp, string guidSignature, string providedSignedSecretKey)
-        {
-            var secretKey = this.allowedApps[appId];
-            var byteSecretKey = Encoding.UTF8.GetBytes(secretKey);
-            byte[] hashedSecretKey;
-
-            using (var hmac = HMACSHA1.Create())
-            {
-                hashedSecretKey = hmac.ComputeHash(byteSecretKey);
-            }
-
-            var secretKeyCombined = $"{hashedSecretKey}:{timeStamp}:{guidSignature}";
-            var byteSecretKeyCombined = Encoding.UTF8.GetBytes(secretKeyCombined);
-            var computedSignedSecretKey = Convert.ToBase64String(byteSecretKeyCombined);
-
-            return await Task.FromResult(computedSignedSecretKey == providedSignedSecretKey);
-        }
-
-        private async Task<bool> ValidateTimeToLive(string timeStamp)
-        {
-            var timeStampDateTime = DateTime.FromFileTimeUtc(long.Parse(timeStamp));
-            return await Task.FromResult(timeStampDateTime.AddSeconds(10) > DateTime.UtcNow);
+            return await Task.FromResult(requestBody);
         }
 
         #endregion Private Methods

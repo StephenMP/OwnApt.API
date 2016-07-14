@@ -7,6 +7,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "Authentication": "1.6996.6542",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -18,6 +19,15 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
           "MongoDB.Driver": "2.2.4"
+        }
+      },
+      "Authentication/1.6996.6542": {
+        "type": "package",
+        "compile": {
+          "lib/dnx451/Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Authentication.dll": {}
         }
       },
       "AutoMapper/5.0.0": {
@@ -1793,6 +1803,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "Authentication": "1.6996.6542",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -1804,6 +1815,15 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
           "MongoDB.Driver": "2.2.4"
+        }
+      },
+      "Authentication/1.6996.6542": {
+        "type": "package",
+        "compile": {
+          "lib/dnx451/Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Authentication.dll": {}
         }
       },
       "AutoMapper/5.0.0": {
@@ -3582,6 +3602,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
+          "Authentication": "1.6996.6542",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -3593,6 +3614,15 @@
           "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
           "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
           "MongoDB.Driver": "2.2.4"
+        }
+      },
+      "Authentication/1.6996.6542": {
+        "type": "package",
+        "compile": {
+          "lib/dnx451/Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Authentication.dll": {}
         }
       },
       "AutoMapper/5.0.0": {
@@ -5371,6 +5401,16 @@
     "Api/1.0.0": {
       "type": "project",
       "path": "../Api/project.json"
+    },
+    "Authentication/1.6996.6542": {
+      "type": "package",
+      "sha512": "6RMErFm7/nP1zHD9/chpWNarsSCtyc6R4brms8vwILKnBz7PmCupYSCyhYlnsvV/DuMOq3VyuDXx4BHaZuSHXg==",
+      "files": [
+        "Authentication.1.6996.6542.nupkg",
+        "Authentication.1.6996.6542.nupkg.sha512",
+        "Authentication.nuspec",
+        "lib/dnx451/Authentication.dll"
+      ]
     },
     "AutoMapper/5.0.0": {
       "type": "package",
@@ -7490,6 +7530,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
+      "Authentication >= 1.6996.6542",
       "Moq >= 4.5.13",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-build204"
