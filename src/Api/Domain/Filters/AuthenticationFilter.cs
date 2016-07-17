@@ -1,19 +1,14 @@
-﻿using Authentication.Domain.Interface;
-using Authentication.Domain.Service;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.Primitives;
-using System;
+using OwnApt.Authentication.Domain.Interface;
+using OwnApt.Authentication.Domain.Service;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Filters
 {
-    // appId:hashedSecret:createdDate:randomGUID
     public class AuthenticationFilter : ActionFilterAttribute, IAsyncAuthorizationFilter
     {
         #region Private Fields + Properties
