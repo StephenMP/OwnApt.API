@@ -5400,7 +5400,7 @@
   "libraries": {
     "Api/1.0.0": {
       "type": "project",
-      "path": "../Api/project.json"
+      "path": "../../src/Api/project.json"
     },
     "Authentication/1.6996.6542": {
       "type": "package",
