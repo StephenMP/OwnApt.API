@@ -7,7 +7,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Authentication": "1.6999.4883",
+          "Authentication": "1.7000.5717",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -21,7 +21,7 @@
           "MongoDB.Driver": "2.2.4"
         }
       },
-      "Authentication/1.6999.4883": {
+      "Authentication/1.7000.5717": {
         "type": "package",
         "compile": {
           "lib/dnx451/Authentication.dll": {}
@@ -1803,7 +1803,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Authentication": "1.6999.4883",
+          "Authentication": "1.7000.5717",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -1817,7 +1817,7 @@
           "MongoDB.Driver": "2.2.4"
         }
       },
-      "Authentication/1.6999.4883": {
+      "Authentication/1.7000.5717": {
         "type": "package",
         "compile": {
           "lib/dnx451/Authentication.dll": {}
@@ -3602,7 +3602,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "Authentication": "1.6999.4883",
+          "Authentication": "1.7000.5717",
           "AutoMapper": "5.0.0",
           "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
           "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
@@ -3616,7 +3616,7 @@
           "MongoDB.Driver": "2.2.4"
         }
       },
-      "Authentication/1.6999.4883": {
+      "Authentication/1.7000.5717": {
         "type": "package",
         "compile": {
           "lib/dnx451/Authentication.dll": {}
@@ -5402,12 +5402,12 @@
       "type": "project",
       "path": "../../src/Api/project.json"
     },
-    "Authentication/1.6999.4883": {
+    "Authentication/1.7000.5717": {
       "type": "package",
-      "sha512": "fmh+ex5G6iOrj1pssxVCqRheZpb9VeUHJybqY7b1+fCP4o5VN4ilTh2ax3mo6whzglxuUxV6fjvSETdnBIJLdg==",
+      "sha512": "1M2QmAyMMAE0JRAgHC2aXelK9oQeWflbAILIUcWHnLLmCppALksMf+3dQXABli5AbA2GPr2glvlhwYe6aylNgQ==",
       "files": [
-        "Authentication.1.6999.4883.nupkg",
-        "Authentication.1.6999.4883.nupkg.sha512",
+        "Authentication.1.7000.5717.nupkg",
+        "Authentication.1.7000.5717.nupkg.sha512",
         "Authentication.nuspec",
         "lib/dnx451/Authentication.dll"
       ]
@@ -7530,6 +7530,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
+      "Authentication >= 1.7000.5717",
       "Moq >= 4.5.13",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-build204"
