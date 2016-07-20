@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "Authentication/1.7002.2714": {
+      "Authentication/1.7002.4641": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final"
@@ -1616,7 +1616,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "Authentication/1.7002.2714": {
+      "Authentication/1.7002.4641": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final"
@@ -3232,7 +3232,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "Authentication/1.7002.2714": {
+      "Authentication/1.7002.4641": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final"
@@ -4849,12 +4849,12 @@
     }
   },
   "libraries": {
-    "Authentication/1.7002.2714": {
+    "Authentication/1.7002.4641": {
       "type": "package",
-      "sha512": "qw650g8bU9vqV9qtQo8JmpdHf8268PWUuKKsqZIXjVWnKjzKwPnAOWdP1xJe0Waw+LIyKQjVhbHUpvJkIL3uVA==",
+      "sha512": "SeKrI40aAbAuqjj2wL659KMHTdKfgVgdTeXN0aX2RdyrdsfWh+XpmBCDWNNYQI2jWxUhhwF7vrelihPNvkGCrw==",
       "files": [
-        "Authentication.1.7002.2714.nupkg",
-        "Authentication.1.7002.2714.nupkg.sha512",
+        "Authentication.1.7002.4641.nupkg",
+        "Authentication.1.7002.4641.nupkg.sha512",
         "Authentication.nuspec",
         "lib/dnx451/Authentication.dll"
       ]
@@ -6751,7 +6751,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Authentication >= 1.7002.2714",
+      "Authentication >= 1.7002.4641",
       "AutoMapper >= 5.0.0",
       "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-rc1-final",
       "Microsoft.AspNet.Mvc >= 6.0.0-rc1-final",
