@@ -5,7 +5,7 @@
   },
 
   "dependencies": {
-    "Authentication": "1.7000.5717",
+    "Authentication": "1.7002.2714",
     "AutoMapper": "5.0.0",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
