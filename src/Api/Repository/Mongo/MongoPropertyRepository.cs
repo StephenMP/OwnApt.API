@@ -7,7 +7,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OwnApt.Api.Repository
+namespace OwnApt.Api.Repository.Mongo
 {
     public class MongoPropertyRepository : IPropertyRepository
     {

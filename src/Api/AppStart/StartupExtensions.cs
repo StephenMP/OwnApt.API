@@ -5,8 +5,8 @@ using MongoDB.Driver;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
-using OwnApt.Api.Repository;
 using OwnApt.Api.Repository.Interface;
+using OwnApt.Api.Repository.Mongo;
 using System;
 
 namespace OwnApt.Api.AppStart
@@ -19,6 +19,7 @@ namespace OwnApt.Api.AppStart
         {
             services.AddInstance<IMongoClient>(BuildMongoClient(configuration));
             services.AddInstance<IMapper>(BuildMapper());
+            services.AddInstance<IConfigurationRoot>(configuration);
 
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
             services.AddTransient<IPropertyService, PropertyService>();
@@ -56,6 +57,17 @@ namespace OwnApt.Api.AppStart
             };
 
             return new MongoClient(mongoClientSettings);
+        }
+
+        private static string BuildSqlCoreConnectionString(IConfigurationRoot configuration)
+        {
+            var server = configuration["SqlCore:Server"];
+            var database = configuration["SqlCore:Database"];
+            var uid = configuration["SqlCore:Uid"];
+            var password = configuration["SqlCore:Password"];
+
+            var connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
+            return connectionString;
         }
 
         #endregion Private Methods

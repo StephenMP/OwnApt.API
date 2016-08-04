@@ -6,7 +6,7 @@ using OwnApt.Api.Repository.Interface;
 using System;
 using System.Threading.Tasks;
 
-namespace OwnApt.Api.Repository
+namespace OwnApt.Api.Repository.Mongo
 {
     public class MongoPersonRepository : IPersonRepository
     {
