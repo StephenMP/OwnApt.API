@@ -7,6 +7,7 @@ using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
+using OwnApt.Api.Repository.Sql;
 using System;
 
 namespace OwnApt.Api.AppStart
@@ -26,6 +27,10 @@ namespace OwnApt.Api.AppStart
 
             services.AddTransient<IPersonRepository, MongoPersonRepository>();
             services.AddTransient<IPersonService, PersonService>();
+
+            services.AddTransient<IUserLoginRepository, UserLoginRepository>();
+            services.AddTransient<IUserLoginService, UserLoginService>();
+            services.AddScoped((_) => new CoreContext(BuildSqlCoreConnectionString(configuration)));
         }
 
         public static IMapper BuildMapper()
@@ -34,6 +39,7 @@ namespace OwnApt.Api.AppStart
             {
                 cfg.AddProfile<PropertyProfile>();
                 cfg.AddProfile<PersonProfile>();
+                cfg.AddProfile<UserLoginProfile>();
             }).CreateMapper();
         }
 

@@ -12,6 +12,7 @@ namespace OwnApt.Api
     {
         #region Public Fields + Properties
 
+        private bool IsDevelopmentEnvironment;
         public IConfigurationRoot Configuration { get; set; }
 
         #endregion Public Fields + Properties
@@ -22,8 +23,9 @@ namespace OwnApt.Api
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder().AddEnvironmentVariables();
+            this.IsDevelopmentEnvironment = env.IsDevelopment();
 
-            if (env.IsDevelopment())
+            if (this.IsDevelopmentEnvironment)
             {
                 builder.AddJsonFile("appSettings_Dev.json");
             }
@@ -59,9 +61,18 @@ namespace OwnApt.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc(c =>
-                c.Filters.Add(new AuthenticationFilter())
-            );
+            if (this.IsDevelopmentEnvironment)
+            {
+                services.AddMvc();
+            }
+
+            else
+            {
+                services.AddMvc(c =>
+                    c.Filters.Add(new AuthenticationFilter())
+                );
+            }
+
             services.AddRouting();
             services.AddOwnAptDependencies(Configuration);
         }
