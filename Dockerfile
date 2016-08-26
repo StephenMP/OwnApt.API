@@ -6,8 +6,8 @@ WORKDIR /app
 COPY src/Api/project.json /app
 RUN ["dotnet", "restore"]
 
-COPY . /app
+COPY src/Api /app
 RUN ["dotnet", "build"]
 
 EXPOSE 5000/tcp
-CMD ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "run"]
