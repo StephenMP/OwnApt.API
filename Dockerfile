@@ -1,6 +1,7 @@
 FROM microsoft/aspnet:latest
 
 COPY . /app
+COPY ../DevOps/NugetPackages /app
 WORKDIR /app
 RUN ["dnu", "restore"]
 
