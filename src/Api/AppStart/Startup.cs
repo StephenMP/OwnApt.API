@@ -1,48 +1,43 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OwnApt.Api.Repository.Sql;
+using MySQL.Data.EntityFrameworkCore.Extensions;
+using System.Data.Common;
+using MySql.Data.MySqlClient;
 using OwnApt.Api.AppStart;
-using OwnApt.Authentication.Api.Filter;
 
-namespace OwnApt.Api
+namespace Api
 {
     public class Startup
     {
-        #region Public Fields + Properties
-
-        private bool IsDevelopmentEnvironment;
-        public IConfigurationRoot Configuration { get; set; }
-
-        #endregion Public Fields + Properties
-
-        #region Public Constructors + Destructors
-
         public Startup(IHostingEnvironment env)
         {
-            // Set up configuration sources.
-            var builder = new ConfigurationBuilder().AddEnvironmentVariables();
-            this.IsDevelopmentEnvironment = env.IsDevelopment();
-
-            if (this.IsDevelopmentEnvironment)
-            {
-                builder.AddJsonFile("appSettings_Dev.json");
-            }
-            else
-            {
-                builder.AddJsonFile("appsettings.json");
-            }
-
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
-        #endregion Public Constructors + Destructors
+        public IConfigurationRoot Configuration { get; }
 
-        #region Public Methods
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Add framework services.
+            services.AddMvc();
 
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+            // Add OwnApt dependencies
+            services.AddOwnAptDependencies(Configuration);
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -50,33 +45,7 @@ namespace OwnApt.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIISPlatformHandler();
-
-            app.UseStaticFiles();
-
             app.UseMvc();
         }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            if (this.IsDevelopmentEnvironment)
-            {
-                services.AddMvc();
-            }
-
-            else
-            {
-                services.AddMvc(c =>
-                    c.Filters.Add(new AuthenticationFilter())
-                );
-            }
-
-            services.AddRouting();
-            services.AddOwnAptDependencies(Configuration);
-        }
-
-        #endregion Public Methods
     }
 }

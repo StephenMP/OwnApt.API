@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
@@ -89,13 +89,13 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             {
                 if (typeof(T) != typeof(Missing))
                 {
-                    var content = Assert.IsType<HttpOkObjectResult>(this.controllerIActionResult);
+                    var content = Assert.IsType<OkObjectResult>(this.controllerIActionResult);
                     this.controllerContent = content.Value;
                     Assert.Equal((int)statusCode, content.StatusCode.Value);
                 }
                 else
                 {
-                    Assert.IsType<HttpOkResult>(this.controllerIActionResult);
+                    Assert.IsType<OkResult>(this.controllerIActionResult);
                 }
             }
             else if (statusCode == HttpStatusCode.Created)

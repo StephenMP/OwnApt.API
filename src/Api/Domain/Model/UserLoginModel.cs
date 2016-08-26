@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿
+using Microsoft.AspNetCore.Identity;
 
 namespace OwnApt.Api.Domain.Model
 {

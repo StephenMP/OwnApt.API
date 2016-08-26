@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Domain.Model;
 
 namespace OwnApt.Api.Controllers
 {
@@ -52,7 +55,6 @@ namespace OwnApt.Api.Controllers
                 return new BadRequestObjectResult($"{nameof(suppliedModel)} was null");
             }
 
-            var meh = JsonConvert.SerializeObject(suppliedModel);
             var userCreated = await this.userLoginService.CreateAsync(suppliedModel);
 
             if (userCreated)
@@ -60,7 +62,7 @@ namespace OwnApt.Api.Controllers
                 return Ok();
             }
 
-            return new HttpStatusCodeResult((int)HttpStatusCode.Conflict);
+            return new StatusCodeResult((int)HttpStatusCode.Conflict);
         }
 
         [HttpDelete("{personId}")]
@@ -116,12 +118,12 @@ namespace OwnApt.Api.Controllers
 
             if (loginModel.VerificationResult == PasswordVerificationResult.Failed)
             {
-                return new HttpUnauthorizedResult();
+                return new UnauthorizedResult();
             }
-            else if (loginModel.VerificationResult == PasswordVerificationResult.SuccessRehashNeeded)
+
+            if (loginModel.VerificationResult == PasswordVerificationResult.SuccessRehashNeeded)
             {
-                var updatedLoginModel = await this.userLoginService.RehashUserPassword(suppliedModel);
-                return Ok(updatedLoginModel);
+                loginModel = await this.userLoginService.RehashUserPassword(suppliedModel);
             }
 
             return Ok(loginModel);
@@ -130,3 +132,4 @@ namespace OwnApt.Api.Controllers
         #endregion Public Methods
     }
 }
+

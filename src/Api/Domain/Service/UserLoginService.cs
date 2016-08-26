@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Interface;

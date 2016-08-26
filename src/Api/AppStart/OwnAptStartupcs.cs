@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using MySql.Data.MySqlClient;
+using MySQL.Data.EntityFrameworkCore.Extensions;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
@@ -9,28 +11,45 @@ using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Sql;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OwnApt.Api.AppStart
 {
-    public static class StartupExtensions
+    public static class OwnAptStartupcs
     {
-        #region Public Methods
-
         public static void AddOwnAptDependencies(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            services.AddInstance<IMongoClient>(BuildMongoClient(configuration));
-            services.AddInstance<IMapper>(BuildMapper());
-            services.AddInstance<IConfigurationRoot>(configuration);
+            AddAutoMapper(services);
+            AddRepositories(services);
+            AddServices(services);
+            AddMongo(services, configuration);
+            AddMySql(services, configuration);
+        }
 
+        private static void AddRepositories(IServiceCollection services)
+        {
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
-            services.AddTransient<IPropertyService, PropertyService>();
-
             services.AddTransient<IPersonRepository, MongoPersonRepository>();
-            services.AddTransient<IPersonService, PersonService>();
-
             services.AddTransient<IUserLoginRepository, UserLoginRepository>();
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddTransient<IPropertyService, PropertyService>();
+            services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IUserLoginService, UserLoginService>();
-            services.AddScoped((_) => new CoreContext(BuildSqlCoreConnectionString(configuration)));
+        }
+
+        private static void AddAutoMapper(IServiceCollection services)
+        {
+            services.AddSingleton<IMapper>(BuildMapper());
+        }
+
+        private static void AddMongo(IServiceCollection services, IConfigurationRoot configuration)
+        {
+            services.AddSingleton<IMongoClient>(BuildMongoClient(configuration));
         }
 
         public static IMapper BuildMapper()
@@ -42,10 +61,6 @@ namespace OwnApt.Api.AppStart
                 cfg.AddProfile<UserLoginProfile>();
             }).CreateMapper();
         }
-
-        #endregion Public Methods
-
-        #region Private Methods
 
         private static MongoClient BuildMongoClient(IConfigurationRoot configuration)
         {
@@ -65,17 +80,25 @@ namespace OwnApt.Api.AppStart
             return new MongoClient(mongoClientSettings);
         }
 
-        private static string BuildSqlCoreConnectionString(IConfigurationRoot configuration)
+        private static void AddMySql(IServiceCollection services, IConfigurationRoot configuration)
         {
             var server = configuration["SqlCore:Server"];
             var database = configuration["SqlCore:Database"];
-            var uid = configuration["SqlCore:Uid"];
+            var userID = configuration["SqlCore:Uid"];
             var password = configuration["SqlCore:Password"];
 
-            var connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
-            return connectionString;
-        }
+            var mysqlConnectionBuilder = new MySqlConnectionStringBuilder
+            {
+                Server = server,
+                Database = database,
+                UserID = userID,
+                Password = password,
+                SslMode = MySqlSslMode.None
+            };
 
-        #endregion Private Methods
+            services.AddDbContext<CoreContext>(options => {
+                options.UseMySQL(mysqlConnectionBuilder.ToString());
+            });
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Domain.Model;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface

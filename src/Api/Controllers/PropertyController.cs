@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
 {
