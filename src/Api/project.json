@@ -20,7 +20,9 @@
     "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "MongoDB.Driver": "2.3.0-beta1",
-    "System.Security.SecureString": "4.0.0"
+    "System.Security.SecureString": "4.0.0",
+    "Authentication": "1.7041.3783",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0"
   },
 
   "tools": {
