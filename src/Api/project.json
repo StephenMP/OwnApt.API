@@ -21,7 +21,7 @@
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "MongoDB.Driver": "2.3.0-beta1",
     "System.Security.SecureString": "4.0.0",
-    "Authentication": "1.7041.3783",
+    "Authentication": "1.4724.21101",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0"
   },
 
