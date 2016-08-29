@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
@@ -21,23 +19,8 @@ namespace OwnApt.Api.AppStart
 {
     public static class OwnAptStartupcs
     {
-        public static void UseOwnAptConfiguration(this IApplicationBuilder app, IHostingEnvironment env)
+        public static void AddOwnAptDependencies(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMvc();
-        }
-
-        public static void UseOwnAptServices(this IServiceCollection services, IConfigurationRoot configuration)
-        {
-            services.AddMvc(options => 
-            {
-                //options.Filters.Add(typeof(HmacAuthenticationFilter));
-            });
-
             AddAutoMapper(services);
             AddRepositories(services);
             AddServices(services);

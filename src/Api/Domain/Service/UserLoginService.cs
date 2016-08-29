@@ -84,7 +84,7 @@ namespace OwnApt.Api.Domain.Service
             }
 
             var suppliedEmail = suppliedModel.Email;
-            var suppliedPassword = suppliedModel.Password;// CryptoProvider.Decrypt(suppliedModel.Password);
+            var suppliedPassword = suppliedModel.Password;
 
             var storedEmail = loginModel.Email;
             var storedHashedPassword = loginModel.Password;
@@ -94,7 +94,6 @@ namespace OwnApt.Api.Domain.Service
             var verificationResult = passwordHasher.VerifyHashedPassword(userIdentity, storedHashedPassword, suppliedPassword);
 
             loginModel.VerificationResult = verificationResult;
-            loginModel.Password = String.Empty;
             return await Task.FromResult(loginModel);
         }
 
@@ -103,7 +102,7 @@ namespace OwnApt.Api.Domain.Service
             var loginModel = await this.ReadByEmailAsync(suppliedModel.Email);
             var userIdentity = await this.BuildIdentity(suppliedModel.Email);
             var passwordHasher = await this.BuildPasswordHasher();
-            var hashedPassword = passwordHasher.HashPassword(userIdentity, suppliedModel.Password);// CryptoProvider.Decrypt(suppliedModel.Password));
+            var hashedPassword = passwordHasher.HashPassword(userIdentity, suppliedModel.Password);
 
             var newUserLoginModel = new UserLoginModel
             {
@@ -113,8 +112,6 @@ namespace OwnApt.Api.Domain.Service
             };
 
             await this.UpdateAsync(newUserLoginModel);
-
-            newUserLoginModel.Password = newUserLoginModel.Password;// CryptoProvider.Encrypt(newUserLoginModel.Password);
             return await Task.FromResult(newUserLoginModel);
         }
 
