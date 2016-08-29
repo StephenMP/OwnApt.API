@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "Authentication/1.4724.21101": {
+      "Authentication/1.4724.29291": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -4326,7 +4326,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
         "dependencies": {
-          "Authentication": "1.4724.21101",
+          "Authentication": "1.4724.29291",
           "AutoMapper": "5.1.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity": "1.0.0",
@@ -4357,12 +4357,12 @@
     }
   },
   "libraries": {
-    "Authentication/1.4724.21101": {
-      "sha512": "aBKQ4hr99kRthxZ3iLJSZcsNulYO62/9sq+AZzWS70h0Ov8b7oVwVQgkwcKEhquRJzFiZEaV5y7MLrkgF2P1vQ==",
+    "Authentication/1.4724.29291": {
+      "sha512": "PNFj1513x+4sz06vqTLCzJS0v0+XUsGHPN6Jmin5FMtnuBv87RfZlsuba10MFkueVMOMZkTwMY++l6hInLIQTg==",
       "type": "package",
-      "path": "Authentication/1.4724.21101",
+      "path": "Authentication/1.4724.29291",
       "files": [
-        "Authentication.1.4724.21101.nupkg.sha512",
+        "Authentication.1.4724.29291.nupkg.sha512",
         "Authentication.nuspec",
         "lib/netstandard1.6/Authentication.dll"
       ]
