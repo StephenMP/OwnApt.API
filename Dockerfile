@@ -3,12 +3,10 @@ FROM microsoft/dotnet:1.0.0-preview2-sdk
 RUN mkdir /app
 WORKDIR /app
 
-COPY src/Api/project.json /app
-#COPY NuGet.config /app
+COPY . /app
 RUN ["dotnet", "restore"]
 
-COPY src/Api/ /app
-RUN ["dotnet", "build"]
+RUN ["dotnet", "build", "src/*"]
 
 EXPOSE 5000/tcp
-CMD ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "run", "src/*"]
