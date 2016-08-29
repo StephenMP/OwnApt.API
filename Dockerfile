@@ -4,6 +4,7 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY src/Api /app
+COPY NuGet.config /app/NuGet.config
 RUN ["dotnet", "restore"]
 RUN ["dotnet", "build"]
 
