@@ -3,20 +3,6 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "Authentication/1.4724.29291": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
-          "NETStandard.Library": "1.6.0",
-          "System.Security.Cryptography.Algorithms": "4.2.0"
-        },
-        "compile": {
-          "lib/netstandard1.6/Authentication.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.6/Authentication.dll": {}
-        }
-      },
       "AutoMapper/5.1.1": {
         "type": "package",
         "dependencies": {
@@ -3961,16 +3947,6 @@
     }
   },
   "libraries": {
-    "Authentication/1.4724.29291": {
-      "sha512": "PNFj1513x+4sz06vqTLCzJS0v0+XUsGHPN6Jmin5FMtnuBv87RfZlsuba10MFkueVMOMZkTwMY++l6hInLIQTg==",
-      "type": "package",
-      "path": "Authentication/1.4724.29291",
-      "files": [
-        "Authentication.1.4724.29291.nupkg.sha512",
-        "Authentication.nuspec",
-        "lib/netstandard1.6/Authentication.dll"
-      ]
-    },
     "AutoMapper/5.1.1": {
       "sha512": "Q3uFSWccBUE1Q9BW88C6RO2Y/iFkPztTKK1ciyx1jhWPdOi5+pvzZ2EwcJKPiV0cr2EXZUWqQOsSpA5jVjfQBg==",
       "type": "package",
@@ -10256,7 +10232,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Authentication >= 1.4724.29291",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 1.0.0",

@@ -12,7 +12,6 @@ using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Sql;
-using OwnApt.Authentication.Api.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace OwnApt.Api.AppStart
         {
             services.AddMvc(options => 
             {
-                options.Filters.Add(typeof(HmacAuthenticationFilter));
+                //options.Filters.Add(typeof(HmacAuthenticationFilter));
             });
 
             AddAutoMapper(services);
