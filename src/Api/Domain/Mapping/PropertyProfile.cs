@@ -6,7 +6,7 @@ namespace OwnApt.Api.Domain.Mapping
 {
     public class PropertyProfile : Profile
     {
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public PropertyProfile()
         {
@@ -14,7 +14,7 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureModelToEntity();
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Private Methods
 

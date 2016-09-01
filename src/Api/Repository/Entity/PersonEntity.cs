@@ -6,7 +6,7 @@ namespace OwnApt.Api.Repository.Entity
 {
     public class PersonEntity : Equatable<PersonEntity>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public int Age { get; set; }
         public ContactDto Contact { get; set; }
@@ -17,7 +17,7 @@ namespace OwnApt.Api.Repository.Entity
         public string[] PropertyIds { get; set; }
         public PersonType Type { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

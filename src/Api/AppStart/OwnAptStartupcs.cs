@@ -13,15 +13,25 @@ using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Sql;
 using OwnApt.Authentication.Api.Filter;
+using Swashbuckle.Swagger.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.AppStart
 {
     public static class OwnAptStartupcs
     {
+        #region Public Methods
+
+        public static IMapper BuildMapper()
+        {
+            return new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<PropertyProfile>();
+                cfg.AddProfile<PersonProfile>();
+                cfg.AddProfile<UserLoginProfile>();
+            }).CreateMapper();
+        }
+
         public static void UseOwnAptConfiguration(this IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -29,21 +39,68 @@ namespace OwnApt.Api.AppStart
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            AddMvc(app);
+            AddSwagger(app);
         }
 
         public static void UseOwnAptServices(this IServiceCollection services, IConfigurationRoot configuration)
         {
-            services.AddMvc(options => 
-            {
-                options.Filters.Add(typeof(HmacAuthenticationFilter));
-            });
-
+            AddFilters(services);
             AddAutoMapper(services);
             AddRepositories(services);
             AddServices(services);
             AddMongo(services, configuration);
             AddMySql(services, configuration);
+            AddSwagger(services);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private static void AddAutoMapper(IServiceCollection services)
+        {
+            services.AddSingleton<IMapper>(BuildMapper());
+        }
+
+        private static void AddFilters(IServiceCollection services)
+        {
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(HmacAuthenticationFilter));
+            });
+        }
+
+        private static void AddMongo(IServiceCollection services, IConfigurationRoot configuration)
+        {
+            services.AddSingleton<IMongoClient>(BuildMongoClient(configuration));
+        }
+
+        private static void AddMvc(IApplicationBuilder app)
+        {
+            app.UseMvc();
+        }
+
+        private static void AddMySql(IServiceCollection services, IConfigurationRoot configuration)
+        {
+            var server = configuration["SqlCore:Server"];
+            var database = configuration["SqlCore:Database"];
+            var userID = configuration["SqlCore:Uid"];
+            var password = configuration["SqlCore:Password"];
+
+            var mysqlConnectionBuilder = new MySqlConnectionStringBuilder
+            {
+                Server = server,
+                Database = database,
+                UserID = userID,
+                Password = password,
+                SslMode = MySqlSslMode.None
+            };
+
+            services.AddDbContext<CoreContext>(options =>
+            {
+                options.UseMySQL(mysqlConnectionBuilder.ToString());
+            });
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -60,24 +117,26 @@ namespace OwnApt.Api.AppStart
             services.AddTransient<IUserLoginService, UserLoginService>();
         }
 
-        private static void AddAutoMapper(IServiceCollection services)
+        private static void AddSwagger(IApplicationBuilder app)
         {
-            services.AddSingleton<IMapper>(BuildMapper());
+            app.UseSwagger("api/{apiVersion}/info.json");
+            app.UseSwaggerUi("api/v1/info", "/api/v1/info.json");
         }
 
-        private static void AddMongo(IServiceCollection services, IConfigurationRoot configuration)
+        private static void AddSwagger(IServiceCollection services)
         {
-            services.AddSingleton<IMongoClient>(BuildMongoClient(configuration));
-        }
-
-        public static IMapper BuildMapper()
-        {
-            return new MapperConfiguration(cfg =>
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(options =>
             {
-                cfg.AddProfile<PropertyProfile>();
-                cfg.AddProfile<PersonProfile>();
-                cfg.AddProfile<UserLoginProfile>();
-            }).CreateMapper();
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "OwnApt Core API",
+                    Description = "All Things OwnApt"
+                });
+                //options.IncludeXmlComments(pathToDoc);
+                options.DescribeAllEnumsAsStrings();
+            });
         }
 
         private static MongoClient BuildMongoClient(IConfigurationRoot configuration)
@@ -98,25 +157,6 @@ namespace OwnApt.Api.AppStart
             return new MongoClient(mongoClientSettings);
         }
 
-        private static void AddMySql(IServiceCollection services, IConfigurationRoot configuration)
-        {
-            var server = configuration["SqlCore:Server"];
-            var database = configuration["SqlCore:Database"];
-            var userID = configuration["SqlCore:Uid"];
-            var password = configuration["SqlCore:Password"];
-
-            var mysqlConnectionBuilder = new MySqlConnectionStringBuilder
-            {
-                Server = server,
-                Database = database,
-                UserID = userID,
-                Password = password,
-                SslMode = MySqlSslMode.None
-            };
-
-            services.AddDbContext<CoreContext>(options => {
-                options.UseMySQL(mysqlConnectionBuilder.ToString());
-            });
-        }
+        #endregion Private Methods
     }
 }

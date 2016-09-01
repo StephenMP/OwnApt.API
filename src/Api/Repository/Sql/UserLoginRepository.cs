@@ -9,14 +9,14 @@ namespace OwnApt.Api.Repository.Sql
 {
     public class UserLoginRepository : IUserLoginRepository
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
         private CoreContext coreContext;
         private IMapper mapper;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public UserLoginRepository(CoreContext coreContext, IMapper mapper)
         {
@@ -24,7 +24,7 @@ namespace OwnApt.Api.Repository.Sql
             this.mapper = mapper;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Public Methods
 

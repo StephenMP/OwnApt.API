@@ -6,7 +6,7 @@ namespace OwnApt.Api.Domain.Model
 {
     public class PersonModel : Equatable<PersonModel>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public int Age { get; set; }
         public ContactDto Contact { get; set; }
@@ -17,7 +17,7 @@ namespace OwnApt.Api.Domain.Model
         public string[] PropertyIds { get; set; }
         public PersonType Type { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

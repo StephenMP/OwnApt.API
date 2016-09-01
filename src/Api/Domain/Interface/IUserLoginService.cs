@@ -15,11 +15,11 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<UserLoginModel> ReadByEmailAsync(string id);
 
+        Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel);
+
         Task UpdateAsync(UserLoginModel model);
 
         Task<UserLoginModel> VerifyUser(UserLoginModel suppliedModel);
-
-        Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel);
 
         #endregion Public Methods
     }

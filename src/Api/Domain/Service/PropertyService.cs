@@ -7,20 +7,20 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PropertyService : IPropertyService
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
         private readonly IPropertyRepository propertyRepository;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public PropertyService(IPropertyRepository propertyRepository)
         {
             this.propertyRepository = propertyRepository;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Public Methods
 

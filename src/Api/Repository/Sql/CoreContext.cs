@@ -5,14 +5,18 @@ namespace OwnApt.Api.Repository.Sql
 {
     public partial class CoreContext : DbContext
     {
-        #region Public Fields + Properties
-
-        public DbSet<UserLoginEntity> UserLogin { get; set; }
-
-        #endregion Public Fields + Properties
+        #region Public Constructors
 
         public CoreContext(DbContextOptions<CoreContext> options) : base(options)
         {
         }
+
+        #endregion Public Constructors
+
+        #region Public Properties
+
+        public DbSet<UserLoginEntity> UserLogin { get; set; }
+
+        #endregion Public Properties
     }
 }

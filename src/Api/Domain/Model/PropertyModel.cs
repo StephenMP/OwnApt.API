@@ -6,7 +6,7 @@ namespace OwnApt.Api.Domain.Model
 {
     public class PropertyModel : Equatable<PropertyModel>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public AddressDto Address { get; set; }
         public FeaturesDto Features { get; set; }
@@ -15,7 +15,7 @@ namespace OwnApt.Api.Domain.Model
         public PropertyType PropertyType { get; set; }
         public string[] TenantIds { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

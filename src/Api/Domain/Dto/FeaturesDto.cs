@@ -4,7 +4,7 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class FeaturesDto : Equatable<FeaturesDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public AmmenityDto[] Ammentities { get; set; }
         public double Bathrooms { get; set; }
@@ -12,7 +12,7 @@ namespace OwnApt.Api.Domain.Dto
         public ParkingDto Parking { get; set; }
         public int Rooms { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

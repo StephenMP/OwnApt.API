@@ -7,20 +7,20 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PersonService : IPersonService
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
         private IPersonRepository personRepository;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public PersonService(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Public Methods
 

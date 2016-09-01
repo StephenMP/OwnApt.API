@@ -10,15 +10,14 @@ namespace OwnApt.Api.Repository.Mongo
 {
     public class MongoPersonRepository : IPersonRepository
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
-        private IMongoCollection<PersonEntity> PersonCollection => this.coreDatabase.GetCollection<PersonEntity>("Person");
         private readonly IMongoDatabase coreDatabase;
         private readonly IMapper mapper;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public MongoPersonRepository(IMongoClient mongoClient, IMapper mapper)
         {
@@ -26,7 +25,13 @@ namespace OwnApt.Api.Repository.Mongo
             this.mapper = mapper;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
+
+        #region Private Properties
+
+        private IMongoCollection<PersonEntity> PersonCollection => this.coreDatabase.GetCollection<PersonEntity>("Person");
+
+        #endregion Private Properties
 
         #region Public Methods
 

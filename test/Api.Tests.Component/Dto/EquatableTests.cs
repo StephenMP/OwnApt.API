@@ -1,16 +1,12 @@
 ﻿using OwnApt.Api.Domain.Dto;
 using OwnApt.Api.Domain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Dto
 {
     public class EquatableTests
     {
+        #region Public Methods
 
         [Fact]
         public void Address()
@@ -186,11 +182,17 @@ namespace Api.Tests.Component.Dto
             DoAsserts(orig, copy);
         }
 
+        #endregion Public Methods
+
+        #region Private Methods
+
         private static void DoAsserts<T>(T orig, T copy)
         {
             Assert.NotNull(orig);
             Assert.NotNull(copy);
             Assert.Equal(orig, copy);
         }
+
+        #endregion Private Methods
     }
 }

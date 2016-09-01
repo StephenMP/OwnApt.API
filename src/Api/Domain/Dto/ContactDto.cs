@@ -4,12 +4,12 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class ContactDto : Equatable<ContactDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string Email { get; set; }
         public PhoneDto[] Phones { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

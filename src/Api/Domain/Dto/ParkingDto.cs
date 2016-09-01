@@ -5,12 +5,12 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class ParkingDto : Equatable<ParkingDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string Description { get; set; }
         public ParkingType Type { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

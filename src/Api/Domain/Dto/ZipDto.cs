@@ -1,19 +1,15 @@
 ﻿using OwnApt.Api.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Dto
 {
     public class ZipDto : Equatable<ZipDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string Base { get; set; }
         public string Extension { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

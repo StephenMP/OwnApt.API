@@ -5,7 +5,7 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class AddressDto : Equatable<AddressDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -14,7 +14,7 @@ namespace OwnApt.Api.Domain.Dto
         public State State { get; set; }
         public ZipDto Zip { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

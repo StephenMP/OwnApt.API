@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Mapping
 {
     public class UserLoginProfile : Profile
     {
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public UserLoginProfile()
         {
@@ -18,7 +14,7 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureModelToEntity();
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Private Methods
 

@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Model;
+using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     public class PropertyController : Controller
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
         private readonly IPropertyService propertyService;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public PropertyController(IPropertyService propertyService)
         {
             this.propertyService = propertyService;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Public Methods
 

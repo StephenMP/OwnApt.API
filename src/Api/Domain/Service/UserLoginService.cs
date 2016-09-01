@@ -11,20 +11,20 @@ namespace OwnApt.Api.Domain.Service
 {
     public class UserLoginService : IUserLoginService
     {
-        #region Private Fields + Properties
+        #region Private Fields
 
         private IUserLoginRepository userLoginRepository;
 
-        #endregion Private Fields + Properties
+        #endregion Private Fields
 
-        #region Public Constructors + Destructors
+        #region Public Constructors
 
         public UserLoginService(IUserLoginRepository userLoginRepository)
         {
             this.userLoginRepository = userLoginRepository;
         }
 
-        #endregion Public Constructors + Destructors
+        #endregion Public Constructors
 
         #region Public Methods
 
@@ -69,6 +69,26 @@ namespace OwnApt.Api.Domain.Service
             return await this.userLoginRepository.ReadByEmailAsync(email);
         }
 
+        public async Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel)
+        {
+            var loginModel = await this.ReadByEmailAsync(suppliedModel.Email);
+            var userIdentity = await this.BuildIdentity(suppliedModel.Email);
+            var passwordHasher = await this.BuildPasswordHasher();
+            var hashedPassword = passwordHasher.HashPassword(userIdentity, CryptoProvider.Decrypt(suppliedModel.Password));
+
+            var newUserLoginModel = new UserLoginModel
+            {
+                UserId = loginModel.UserId,
+                Email = loginModel.Email,
+                Password = hashedPassword
+            };
+
+            await this.UpdateAsync(newUserLoginModel);
+
+            newUserLoginModel.Password = CryptoProvider.Encrypt(newUserLoginModel.Password);
+            return await Task.FromResult(newUserLoginModel);
+        }
+
         public async Task UpdateAsync(UserLoginModel model)
         {
             await this.userLoginRepository.UpdateAsync(model);
@@ -97,26 +117,6 @@ namespace OwnApt.Api.Domain.Service
             loginModel.VerificationResult = verificationResult;
             loginModel.Password = String.Empty;
             return await Task.FromResult(loginModel);
-        }
-
-        public async Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel)
-        {
-            var loginModel = await this.ReadByEmailAsync(suppliedModel.Email);
-            var userIdentity = await this.BuildIdentity(suppliedModel.Email);
-            var passwordHasher = await this.BuildPasswordHasher();
-            var hashedPassword = passwordHasher.HashPassword(userIdentity, CryptoProvider.Decrypt(suppliedModel.Password));
-
-            var newUserLoginModel = new UserLoginModel
-            {
-                UserId = loginModel.UserId,
-                Email = loginModel.Email,
-                Password = hashedPassword
-            };
-
-            await this.UpdateAsync(newUserLoginModel);
-
-            newUserLoginModel.Password = CryptoProvider.Encrypt(newUserLoginModel.Password);
-            return await Task.FromResult(newUserLoginModel);
         }
 
         #endregion Public Methods

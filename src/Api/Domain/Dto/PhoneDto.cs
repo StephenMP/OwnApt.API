@@ -5,7 +5,7 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class PhoneDto : Equatable<PhoneDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public int AreaCode { get; set; }
         public int CountryCode { get; set; }
@@ -13,7 +13,7 @@ namespace OwnApt.Api.Domain.Dto
         public int Prefix { get; set; }
         public PhoneType Type { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

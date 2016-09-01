@@ -4,13 +4,13 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class NameDto : Equatable<NameDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 

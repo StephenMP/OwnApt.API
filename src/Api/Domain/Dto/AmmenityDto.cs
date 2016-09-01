@@ -5,12 +5,12 @@ namespace OwnApt.Api.Domain.Dto
 {
     public class AmmenityDto : Equatable<AmmenityDto>
     {
-        #region Public Fields + Properties
+        #region Public Properties
 
         public string Description { get; set; }
         public AmmenityType Type { get; set; }
 
-        #endregion Public Fields + Properties
+        #endregion Public Properties
 
         #region Public Methods
 
