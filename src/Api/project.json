@@ -22,7 +22,7 @@
     "MongoDB.Driver": "2.3.0-beta1",
     "System.Security.SecureString": "4.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-    "Authentication": "14.7248.6946",
+    "Authentication": "14.7271.5352",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
     "Swashbuckle.SwaggerUi": "6.0.0-beta901"
   },
