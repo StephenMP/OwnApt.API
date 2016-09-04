@@ -12,8 +12,8 @@ namespace OwnApt.Api.Controllers
     {
         #region Private Fields
 
-        private IPersonService personService;
-        private IUserLoginService userLoginService;
+        private readonly IPersonService personService;
+        private readonly IUserLoginService userLoginService;
 
         #endregion Private Fields
 

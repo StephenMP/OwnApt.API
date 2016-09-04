@@ -18,7 +18,7 @@ using System;
 
 namespace OwnApt.Api.AppStart
 {
-    public static class OwnAptStartupcs
+    public static class OwnAptStartup
     {
         #region Public Methods
 
@@ -147,7 +147,7 @@ namespace OwnApt.Api.AppStart
             var host = configuration["MongoCore:Host"];
             var port = Convert.ToInt32(configuration["MongoCore:Port"]);
 
-            var mongoClientSettings = new MongoClientSettings()
+            var mongoClientSettings = new MongoClientSettings
             {
                 Credentials = new MongoCredential[] { MongoCredential.CreateCredential(coreDbName, username, password) },
                 ConnectionMode = ConnectionMode.Direct,

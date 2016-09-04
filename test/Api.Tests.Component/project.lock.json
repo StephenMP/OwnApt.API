@@ -1109,6 +1109,18 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -4301,6 +4313,27 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "TestEnvironment/14.7294.5912": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "1.0.0",
+          "Microsoft.EntityFrameworkCore.InMemory": "1.0.0",
+          "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+          "MongoDB.Driver": "2.3.0-beta1",
+          "NETStandard.Library": "1.6.0",
+          "System.Collections": "4.0.11",
+          "System.Collections.NonGeneric": "4.0.1",
+          "System.Collections.Specialized": "4.0.1",
+          "System.Diagnostics.Process": "4.1.0",
+          "System.Security.SecureString": "4.0.0-beta-23123"
+        },
+        "compile": {
+          "lib/netstandard1.6/TestEnvironment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/TestEnvironment.dll": {}
+        }
+      },
       "xunit/2.2.0-beta2-build3300": {
         "type": "package",
         "dependencies": {
@@ -5271,6 +5304,19 @@
         "lib/net451/Microsoft.EntityFrameworkCore.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.xml"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/1.0.0": {
+      "sha512": "0HGcrblJnPlW9EHLFKZ4uSFXOVbvtIymPNsbD+PoAm2B12oe8ImTgWHAgeYbCDLWHyETyN3D1sn8sqkqbo+uog==",
+      "type": "package",
+      "path": "Microsoft.EntityFrameworkCore.InMemory/1.0.0",
+      "files": [
+        "Microsoft.EntityFrameworkCore.InMemory.1.0.0.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.InMemory.nuspec",
+        "lib/net451/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net451/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.InMemory.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/1.0.0": {
@@ -10989,6 +11035,16 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "TestEnvironment/14.7294.5912": {
+      "sha512": "Q1djFh61886qdJibEq7BpT4fGHjJFHoSk8cCgSmKZVvu1nRC+02Dz2n7dg76TTPGrtYVLRYoELnJe0FS6+Nm2w==",
+      "type": "package",
+      "path": "TestEnvironment/14.7294.5912",
+      "files": [
+        "TestEnvironment.14.7294.5912.nupkg.sha512",
+        "TestEnvironment.nuspec",
+        "lib/netstandard1.6/TestEnvironment.dll"
+      ]
+    },
     "xunit/2.2.0-beta2-build3300": {
       "sha512": "jUMf+Hrw8+XZN56TfO+JjoibR5L806/kgDIkwCg9OXLlfnA4li4JTmH342ifYj1QMR10is8hfYYFTyjHq0+aQg==",
       "type": "package",
@@ -11108,6 +11164,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
+      "TestEnvironment >= 14.7294.5912",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "moq.netcore >= 4.4.0-beta8",
       "xunit >= 2.2.0-beta2-build3300"

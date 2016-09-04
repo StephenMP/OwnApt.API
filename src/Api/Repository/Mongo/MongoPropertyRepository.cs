@@ -58,14 +58,14 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId)
         {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.OwnerIds.Where(o => o.Contains(ownerId)).Any());
+            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.OwnerIds.Any(o => o.Contains(ownerId)));
             var propertyModels = await propertyEntities.ToListAsync();
             return this.mapper.Map<PropertyModel[]>(propertyModels);
         }
 
         public async Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId)
         {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.TenantIds.Where(t => t.Contains(tenantId)).Any());
+            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.TenantIds.Any(t => t.Contains(tenantId)));
             var propertyModels = await propertyEntities.ToListAsync();
             return this.mapper.Map<PropertyModel[]>(propertyModels);
         }

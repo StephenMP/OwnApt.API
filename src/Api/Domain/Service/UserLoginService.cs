@@ -39,7 +39,7 @@ namespace OwnApt.Api.Domain.Service
 
             var userIdentity = await this.BuildIdentity(suppliedModel.Email);
             var passwordHasher = await this.BuildPasswordHasher();
-            var hashedPassword = passwordHasher.HashPassword(userIdentity, suppliedModel.Password);
+            var hashedPassword = passwordHasher.HashPassword(userIdentity, CryptoProvider.Decrypt(suppliedModel.Password));
 
             var newUserLoginModel = new UserLoginModel
             {

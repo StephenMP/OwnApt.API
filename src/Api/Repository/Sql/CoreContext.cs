@@ -3,7 +3,7 @@ using OwnApt.Api.Repository.Entity;
 
 namespace OwnApt.Api.Repository.Sql
 {
-    public partial class CoreContext : DbContext
+    public class CoreContext : DbContext
     {
         #region Public Constructors
 
