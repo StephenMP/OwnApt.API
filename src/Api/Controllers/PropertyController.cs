@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -26,7 +26,7 @@ namespace OwnApt.Api.Controllers
         #region Public Methods
 
         [HttpPost]
-        public async Task<IActionResult> CreateProperty([FromBody] PropertyModel model)
+        public async Task<IActionResult> CreatePropertyAsync([FromBody] PropertyModel model)
         {
             if (model == null)
             {
@@ -40,7 +40,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpDelete("{propertyId}")]
-        public async Task<IActionResult> DeleteProperty(string propertyId)
+        public async Task<IActionResult> DeletePropertyAsync(string propertyId)
         {
             if (string.IsNullOrEmpty(propertyId))
             {
@@ -52,7 +52,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpGet("owner/{ownerId}")]
-        public async Task<IActionResult> ReadPropertiesForOwner(string ownerId)
+        public async Task<IActionResult> ReadPropertiesForOwnerAsync(string ownerId)
         {
             if (string.IsNullOrEmpty(ownerId))
             {
@@ -64,7 +64,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpGet("tenant/{tenantId}")]
-        public async Task<IActionResult> ReadPropertiesForTenant(string tenantId)
+        public async Task<IActionResult> ReadPropertiesForTenantAsync(string tenantId)
         {
             if (string.IsNullOrEmpty(tenantId))
             {
@@ -76,7 +76,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpGet("{propertyId}")]
-        public async Task<IActionResult> ReadProperty(string propertyId)
+        public async Task<IActionResult> ReadPropertyAsync(string propertyId)
         {
             if (string.IsNullOrEmpty(propertyId))
             {
@@ -88,7 +88,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpPut("{propertyId}")]
-        public async Task<IActionResult> UpdateProperty(string propertyId, [FromBody] PropertyModel model)
+        public async Task<IActionResult> UpdatePropertyAsync(string propertyId, [FromBody] PropertyModel model)
         {
             if (string.IsNullOrEmpty(propertyId))
             {
@@ -105,119 +105,5 @@ namespace OwnApt.Api.Controllers
         }
 
         #endregion Public Methods
-
-        //[HttpGet("insert")]
-        //public async Task<IActionResult> InsertTestCrap()
-        //{
-        //    var propertyModel = new PropertyModel
-        //    {
-        //        Address = new AddressModel
-        //        {
-        //            Address1 = "12345 Test Ave",
-        //            City = "Boise",
-        //            County = "Ada",
-        //            State = State.ID,
-        //            Zip = new ZipModel
-        //            {
-        //                Base = "83703"
-        //            }
-        //        },
-        //        Features = new FeaturesModel
-        //        {
-        //            Ammentities = new List<AmmentityModel>
-        //            {
-        //                new AmmentityModel
-        //                {
-        //                    Description = "Gas Fireplace",
-        //                    Type = AmmenityType.Fireplace
-        //                }
-        //            },
-        //            Bathrooms = 2,
-        //            Levels = 1,
-        //            Parking = new ParkingModel
-        //            {
-        //                Description = "Three Car Garage",
-        //                Type = ParkingType.Garage
-        //            },
-        //            Rooms = 3
-        //        },
-        //        PropertyType = PropertyType.SingleFamilyHome
-        //    };
-
-        //    var ownerModel = new PersonModel
-        //    {
-        //        Age = 30,
-        //        Contact = new ContactModel
-        //        {
-        //            Email = "john@doe.com",
-        //            Phones = new List<PhoneModel>
-        //            {
-        //                new PhoneModel
-        //                {
-        //                    AreaCode = 208,
-        //                    CountryCode = 1,
-        //                    LineNumber = 4567,
-        //                    Prefix = 123,
-        //                    Type = PhoneType.Home
-        //                }
-        //            }
-        //        },
-        //        CreditScore = 700,
-        //        Gender = Gender.Male,
-        //        Name = new NameModel
-        //        {
-        //            FirstName = "John",
-        //            MiddleName = "None",
-        //            LastName = "Doe"
-        //        },
-        //        PropertyIds = new List<string>
-        //        {
-        //            propertyModel.Id
-        //        },
-        //        Type = PersonType.Owner
-        //    };
-
-        //    var tenantModel = new PersonModel
-        //    {
-        //        Age = 30,
-        //        Contact = new ContactModel
-        //        {
-        //            Email = "jane@doe.com",
-        //            Phones = new List<PhoneModel>
-        //            {
-        //                new PhoneModel
-        //                {
-        //                    AreaCode = 208,
-        //                    CountryCode = 1,
-        //                    LineNumber = 456,
-        //                    Prefix = 7890,
-        //                    Type = PhoneType.Home
-        //                }
-        //            }
-        //        },
-        //        CreditScore = 750,
-        //        Gender = Gender.Female,
-        //        Name = new NameModel
-        //        {
-        //            FirstName = "Jane",
-        //            MiddleName = "None",
-        //            LastName = "Doe"
-        //        },
-        //        PropertyIds = new List<string>
-        //        {
-        //            propertyModel.Id
-        //        },
-        //        Type = PersonType.Tenant
-        //    };
-
-        //    propertyModel.OwnerIds = new List<string> { ownerModel.Id };
-        //    propertyModel.TenantIds = new List<string> { tenantModel.Id };
-
-        //    await this.personService.CreateAsync(ownerModel);
-        //    await this.personService.CreateAsync(tenantModel);
-        //    await this.propertyService.CreateAsync(propertyModel);
-
-        //    return Ok("Shiz be done! Yo!");
-        //}
     }
 }

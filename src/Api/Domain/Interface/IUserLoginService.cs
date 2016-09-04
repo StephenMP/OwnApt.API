@@ -1,4 +1,4 @@
-﻿using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Contract.Model;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface
@@ -15,11 +15,11 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<UserLoginModel> ReadByEmailAsync(string id);
 
-        Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel);
+        Task<UserLoginModel> RehashUserPasswordAsync(UserLoginModel suppliedModel);
 
         Task UpdateAsync(UserLoginModel model);
 
-        Task<UserLoginModel> VerifyUser(UserLoginModel suppliedModel);
+        Task<UserLoginModel> VerifyUserAsync(UserLoginModel suppliedModel);
 
         #endregion Public Methods
     }

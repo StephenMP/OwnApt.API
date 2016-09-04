@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using OwnApt.Api.Domain.Model;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;

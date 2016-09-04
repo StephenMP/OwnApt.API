@@ -1,4 +1,4 @@
-﻿using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Contract.Model;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface

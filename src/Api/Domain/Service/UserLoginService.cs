@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Authentication.Client.Security;
 using System;
@@ -13,7 +13,7 @@ namespace OwnApt.Api.Domain.Service
     {
         #region Private Fields
 
-        private IUserLoginRepository userLoginRepository;
+        private readonly IUserLoginRepository userLoginRepository;
 
         #endregion Private Fields
 
@@ -37,8 +37,8 @@ namespace OwnApt.Api.Domain.Service
                 return await Task.FromResult(false);
             }
 
-            var userIdentity = await this.BuildIdentity(suppliedModel.Email);
-            var passwordHasher = await this.BuildPasswordHasher();
+            var userIdentity = await BuildIdentityAsync(suppliedModel.Email);
+            var passwordHasher = await BuildPasswordHasherAsync();
             var hashedPassword = passwordHasher.HashPassword(userIdentity, CryptoProvider.Decrypt(suppliedModel.Password));
 
             var newUserLoginModel = new UserLoginModel
@@ -69,11 +69,11 @@ namespace OwnApt.Api.Domain.Service
             return await this.userLoginRepository.ReadByEmailAsync(email);
         }
 
-        public async Task<UserLoginModel> RehashUserPassword(UserLoginModel suppliedModel)
+        public async Task<UserLoginModel> RehashUserPasswordAsync(UserLoginModel suppliedModel)
         {
             var loginModel = await this.ReadByEmailAsync(suppliedModel.Email);
-            var userIdentity = await this.BuildIdentity(suppliedModel.Email);
-            var passwordHasher = await this.BuildPasswordHasher();
+            var userIdentity = await BuildIdentityAsync(suppliedModel.Email);
+            var passwordHasher = await BuildPasswordHasherAsync();
             var hashedPassword = passwordHasher.HashPassword(userIdentity, CryptoProvider.Decrypt(suppliedModel.Password));
 
             var newUserLoginModel = new UserLoginModel
@@ -94,7 +94,7 @@ namespace OwnApt.Api.Domain.Service
             await this.userLoginRepository.UpdateAsync(model);
         }
 
-        public async Task<UserLoginModel> VerifyUser(UserLoginModel suppliedModel)
+        public async Task<UserLoginModel> VerifyUserAsync(UserLoginModel suppliedModel)
         {
             var loginModel = await this.ReadByEmailAsync(suppliedModel.Email);
 
@@ -110,8 +110,8 @@ namespace OwnApt.Api.Domain.Service
             var storedEmail = loginModel.Email;
             var storedHashedPassword = loginModel.Password;
 
-            var userIdentity = await this.BuildIdentity(suppliedModel.Email);
-            var passwordHasher = await this.BuildPasswordHasher();
+            var userIdentity = await BuildIdentityAsync(suppliedModel.Email);
+            var passwordHasher = await BuildPasswordHasherAsync();
             var verificationResult = passwordHasher.VerifyHashedPassword(userIdentity, storedHashedPassword, suppliedPassword);
 
             loginModel.VerificationResult = verificationResult;
@@ -123,12 +123,12 @@ namespace OwnApt.Api.Domain.Service
 
         #region Private Methods
 
-        private async Task<GenericIdentity> BuildIdentity(string email)
+        private async static Task<GenericIdentity> BuildIdentityAsync(string email)
         {
             return await Task.FromResult(new GenericIdentity(email));
         }
 
-        private async Task<PasswordHasher<GenericIdentity>> BuildPasswordHasher()
+        private async static Task<PasswordHasher<GenericIdentity>> BuildPasswordHasherAsync()
         {
             return await Task.FromResult(new PasswordHasher<GenericIdentity>());
         }

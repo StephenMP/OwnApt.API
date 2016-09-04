@@ -1,5 +1,5 @@
-﻿using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Contract.Model;
+using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
 

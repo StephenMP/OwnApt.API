@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.AppStart;
+using OwnApt.Api.Contract.Dto;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
-using OwnApt.Api.Domain.Dto;
 using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
@@ -148,19 +148,19 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
             }
         }
 
-        internal async Task WhenICreatePerson()
+        internal async Task WhenICreatePersonAsync()
         {
-            personControllerActionResult = await this.personController.CreatePerson(this.personModel);
+            personControllerActionResult = await this.personController.CreatePersonAsync(this.personModel);
         }
 
-        internal async Task WhenICreateUser()
+        internal async Task WhenICreateUserAsync()
         {
-            this.personControllerActionResult = await this.personController.CreateUser(this.suppliedUserLoginModel);
+            this.personControllerActionResult = await this.personController.CreateUserAsync(this.suppliedUserLoginModel);
         }
 
-        internal async Task WhenILoginUser()
+        internal async Task WhenILoginUserAsync()
         {
-            this.personControllerActionResult = await this.personController.UserLogin(this.suppliedUserLoginModel);
+            this.personControllerActionResult = await this.personController.UserLoginAsync(this.suppliedUserLoginModel);
         }
 
         #endregion Internal Methods

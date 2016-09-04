@@ -1,4 +1,4 @@
-﻿using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Contract.Model;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -10,85 +10,94 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
     {
         #region Private Fields
 
-        private PropertyControllerSteps steps = new PropertyControllerSteps();
+        private readonly PropertyControllerSteps steps;
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public PropertyControllerFeatures()
+        {
+            this.steps = new PropertyControllerSteps();
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 
         [Fact]
-        public async Task CanCreateProperty()
+        public async Task CanCreatePropertyAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallCreateProperty();
+            await this.steps.WhenICallCreatePropertyAsync();
             this.steps.ThenICanVerifyIReceived<PropertyModel>(HttpStatusCode.Created);
             this.steps.ThenICanVerifyICreateProperty();
         }
 
         [Fact]
-        public async Task CanDeleteProperty()
+        public async Task CanDeletePropertyAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallReadProperty();
+            await this.steps.WhenICallReadPropertyAsync();
             this.steps.ThenICanVerifyIReceived<PropertyModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyIReadProperty();
         }
 
         [Fact]
-        public async Task CanReadProperty()
+        public async Task CanReadPropertyAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallDeleteProperty();
+            await this.steps.WhenICallDeletePropertyAsync();
             this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
         }
 
         [Fact]
-        public async Task CanReadPropertyForOwner()
+        public async Task CanReadPropertyForOwnerAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallReadProperty();
+            await this.steps.WhenICallReadPropertyAsync();
             this.steps.ThenICanVerifyIReceived<PropertyModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyIReadProperty();
         }
 
         [Fact]
-        public async Task CanReadPropertyForTenant()
+        public async Task CanReadPropertyForTenantAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallReadProperty();
+            await this.steps.WhenICallReadPropertyAsync();
             this.steps.ThenICanVerifyIReceived<PropertyModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyIReadProperty();
         }
 
         [Fact]
-        public async Task CanUpdateProperty()
+        public async Task CanUpdatePropertyAsync()
         {
             this.steps.GivenIHaveAPropertyId();
             this.steps.GivenIHaveAPropertyModel();
             this.steps.GivenIHaveAMockedPropertyRepository();
             this.steps.GivenIHaveAPropertyService();
             this.steps.GivenIHaveAPropertyController();
-            await this.steps.WhenICallUpdateProperty();
+            await this.steps.WhenICallUpdatePropertyAsync();
             this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
         }
 

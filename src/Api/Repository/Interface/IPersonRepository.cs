@@ -1,4 +1,4 @@
-﻿using OwnApt.Api.Domain.Model;
+﻿using OwnApt.Api.Contract.Model;
 
 namespace OwnApt.Api.Repository.Interface
 {

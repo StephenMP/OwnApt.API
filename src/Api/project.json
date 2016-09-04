@@ -24,7 +24,8 @@
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Authentication": "14.7271.5352",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
-    "Swashbuckle.SwaggerUi": "6.0.0-beta901"
+    "Swashbuckle.SwaggerUi": "6.0.0-beta901",
+    "ApiContract": "14.7296.7899"
   },
 
   "tools": {

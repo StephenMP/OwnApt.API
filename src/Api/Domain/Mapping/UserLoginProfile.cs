@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using OwnApt.Api.Domain.Model;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity;
 
 namespace OwnApt.Api.Domain.Mapping

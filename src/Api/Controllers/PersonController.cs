@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
-using OwnApt.Api.Domain.Model;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -30,7 +30,7 @@ namespace OwnApt.Api.Controllers
         #region Public Methods
 
         [HttpPost]
-        public async Task<IActionResult> CreatePerson([FromBody] PersonModel model)
+        public async Task<IActionResult> CreatePersonAsync([FromBody] PersonModel model)
         {
             if (model == null)
             {
@@ -44,7 +44,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpPost("createUser")]
-        public async Task<IActionResult> CreateUser([FromBody] UserLoginModel suppliedModel)
+        public async Task<IActionResult> CreateUserAsync([FromBody] UserLoginModel suppliedModel)
         {
             if (suppliedModel == null)
             {
@@ -62,7 +62,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpDelete("{personId}")]
-        public async Task<IActionResult> DeletePerson(string personId)
+        public async Task<IActionResult> DeletePersonAsync(string personId)
         {
             if (string.IsNullOrEmpty(personId))
             {
@@ -74,7 +74,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpGet("{personId}")]
-        public async Task<IActionResult> ReadPerson(string personId)
+        public async Task<IActionResult> ReadPersonAsync(string personId)
         {
             if (string.IsNullOrWhiteSpace(personId))
             {
@@ -86,7 +86,7 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpPut("{personId}")]
-        public async Task<IActionResult> UpdatePerson(string personId, [FromBody] PersonModel model)
+        public async Task<IActionResult> UpdatePersonAsync(string personId, [FromBody] PersonModel model)
         {
             if (string.IsNullOrEmpty(personId))
             {
@@ -103,14 +103,14 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpPost("userLogin")]
-        public async Task<IActionResult> UserLogin([FromBody] UserLoginModel suppliedModel)
+        public async Task<IActionResult> UserLoginAsync([FromBody] UserLoginModel suppliedModel)
         {
             if (suppliedModel == null)
             {
                 return new BadRequestObjectResult($"{nameof(suppliedModel)} was null");
             }
 
-            var loginModel = await this.userLoginService.VerifyUser(suppliedModel);
+            var loginModel = await this.userLoginService.VerifyUserAsync(suppliedModel);
 
             if (loginModel.VerificationResult == PasswordVerificationResult.Failed)
             {
@@ -119,7 +119,7 @@ namespace OwnApt.Api.Controllers
 
             if (loginModel.VerificationResult == PasswordVerificationResult.SuccessRehashNeeded)
             {
-                loginModel = await this.userLoginService.RehashUserPassword(suppliedModel);
+                loginModel = await this.userLoginService.RehashUserPasswordAsync(suppliedModel);
             }
 
             return Ok(loginModel);

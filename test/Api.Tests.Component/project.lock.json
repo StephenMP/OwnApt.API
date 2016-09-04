@@ -3,6 +3,20 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
+      "ApiContract/14.7296.7899": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "1.0.0",
+          "NETStandard.Library": "1.6.0",
+          "OwnApt": "14.7296.7196"
+        },
+        "compile": {
+          "lib/netstandard1.6/ApiContract.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/ApiContract.dll": {}
+        }
+      },
       "Authentication/14.7271.5352": {
         "type": "package",
         "dependencies": {
@@ -2078,6 +2092,19 @@
         },
         "runtime": {
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
+        }
+      },
+      "OwnApt/14.7296.7196": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Primitives": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.6/OwnApt.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.6/OwnApt.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -4432,6 +4459,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
         "dependencies": {
+          "ApiContract": "14.7296.7899",
           "Authentication": "14.7271.5352",
           "AutoMapper": "5.1.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
@@ -4465,6 +4493,16 @@
     }
   },
   "libraries": {
+    "ApiContract/14.7296.7899": {
+      "sha512": "7RgUT9c2DdZof1289VWAMVsSQBiIeesTMDHCbzwTF/YZoVbU43eFDefEkIySGIRwEZ6FtGHMwKijAuDgFzvAWg==",
+      "type": "package",
+      "path": "ApiContract/14.7296.7899",
+      "files": [
+        "ApiContract.14.7296.7899.nupkg.sha512",
+        "ApiContract.nuspec",
+        "lib/netstandard1.6/ApiContract.dll"
+      ]
+    },
     "Authentication/14.7271.5352": {
       "sha512": "WPXDDSYJRZGGvF4iis80smbfq6P3YgXpj6RGOMOcXtzPtemulOSAnacmI4gJCAAQ7twwm9I8W2g+OI0PDLkrIw==",
       "type": "package",
@@ -6123,6 +6161,16 @@
         "lib/net45/NuGet.Versioning.xml",
         "lib/netstandard1.0/NuGet.Versioning.dll",
         "lib/netstandard1.0/NuGet.Versioning.xml"
+      ]
+    },
+    "OwnApt/14.7296.7196": {
+      "sha512": "SAi5YOcLm1IcNt9y6H65rjt1pe48O97Nb5Yt11XVm/U5iSwO0on1bjreC48FvJiOByZr4Cl8CwRH/2pQQmxUlQ==",
+      "type": "package",
+      "path": "OwnApt/14.7296.7196",
+      "files": [
+        "OwnApt.14.7296.7196.nupkg.sha512",
+        "OwnApt.nuspec",
+        "lib/netstandard1.6/OwnApt.dll"
       ]
     },
     "Remotion.Linq/2.1.1": {

@@ -1,6 +1,7 @@
-﻿using OwnApt.Api.Domain.Dto;
-using OwnApt.Api.Domain.Enum;
+﻿using OwnApt.Api.Contract.Dto;
 using OwnApt.Api.Extensions;
+using OwnApt.Common.Dto;
+using OwnApt.Common.Enum;
 
 namespace OwnApt.Api.Repository.Entity
 {
