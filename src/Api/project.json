@@ -19,13 +19,13 @@
     "MySql.Data.Core": "7.0.4-IR-191",
     "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
     "Microsoft.EntityFrameworkCore": "1.0.0",
-    "MongoDB.Driver": "2.3.0-beta1",
     "System.Security.SecureString": "4.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Authentication": "14.7271.5352",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
     "Swashbuckle.SwaggerUi": "6.0.0-beta901",
-    "ApiContract": "14.7296.7899"
+    "ApiContract": "14.7296.7899",
+    "MongoDB.Driver": "2.3.0-rc1"
   },
 
   "tools": {
