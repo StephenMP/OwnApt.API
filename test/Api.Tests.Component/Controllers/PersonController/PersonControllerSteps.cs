@@ -174,6 +174,8 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
                 if (disposing)
                 {
                     this.testEnvironment?.Dispose();
+                    this.coreContext?.Dispose();
+                    this.personController?.Dispose();
                 }
 
                 disposedValue = true;
