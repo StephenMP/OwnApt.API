@@ -24,8 +24,8 @@
     "Authentication": "14.7271.5352",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
     "Swashbuckle.SwaggerUi": "6.0.0-beta901",
-    "ApiContract": "14.7296.7899",
-    "MongoDB.Driver": "2.3.0-rc1"
+    "MongoDB.Driver": "2.3.0-rc1",
+    "ApiContract": "14.7313.1912"
   },
 
   "tools": {
