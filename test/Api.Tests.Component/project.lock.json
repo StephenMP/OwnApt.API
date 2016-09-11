@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7313.1912": {
+      "ApiContract/14.7356.41": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
@@ -17,7 +17,7 @@
           "lib/netstandard1.6/ApiContract.dll": {}
         }
       },
-      "Authentication/14.7271.5352": {
+      "Authentication/14.7354.4775": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -4476,8 +4476,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
         "dependencies": {
-          "ApiContract": "14.7313.1912",
-          "Authentication": "14.7271.5352",
+          "ApiContract": "14.7356.41",
+          "Authentication": "14.7354.4775",
           "AutoMapper": "5.1.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
           "Microsoft.AspNetCore.Identity": "1.0.0",
@@ -4510,22 +4510,22 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7313.1912": {
-      "sha512": "+jeIzQM3KujlhH9CEOT0b7cxQxyIW5ed2dawJNFETcoSKXMNzE39I/q+1byQ+VBVbm2ee/UI6GAWB+muJ1709w==",
+    "ApiContract/14.7356.41": {
+      "sha512": "6HcbVMm8ubkeQhTFy0l7xTdWU8tzdm+WrpfSnow7UCsor8w8hwilwg4vGYQ8cL8ZoE01GunhrobwUmDXgTy/UA==",
       "type": "package",
-      "path": "ApiContract/14.7313.1912",
+      "path": "ApiContract/14.7356.41",
       "files": [
-        "ApiContract.14.7313.1912.nupkg.sha512",
+        "ApiContract.14.7356.41.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
     },
-    "Authentication/14.7271.5352": {
-      "sha512": "WPXDDSYJRZGGvF4iis80smbfq6P3YgXpj6RGOMOcXtzPtemulOSAnacmI4gJCAAQ7twwm9I8W2g+OI0PDLkrIw==",
+    "Authentication/14.7354.4775": {
+      "sha512": "LBX6bm8E3NmHVgePPeYVM0KfK8l9XJ/mExshqg/YBpIjvp5TVidQA2y6TMRKspaKMKFVBQulnbdLwtoc9CJpBQ==",
       "type": "package",
-      "path": "Authentication/14.7271.5352",
+      "path": "Authentication/14.7354.4775",
       "files": [
-        "Authentication.14.7271.5352.nupkg.sha512",
+        "Authentication.14.7354.4775.nupkg.sha512",
         "Authentication.nuspec",
         "lib/netstandard1.6/Authentication.dll"
       ]

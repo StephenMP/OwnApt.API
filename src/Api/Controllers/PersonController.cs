@@ -10,14 +10,14 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PersonController : Controller
     {
-        #region Private Fields
+        #region Fields
 
         private readonly IPersonService personService;
         private readonly IUserLoginService userLoginService;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PersonController(IPersonService personService, IUserLoginService userLoginService)
         {
@@ -25,9 +25,9 @@ namespace OwnApt.Api.Controllers
             this.userLoginService = userLoginService;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         [HttpPost]
         public async Task<IActionResult> CreatePersonAsync([FromBody] PersonModel model)
@@ -125,6 +125,6 @@ namespace OwnApt.Api.Controllers
             return Ok(loginModel);
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

@@ -6,7 +6,7 @@ namespace OwnApt.Api.Repository.Entity
     [Table("UserLogin")]
     public class UserLoginEntity
     {
-        #region Public Properties
+        #region Properties
 
         [Column("Email")]
         public string Email { get; set; }
@@ -17,6 +17,6 @@ namespace OwnApt.Api.Repository.Entity
         [Key, Column("UserId")]
         public string UserId { get; set; }
 
-        #endregion Public Properties
+        #endregion Properties
     }
 }

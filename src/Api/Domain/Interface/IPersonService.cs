@@ -5,7 +5,7 @@ namespace OwnApt.Api.Domain.Interface
 {
     public interface IPersonService
     {
-        #region Public Methods
+        #region Methods
 
         Task<PersonModel> CreateAsync(PersonModel personModel);
 
@@ -15,6 +15,6 @@ namespace OwnApt.Api.Domain.Interface
 
         Task UpdateAsync(PersonModel personModel);
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

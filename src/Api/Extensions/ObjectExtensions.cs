@@ -5,7 +5,7 @@ namespace OwnApt.Api.Extensions
 {
     public static class ObjectExtensions
     {
-        #region Public Methods
+        #region Methods
 
         public static int GetHashCodeSafe(this object obj)
         {
@@ -29,6 +29,6 @@ namespace OwnApt.Api.Extensions
             return hash;
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

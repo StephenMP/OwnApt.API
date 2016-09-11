@@ -9,28 +9,24 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
 {
     public class PersonControllerFeatures : IDisposable
     {
-        #region Public Fields
+        #region Fields
 
         public PersonControllerSteps steps;
 
-        #endregion Public Fields
-
-        #region Private Fields
-
         private bool disposedValue;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PersonControllerFeatures()
         {
             this.steps = new PersonControllerSteps();
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         [Fact]
         public async Task CanCreatePersonAsync()
@@ -81,10 +77,6 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
             GC.SuppressFinalize(this);
         }
 
-        #endregion Public Methods
-
-        #region Protected Methods
-
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -98,6 +90,6 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
             }
         }
 
-        #endregion Protected Methods
+        #endregion Methods
     }
 }

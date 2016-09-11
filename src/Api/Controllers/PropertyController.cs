@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OwnApt.Api.Contract.Dto;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using System.Threading.Tasks;
@@ -8,22 +9,35 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PropertyController : Controller
     {
-        #region Private Fields
+        #region Fields
 
         private readonly IPropertyService propertyService;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PropertyController(IPropertyService propertyService)
         {
             this.propertyService = propertyService;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
+
+        [HttpPost("owner/addToProperties")]
+        public async Task<IActionResult> AddOwnerToProperties([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
+        {
+            if (mapOwnerToPropertiesDto == null)
+            {
+                return new BadRequestObjectResult($"{nameof(mapOwnerToPropertiesDto)} is null or empty");
+            }
+
+            await this.propertyService.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto);
+
+            return Ok();
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreatePropertyAsync([FromBody] PropertyModel model)
@@ -61,19 +75,6 @@ namespace OwnApt.Api.Controllers
 
             var propertyModelList = await this.propertyService.ReadPropertiesForOwnerAsync(ownerId);
             return Ok(propertyModelList);
-        }
-
-        [HttpPost("owner/addToProperties")]
-        public async Task<IActionResult> AddOwnerToProperties([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
-        {
-            if(mapOwnerToPropertiesDto == null)
-            {
-                return new BadRequestObjectResult($"{nameof(mapOwnerToPropertiesDto)} is null or empty");
-            }
-
-            await this.propertyService.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto);
-
-            return Ok();
         }
 
         [HttpGet("tenant/{tenantId}")]
@@ -117,6 +118,6 @@ namespace OwnApt.Api.Controllers
             return Ok();
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

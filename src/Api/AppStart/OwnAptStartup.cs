@@ -20,9 +20,14 @@ namespace OwnApt.Api.AppStart
 {
     public static class OwnAptStartup
     {
+        #region Fields
+
         private static IConfigurationRoot Configuration;
         private static IHostingEnvironment HostEnvironment;
-        #region Public Methods
+
+        #endregion Fields
+
+        #region Methods
 
         public static IMapper BuildMapper()
         {
@@ -62,10 +67,6 @@ namespace OwnApt.Api.AppStart
             AddSwagger(services);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         private static void AddAutoMapper(IServiceCollection services)
         {
             services.AddSingleton<IMapper>(BuildMapper());
@@ -77,7 +78,6 @@ namespace OwnApt.Api.AppStart
             {
                 services.AddMvc();
             }
-
             else
             {
                 services.AddMvc(options =>
@@ -173,6 +173,6 @@ namespace OwnApt.Api.AppStart
             return new MongoClient(mongoClientSettings);
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

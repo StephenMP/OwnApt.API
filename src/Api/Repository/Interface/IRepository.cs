@@ -4,7 +4,7 @@ namespace OwnApt.Api.Repository.Interface
 {
     public interface IRepository<TModel>
     {
-        #region Public Methods
+        #region Methods
 
         Task<TModel> CreateAsync(TModel model);
 
@@ -14,6 +14,6 @@ namespace OwnApt.Api.Repository.Interface
 
         Task UpdateAsync(TModel model);
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

@@ -11,22 +11,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class UserLoginService : IUserLoginService
     {
-        #region Private Fields
+        #region Fields
 
         private readonly IUserLoginRepository userLoginRepository;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public UserLoginService(IUserLoginRepository userLoginRepository)
         {
             this.userLoginRepository = userLoginRepository;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         public async Task<bool> CreateAsync(UserLoginModel suppliedModel)
         {
@@ -119,10 +119,6 @@ namespace OwnApt.Api.Domain.Service
             return await Task.FromResult(loginModel);
         }
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         private async static Task<GenericIdentity> BuildIdentityAsync(string email)
         {
             return await Task.FromResult(new GenericIdentity(email));
@@ -133,6 +129,6 @@ namespace OwnApt.Api.Domain.Service
             return await Task.FromResult(new PasswordHasher<GenericIdentity>());
         }
 
-        #endregion Private Methods
+        #endregion Methods
     }
 }

@@ -8,7 +8,7 @@ namespace OwnApt.Api.Repository.Entity
 {
     public class PropertyEntity : Equatable<PropertyEntity>
     {
-        #region Public Properties
+        #region Properties
 
         public AddressDto Address { get; set; }
         public FeaturesDto Features { get; set; }
@@ -17,9 +17,9 @@ namespace OwnApt.Api.Repository.Entity
         public PropertyType PropertyType { get; set; }
         public List<string> TenantIds { get; set; }
 
-        #endregion Public Properties
+        #endregion Properties
 
-        #region Public Methods
+        #region Methods
 
         public override int GetHashCode()
         {
@@ -31,6 +31,6 @@ namespace OwnApt.Api.Repository.Entity
                 ^ this.PropertyType.GetHashCodeSafe();
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

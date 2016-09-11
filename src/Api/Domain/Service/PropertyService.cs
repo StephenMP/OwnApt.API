@@ -1,4 +1,5 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using OwnApt.Api.Contract.Dto;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
@@ -7,28 +8,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PropertyService : IPropertyService
     {
-        #region Private Fields
-
-        public async Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
-        {
-            await this.propertyRepository.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto.OwnerId, mapOwnerToPropertiesDto.PropertyIds);
-        }
-
+        #region Fields
 
         private readonly IPropertyRepository propertyRepository;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PropertyService(IPropertyRepository propertyRepository)
         {
             this.propertyRepository = propertyRepository;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         public async Task<PropertyModel> CreateAsync(PropertyModel property)
         {
@@ -38,6 +33,11 @@ namespace OwnApt.Api.Domain.Service
         public async Task DeleteAsync(string id)
         {
             await this.propertyRepository.DeleteAsync(id);
+        }
+
+        public async Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
+        {
+            await this.propertyRepository.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto.OwnerId, mapOwnerToPropertiesDto.PropertyIds);
         }
 
         public async Task<PropertyModel> ReadAsync(string id)
@@ -60,6 +60,6 @@ namespace OwnApt.Api.Domain.Service
             await this.propertyRepository.UpdateAsync(property);
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

@@ -21,11 +21,11 @@
     "Microsoft.EntityFrameworkCore": "1.0.0",
     "System.Security.SecureString": "4.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-    "Authentication": "14.7271.5352",
+    "Authentication": "14.7354.4775",
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
     "Swashbuckle.SwaggerUi": "6.0.0-beta901",
     "MongoDB.Driver": "2.3.0-rc1",
-    "ApiContract": "14.7313.1912"
+    "ApiContract": "14.7356.41"
   },
 
   "tools": {

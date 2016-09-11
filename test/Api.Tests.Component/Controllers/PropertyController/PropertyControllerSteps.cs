@@ -15,7 +15,7 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
     internal class PropertyControllerSteps
     {
-        #region Private Fields
+        #region Fields
 
         private readonly Random random = new Random();
         private object controllerContent;
@@ -26,9 +26,9 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
         private IPropertyRepository propertyRepository;
         private IPropertyService propertyService;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Internal Methods
+        #region Methods
 
         internal void GivenIHaveAMockedPropertyRepository()
         {
@@ -125,6 +125,6 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             this.controllerIActionResult = await this.propertyController.UpdatePropertyAsync(this.propertyId, this.mockedPropertyModel);
         }
 
-        #endregion Internal Methods
+        #endregion Methods
     }
 }

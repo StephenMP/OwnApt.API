@@ -8,22 +8,22 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
     public class PropertyControllerFeatures
     {
-        #region Private Fields
+        #region Fields
 
         private readonly PropertyControllerSteps steps;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PropertyControllerFeatures()
         {
             this.steps = new PropertyControllerSteps();
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         [Fact]
         public async Task CanCreatePropertyAsync()
@@ -101,6 +101,6 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

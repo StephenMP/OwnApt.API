@@ -20,7 +20,7 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
 {
     public class PersonControllerSteps : IDisposable
     {
-        #region Private Fields
+        #region Fields
 
         private CoreContext coreContext;
         private bool disposedValue;
@@ -35,19 +35,15 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
         private IUserLoginRepository userLoginRepository;
         private IUserLoginService userLoginService;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Methods
+        #region Methods
 
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-        #endregion Public Methods
-
-        #region Internal Methods
 
         internal void GivenIHaveACoreContext()
         {
@@ -163,10 +159,6 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
             this.personControllerActionResult = await this.personController.UserLoginAsync(this.suppliedUserLoginModel);
         }
 
-        #endregion Internal Methods
-
-        #region Protected Methods
-
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -182,6 +174,6 @@ namespace Api.Tests.Component.Controllers.PersonControllerTests
             }
         }
 
-        #endregion Protected Methods
+        #endregion Methods
     }
 }

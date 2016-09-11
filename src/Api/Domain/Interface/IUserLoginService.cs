@@ -5,7 +5,7 @@ namespace OwnApt.Api.Domain.Interface
 {
     public interface IUserLoginService
     {
-        #region Public Methods
+        #region Methods
 
         Task<bool> CreateAsync(UserLoginModel model);
 
@@ -21,6 +21,6 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<UserLoginModel> VerifyUserAsync(UserLoginModel suppliedModel);
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

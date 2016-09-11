@@ -7,22 +7,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PersonService : IPersonService
     {
-        #region Private Fields
+        #region Fields
 
         private IPersonRepository personRepository;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public PersonService(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         public async Task<PersonModel> CreateAsync(PersonModel personModel)
         {
@@ -44,6 +44,6 @@ namespace OwnApt.Api.Domain.Service
             await this.personRepository.UpdateAsync(personModel);
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }

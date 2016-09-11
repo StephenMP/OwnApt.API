@@ -9,14 +9,14 @@ namespace OwnApt.Api.Repository.Sql
 {
     public class UserLoginRepository : IUserLoginRepository
     {
-        #region Private Fields
+        #region Fields
 
         private CoreContext coreContext;
         private IMapper mapper;
 
-        #endregion Private Fields
+        #endregion Fields
 
-        #region Public Constructors
+        #region Constructors
 
         public UserLoginRepository(CoreContext coreContext, IMapper mapper)
         {
@@ -24,9 +24,9 @@ namespace OwnApt.Api.Repository.Sql
             this.mapper = mapper;
         }
 
-        #endregion Public Constructors
+        #endregion Constructors
 
-        #region Public Methods
+        #region Methods
 
         public async Task<UserLoginModel> CreateAsync(UserLoginModel model)
         {
@@ -84,6 +84,6 @@ namespace OwnApt.Api.Repository.Sql
             //}
         }
 
-        #endregion Public Methods
+        #endregion Methods
     }
 }
