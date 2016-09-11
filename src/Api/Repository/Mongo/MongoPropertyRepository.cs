@@ -30,6 +30,19 @@ namespace OwnApt.Api.Repository.Mongo
 
         #region Private Properties
 
+        public async Task MapOwnerToPropertiesAsync(string ownerId, params string[] propertyIds)
+        {
+            var cursor = await this.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
+            var properties = await cursor.ToListAsync();
+
+            foreach(var property in properties)
+            {
+                property.OwnerIds.Add(ownerId);
+                await this.PropertiesCollection.ReplaceOneAsync(p => p.Id == property.Id, property);
+            }
+        }
+
+
         private IMongoCollection<PropertyEntity> PropertiesCollection => this.coreDatabase.GetCollection<PropertyEntity>("Property");
 
         #endregion Private Properties

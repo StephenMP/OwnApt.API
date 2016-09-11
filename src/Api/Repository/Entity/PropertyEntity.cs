@@ -2,6 +2,7 @@
 using OwnApt.Api.Extensions;
 using OwnApt.Common.Dto;
 using OwnApt.Common.Enum;
+using System.Collections.Generic;
 
 namespace OwnApt.Api.Repository.Entity
 {
@@ -12,9 +13,9 @@ namespace OwnApt.Api.Repository.Entity
         public AddressDto Address { get; set; }
         public FeaturesDto Features { get; set; }
         public string Id { get; set; }
-        public string[] OwnerIds { get; set; }
+        public List<string> OwnerIds { get; set; }
         public PropertyType PropertyType { get; set; }
-        public string[] TenantIds { get; set; }
+        public List<string> TenantIds { get; set; }
 
         #endregion Public Properties
 

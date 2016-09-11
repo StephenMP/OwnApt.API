@@ -63,6 +63,19 @@ namespace OwnApt.Api.Controllers
             return Ok(propertyModelList);
         }
 
+        [HttpPost("owner/addToProperties")]
+        public async Task<IActionResult> AddOwnerToProperties([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
+        {
+            if(mapOwnerToPropertiesDto == null)
+            {
+                return new BadRequestObjectResult($"{nameof(mapOwnerToPropertiesDto)} is null or empty");
+            }
+
+            await this.propertyService.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto);
+
+            return Ok();
+        }
+
         [HttpGet("tenant/{tenantId}")]
         public async Task<IActionResult> ReadPropertiesForTenantAsync(string tenantId)
         {

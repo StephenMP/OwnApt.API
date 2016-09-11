@@ -20,6 +20,8 @@ namespace OwnApt.Api.AppStart
 {
     public static class OwnAptStartup
     {
+        private static IConfigurationRoot Configuration;
+        private static IHostingEnvironment HostEnvironment;
         #region Public Methods
 
         public static IMapper BuildMapper()
@@ -32,9 +34,15 @@ namespace OwnApt.Api.AppStart
             }).CreateMapper();
         }
 
-        public static void UseOwnAptConfiguration(this IApplicationBuilder app, IHostingEnvironment env)
+        public static void ConfigureOwnAptStartup(IConfigurationRoot configuration, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            Configuration = configuration;
+            HostEnvironment = env;
+        }
+
+        public static void UseOwnAptConfiguration(this IApplicationBuilder app)
+        {
+            if (HostEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -43,14 +51,14 @@ namespace OwnApt.Api.AppStart
             AddSwagger(app);
         }
 
-        public static void UseOwnAptServices(this IServiceCollection services, IConfigurationRoot configuration)
+        public static void UseOwnAptServices(this IServiceCollection services)
         {
             AddFilters(services);
             AddAutoMapper(services);
             AddRepositories(services);
             AddServices(services);
-            AddMongo(services, configuration);
-            AddMySql(services, configuration);
+            AddMongo(services);
+            AddMySql(services);
             AddSwagger(services);
         }
 
@@ -65,15 +73,23 @@ namespace OwnApt.Api.AppStart
 
         private static void AddFilters(IServiceCollection services)
         {
-            services.AddMvc(options =>
+            if (HostEnvironment.IsDevelopment())
             {
-                options.Filters.Add(typeof(HmacAuthenticationFilter));
-            });
+                services.AddMvc();
+            }
+
+            else
+            {
+                services.AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(HmacAuthenticationFilter));
+                });
+            }
         }
 
-        private static void AddMongo(IServiceCollection services, IConfigurationRoot configuration)
+        private static void AddMongo(IServiceCollection services)
         {
-            services.AddSingleton<IMongoClient>(BuildMongoClient(configuration));
+            services.AddSingleton<IMongoClient>(BuildMongoClient());
         }
 
         private static void AddMvc(IApplicationBuilder app)
@@ -81,12 +97,12 @@ namespace OwnApt.Api.AppStart
             app.UseMvc();
         }
 
-        private static void AddMySql(IServiceCollection services, IConfigurationRoot configuration)
+        private static void AddMySql(IServiceCollection services)
         {
-            var server = configuration["SqlCore:Server"];
-            var database = configuration["SqlCore:Database"];
-            var userID = configuration["SqlCore:Uid"];
-            var password = configuration["SqlCore:Password"];
+            var server = Configuration["SqlCore:Server"];
+            var database = Configuration["SqlCore:Database"];
+            var userID = Configuration["SqlCore:Uid"];
+            var password = Configuration["SqlCore:Password"];
 
             var mysqlConnectionBuilder = new MySqlConnectionStringBuilder
             {
@@ -139,13 +155,13 @@ namespace OwnApt.Api.AppStart
             });
         }
 
-        private static MongoClient BuildMongoClient(IConfigurationRoot configuration)
+        private static MongoClient BuildMongoClient()
         {
-            var coreDbName = configuration["MongoCore:Name"];
-            var username = configuration["MongoCore:Username"];
-            var password = configuration["MongoCore:Password"];
-            var host = configuration["MongoCore:Host"];
-            var port = Convert.ToInt32(configuration["MongoCore:Port"]);
+            var coreDbName = Configuration["MongoCore:Name"];
+            var username = Configuration["MongoCore:Username"];
+            var password = Configuration["MongoCore:Password"];
+            var host = Configuration["MongoCore:Host"];
+            var port = Convert.ToInt32(Configuration["MongoCore:Port"]);
 
             var mongoClientSettings = new MongoClientSettings
             {

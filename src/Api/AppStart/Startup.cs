@@ -19,6 +19,8 @@ namespace Api
                             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                             .AddEnvironmentVariables()
                             .Build();
+
+            OwnAptStartup.ConfigureOwnAptStartup(Configuration, env);
         }
 
         #endregion Public Constructors
@@ -37,13 +39,13 @@ namespace Api
             loggerFactory.AddDebug();
 
             // Configure app for OwnApt
-            app.UseOwnAptConfiguration(env);
+            app.UseOwnAptConfiguration();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             // Configure services for OwnApt
-            services.UseOwnAptServices(Configuration);
+            services.UseOwnAptServices();
         }
 
         #endregion Public Methods

@@ -6,6 +6,7 @@ namespace OwnApt.Api.Domain.Interface
     public interface IPropertyService
     {
         #region Public Methods
+        Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto);
 
         Task<PropertyModel> CreateAsync(PropertyModel property);
 

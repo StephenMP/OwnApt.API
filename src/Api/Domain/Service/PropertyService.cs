@@ -9,6 +9,12 @@ namespace OwnApt.Api.Domain.Service
     {
         #region Private Fields
 
+        public async Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
+        {
+            await this.propertyRepository.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto.OwnerId, mapOwnerToPropertiesDto.PropertyIds);
+        }
+
+
         private readonly IPropertyRepository propertyRepository;
 
         #endregion Private Fields

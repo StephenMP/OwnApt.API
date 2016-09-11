@@ -11,6 +11,8 @@ namespace OwnApt.Api.Repository.Interface
 
         Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId);
 
+        Task MapOwnerToPropertiesAsync(string ownerId, params string[] propertyIds);
+
         #endregion Public Methods
     }
 }
