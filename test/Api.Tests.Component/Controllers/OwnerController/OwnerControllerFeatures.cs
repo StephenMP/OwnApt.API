@@ -1,7 +1,6 @@
 ﻿using OwnApt.Api.Contract.Model;
 using System;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 

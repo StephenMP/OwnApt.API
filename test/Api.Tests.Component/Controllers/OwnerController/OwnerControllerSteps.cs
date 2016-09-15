@@ -7,7 +7,6 @@ using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Sql;
-using OwnApt.Authentication.Client.Security;
 using OwnApt.TestEnvironment.Environment;
 using System;
 using System.Net;
@@ -26,10 +25,10 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
         private OwnerController ownerController;
         private IActionResult ownerControllerActionResult;
         private object ownerControllerContent;
+        private OwnerModel ownerModel;
         private IOwnerRepository ownerRepository;
         private IOwnerService ownerService;
         private TestingEnvironment testEnvironment;
-        private OwnerModel ownerModel;
 
         #endregion Fields
 
