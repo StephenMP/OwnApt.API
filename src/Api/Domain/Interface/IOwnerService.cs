@@ -3,17 +3,17 @@ using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface
 {
-    public interface IPersonService
+    public interface IOwnerService
     {
         #region Methods
 
-        Task<PersonModel> CreateAsync(PersonModel personModel);
+        Task<OwnerModel> CreateAsync(OwnerModel model);
 
         Task DeleteAsync(string id);
 
-        Task<PersonModel> ReadAsync(string id);
+        Task<OwnerModel> ReadAsync(string id);
 
-        Task UpdateAsync(PersonModel personModel);
+        Task UpdateAsync(OwnerModel model);
 
         #endregion Methods
     }

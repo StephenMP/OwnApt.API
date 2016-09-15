@@ -34,8 +34,8 @@ namespace OwnApt.Api.AppStart
             return new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<PropertyProfile>();
-                cfg.AddProfile<PersonProfile>();
-                cfg.AddProfile<UserLoginProfile>();
+                cfg.AddProfile<OwnerProfile>();
+                cfg.AddProfile<MainProfile>();
             }).CreateMapper();
         }
 
@@ -122,15 +122,13 @@ namespace OwnApt.Api.AppStart
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
-            services.AddTransient<IPersonRepository, MongoPersonRepository>();
-            services.AddTransient<IUserLoginRepository, UserLoginRepository>();
+            services.AddTransient<IOwnerRepository, MongoOwnerRepository>();
         }
 
         private static void AddServices(IServiceCollection services)
         {
             services.AddTransient<IPropertyService, PropertyService>();
-            services.AddTransient<IPersonService, PersonService>();
-            services.AddTransient<IUserLoginService, UserLoginService>();
+            services.AddTransient<IOwnerService, OwnerService>();
         }
 
         private static void AddSwagger(IApplicationBuilder app)

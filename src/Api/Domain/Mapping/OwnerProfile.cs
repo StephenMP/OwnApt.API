@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using OwnApt.Api.Contract.Model;
-using OwnApt.Api.Repository.Entity;
+using OwnApt.Api.Repository.Entity.Mongo;
 
 namespace OwnApt.Api.Domain.Mapping
 {
-    public class UserLoginProfile : Profile
+    public class OwnerProfile : Profile
     {
         #region Constructors
 
-        public UserLoginProfile()
+        public OwnerProfile()
         {
             ConfigureEntityToModel();
             ConfigureModelToEntity();
@@ -20,12 +20,12 @@ namespace OwnApt.Api.Domain.Mapping
 
         private void ConfigureEntityToModel()
         {
-            CreateMap<UserLoginEntity, UserLoginModel>();
+            CreateMap<OwnerEntity, OwnerModel>();
         }
 
         private void ConfigureModelToEntity()
         {
-            CreateMap<UserLoginModel, UserLoginEntity>();
+            CreateMap<OwnerModel, OwnerEntity>();
         }
 
         #endregion Methods

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OwnApt.Api.Repository.Entity;
 
 namespace OwnApt.Api.Repository.Sql
 {
@@ -12,11 +11,5 @@ namespace OwnApt.Api.Repository.Sql
         }
 
         #endregion Constructors
-
-        #region Properties
-
-        public DbSet<UserLoginEntity> UserLogin { get; set; }
-
-        #endregion Properties
     }
 }

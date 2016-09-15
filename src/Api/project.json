@@ -25,7 +25,9 @@
     "Swashbuckle.SwaggerGen": "6.0.0-beta901",
     "Swashbuckle.SwaggerUi": "6.0.0-beta901",
     "MongoDB.Driver": "2.3.0-rc1",
-    "ApiContract": "14.7356.41"
+    "System.Reflection.TypeExtensions": "4.1.0",
+    "OwnApt": "14.7392.4702",
+    "ApiContract": "14.7392.5069"
   },
 
   "tools": {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using OwnApt.Api.Contract.Model;
-using OwnApt.Api.Repository.Entity;
+using OwnApt.Api.Repository.Entity.Mongo;
 
 namespace OwnApt.Api.Domain.Mapping
 {

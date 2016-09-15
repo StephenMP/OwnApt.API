@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MongoDB.Driver;
 using OwnApt.Api.Contract.Model;
-using OwnApt.Api.Repository.Entity;
+using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
 using System;
 using System.Linq;
