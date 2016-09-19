@@ -5,7 +5,7 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 {
     public class PhoneEntity : Equatable
     {
-        #region Properties
+        #region Public Properties
 
         public int AreaCode { get; set; }
         public int CountryCode { get; set; }
@@ -13,6 +13,6 @@ namespace OwnApt.Api.Repository.Entity.Mongo
         public int Prefix { get; set; }
         public PhoneType Type { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

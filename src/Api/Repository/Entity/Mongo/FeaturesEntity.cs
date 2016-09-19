@@ -5,7 +5,7 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 {
     public class FeaturesEntity : Equatable
     {
-        #region Properties
+        #region Public Properties
 
         public IList<AmenityEntity> Amenities { get; set; }
         public double Bathrooms { get; set; }
@@ -15,6 +15,6 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 
         public int SqFootage { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

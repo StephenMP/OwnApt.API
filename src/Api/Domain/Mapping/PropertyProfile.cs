@@ -6,7 +6,7 @@ namespace OwnApt.Api.Domain.Mapping
 {
     public class PropertyProfile : Profile
     {
-        #region Constructors
+        #region Public Constructors
 
         public PropertyProfile()
         {
@@ -14,9 +14,9 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureModelToEntity();
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Private Methods
 
         private void ConfigureEntityToModel()
         {
@@ -28,6 +28,6 @@ namespace OwnApt.Api.Domain.Mapping
             CreateMap<PropertyModel, PropertyEntity>();
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7392.6666": {
+      "ApiContract/14.7414.5577": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
@@ -4076,12 +4076,12 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7392.6666": {
-      "sha512": "MbwiT+xpiSnDpAHFvrlCJQcXOiMHEG5ExCFVnY8VGPhLSEPdoCQ93GTSOTtCgBJ/PlH/l7OR/12d3FLKxyBdJQ==",
+    "ApiContract/14.7414.5577": {
+      "sha512": "aYl6wrkDOm5Kro0D4znJaKJ/qA6SXHe59jC4BP1gr05TAQrF/1k6s8XIjCiPd0dDbfq2TUHmQOOa83386q4GLw==",
       "type": "package",
-      "path": "ApiContract/14.7392.6666",
+      "path": "ApiContract/14.7414.5577",
       "files": [
-        "ApiContract.14.7392.6666.nupkg.sha512",
+        "ApiContract.14.7414.5577.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
@@ -10448,7 +10448,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "ApiContract >= 14.7392.6666",
+      "ApiContract >= 14.7414.5577",
       "Authentication >= 14.7354.4775",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",

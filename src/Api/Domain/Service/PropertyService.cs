@@ -8,22 +8,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PropertyService : IPropertyService
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IPropertyRepository propertyRepository;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public PropertyService(IPropertyRepository propertyRepository)
         {
             this.propertyRepository = propertyRepository;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public async Task<PropertyModel> CreateAsync(PropertyModel property)
         {
@@ -60,6 +60,6 @@ namespace OwnApt.Api.Domain.Service
             await this.propertyRepository.UpdateAsync(property);
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

@@ -2,6 +2,7 @@
 using OwnApt.Api.Contract.Dto;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Extension;
 using OwnApt.Common.Enum;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,24 +12,24 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class PropertyController : Controller
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IPropertyService propertyService;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public PropertyController(IPropertyService propertyService)
         {
             this.propertyService = propertyService;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
-        [HttpPost("owner/addToProperties")]
+        [HttpPut("owner/add")]
         public async Task<IActionResult> AddOwnerToPropertiesAsync([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
         {
             if (mapOwnerToPropertiesDto == null)
@@ -42,7 +43,6 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpPost]
-        /* Here for IT support of adding properties only. Delete once BO solution is in place */
         public async Task<IActionResult> CreatePropertyAsync([FromBody] PropertyModel model)
         {
             if (model == null)
@@ -51,13 +51,14 @@ namespace OwnApt.Api.Controllers
             }
 
             var propertyModel = await this.propertyService.CreateAsync(model);
-            var resourceUri = Request == null ? "" : $"{Request.Host}{Request.Path}/{model.Id}";
+            var resourceUri = Request.GetResourcePathSafe(model.Id);
 
             return Created(resourceUri, propertyModel);
         }
 
         [HttpPost("createProperty")]
-        public async Task<IActionResult> CreatePropertyAsync()
+        /* Here for IT support of adding properties only. Delete once BO solution is in place */
+        public async Task<IActionResult> ITSupport_CreatePropertyAsync()
         {
             var model = new PropertyModel
             {
@@ -156,14 +157,9 @@ namespace OwnApt.Api.Controllers
             return Ok(propertyModel);
         }
 
-        [HttpPut("{propertyId}")]
-        public async Task<IActionResult> UpdatePropertyAsync(string propertyId, [FromBody] PropertyModel model)
+        [HttpPut]
+        public async Task<IActionResult> UpdatePropertyAsync([FromBody] PropertyModel model)
         {
-            if (string.IsNullOrEmpty(propertyId))
-            {
-                return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
-            }
-
             if (model == null)
             {
                 return new BadRequestObjectResult($"{nameof(model)} was null");
@@ -173,6 +169,6 @@ namespace OwnApt.Api.Controllers
             return Ok();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

@@ -6,7 +6,7 @@ namespace Api
 {
     public class Program
     {
-        #region Methods
+        #region Public Methods
 
         public static void Main(string[] args)
         {
@@ -21,6 +21,6 @@ namespace Api
             host.Run();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

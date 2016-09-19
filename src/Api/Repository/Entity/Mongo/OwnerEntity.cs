@@ -6,7 +6,7 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 {
     public class OwnerEntity : Equatable
     {
-        #region Properties
+        #region Public Properties
 
         public BirthdateEntity Birthdate { get; set; }
         public ContactEntity Contact { get; set; }
@@ -16,6 +16,6 @@ namespace OwnApt.Api.Repository.Entity.Mongo
         public NameEntity Name { get; set; }
         public IList<string> PropertyIds { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

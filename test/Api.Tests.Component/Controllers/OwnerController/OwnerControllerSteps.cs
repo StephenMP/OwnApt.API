@@ -6,7 +6,6 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
-using OwnApt.Api.Repository.Sql;
 using OwnApt.TestEnvironment.Environment;
 using System;
 using System.Net;
@@ -18,7 +17,7 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
 {
     public class OwnerControllerSteps : IDisposable
     {
-        #region Fields
+        #region Private Fields
 
         private CoreContext coreContext;
         private bool disposedValue;
@@ -30,15 +29,19 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
         private IOwnerService ownerService;
         private TestingEnvironment testEnvironment;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Methods
+        #region Public Methods
 
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        #endregion Public Methods
+
+        #region Internal Methods
 
         internal void GivenIHaveACoreContext()
         {
@@ -113,6 +116,10 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
             ownerControllerActionResult = await this.ownerController.CreateOwnerAsync(this.ownerModel);
         }
 
+        #endregion Internal Methods
+
+        #region Protected Methods
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -128,6 +135,6 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
             }
         }
 
-        #endregion Methods
+        #endregion Protected Methods
     }
 }

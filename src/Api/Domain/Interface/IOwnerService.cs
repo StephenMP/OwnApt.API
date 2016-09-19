@@ -5,7 +5,7 @@ namespace OwnApt.Api.Domain.Interface
 {
     public interface IOwnerService
     {
-        #region Methods
+        #region Public Methods
 
         Task<OwnerModel> CreateAsync(OwnerModel model);
 
@@ -15,6 +15,6 @@ namespace OwnApt.Api.Domain.Interface
 
         Task UpdateAsync(OwnerModel model);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

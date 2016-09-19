@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
+using OwnApt.Api.Repository.Entity.Sql;
 
 namespace OwnApt.Api.Domain.Mapping
 {
     public class MainProfile : Profile
     {
-        #region Constructors
+        #region Public Constructors
 
         public MainProfile()
         {
+            ConfigureTerm();
             ConfigureAddress();
             ConfigureAmenity();
             ConfigureBirthdate();
@@ -21,9 +23,9 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureZip();
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Private Methods
 
         private void ConfigureAddress()
         {
@@ -73,12 +75,18 @@ namespace OwnApt.Api.Domain.Mapping
             CreateMap<PhoneEntity, PhoneModel>();
         }
 
+        private void ConfigureTerm()
+        {
+            CreateMap<TermModel, TermEntity>();
+            CreateMap<TermEntity, TermModel>();
+        }
+
         private void ConfigureZip()
         {
             CreateMap<ZipModel, ZipEntity>();
             CreateMap<ZipEntity, ZipModel>();
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

@@ -7,22 +7,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class OwnerService : IOwnerService
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IOwnerRepository ownerRepository;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public OwnerService(IOwnerRepository ownerRepository)
         {
             this.ownerRepository = ownerRepository;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         public async Task<OwnerModel> CreateAsync(OwnerModel model)
         {
@@ -44,6 +44,6 @@ namespace OwnApt.Api.Domain.Service
             await this.ownerRepository.UpdateAsync(model);
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

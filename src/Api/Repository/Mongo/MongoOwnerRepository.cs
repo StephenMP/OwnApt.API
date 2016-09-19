@@ -10,14 +10,14 @@ namespace OwnApt.Api.Repository.Mongo
 {
     public class MongoOwnerRepository : IOwnerRepository
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IMongoDatabase coreDatabase;
         private readonly IMapper mapper;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public MongoOwnerRepository(IMongoClient mongoClient, IMapper mapper)
         {
@@ -25,15 +25,15 @@ namespace OwnApt.Api.Repository.Mongo
             this.mapper = mapper;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Properties
+        #region Private Properties
 
         private IMongoCollection<OwnerEntity> OwnerCollection => this.coreDatabase.GetCollection<OwnerEntity>("Owner");
 
-        #endregion Properties
+        #endregion Private Properties
 
-        #region Methods
+        #region Public Methods
 
         public async Task<OwnerModel> CreateAsync(OwnerModel model)
         {
@@ -62,6 +62,6 @@ namespace OwnApt.Api.Repository.Mongo
             await this.OwnerCollection.ReplaceOneAsync(p => p.Id == model.Id, ownerEntity);
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

@@ -5,7 +5,7 @@ namespace OwnApt.Api.Repository.Interface
 {
     public interface IPropertyRepository : IRepository<PropertyModel>
     {
-        #region Methods
+        #region Public Methods
 
         Task MapOwnerToPropertiesAsync(string ownerId, params string[] propertyIds);
 
@@ -13,6 +13,6 @@ namespace OwnApt.Api.Repository.Interface
 
         Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

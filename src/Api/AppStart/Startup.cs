@@ -9,7 +9,7 @@ namespace Api
 {
     public class Startup
     {
-        #region Constructors
+        #region Public Constructors
 
         public Startup(IHostingEnvironment env)
         {
@@ -23,15 +23,15 @@ namespace Api
             OwnAptStartup.ConfigureOwnAptStartup(Configuration, env);
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Properties
+        #region Public Properties
 
         public IConfigurationRoot Configuration { get; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
+        #region Public Methods
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -48,6 +48,6 @@ namespace Api
             services.UseOwnAptServices();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

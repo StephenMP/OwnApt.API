@@ -4,11 +4,11 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 {
     public class ZipEntity : Equatable
     {
-        #region Properties
+        #region Public Properties
 
         public string Base { get; set; }
         public string Extension { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

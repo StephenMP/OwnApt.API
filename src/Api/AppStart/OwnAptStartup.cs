@@ -11,7 +11,8 @@ using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
-using OwnApt.Api.Repository.Sql;
+using OwnApt.Api.Repository.Sql.Core;
+using OwnApt.Api.Repository.Sql.Lease;
 using OwnApt.Authentication.Api.Filter;
 using Swashbuckle.Swagger.Model;
 using System;
@@ -20,14 +21,14 @@ namespace OwnApt.Api.AppStart
 {
     public static class OwnAptStartup
     {
-        #region Fields
+        #region Private Fields
 
         private static IConfigurationRoot Configuration;
         private static IHostingEnvironment HostEnvironment;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Methods
+        #region Public Methods
 
         public static IMapper BuildMapper()
         {
@@ -63,9 +64,13 @@ namespace OwnApt.Api.AppStart
             AddRepositories(services);
             AddServices(services);
             AddMongo(services);
-            AddMySql(services);
+            AddSql(services);
             AddSwagger(services);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static void AddAutoMapper(IServiceCollection services)
         {
@@ -97,38 +102,45 @@ namespace OwnApt.Api.AppStart
             app.UseMvc();
         }
 
-        private static void AddMySql(IServiceCollection services)
-        {
-            var server = Configuration["SqlCore:Server"];
-            var database = Configuration["SqlCore:Database"];
-            var userID = Configuration["SqlCore:Uid"];
-            var password = Configuration["SqlCore:Password"];
-
-            var mysqlConnectionBuilder = new MySqlConnectionStringBuilder
-            {
-                Server = server,
-                Database = database,
-                UserID = userID,
-                Password = password,
-                SslMode = MySqlSslMode.None
-            };
-
-            services.AddDbContext<CoreContext>(options =>
-            {
-                options.UseMySQL(mysqlConnectionBuilder.ToString());
-            });
-        }
-
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
             services.AddTransient<IOwnerRepository, MongoOwnerRepository>();
+            services.AddTransient<ITermRepository, TermRepository>();
         }
 
         private static void AddServices(IServiceCollection services)
         {
             services.AddTransient<IPropertyService, PropertyService>();
             services.AddTransient<IOwnerService, OwnerService>();
+            services.AddTransient<ITermService, TermService>();
+        }
+
+        private static void AddSql(IServiceCollection services)
+        {
+            var server = Configuration["SqlCore:Server"];
+            var userID = Configuration["SqlCore:Uid"];
+            var password = Configuration["SqlCore:Password"];
+
+            var connnectionStringBuilder = new MySqlConnectionStringBuilder
+            {
+                Server = server,
+                UserID = userID,
+                Password = password,
+                SslMode = MySqlSslMode.None,
+                Database = "Core"
+            };
+
+            services.AddDbContext<CoreContext>(options =>
+            {
+                options.UseMySQL(connnectionStringBuilder.ToString());
+            });
+
+            connnectionStringBuilder.Database = "Lease";
+            services.AddDbContext<LeaseContext>(options =>
+            {
+                options.UseMySQL(connnectionStringBuilder.ToString());
+            });
         }
 
         private static void AddSwagger(IApplicationBuilder app)
@@ -171,6 +183,6 @@ namespace OwnApt.Api.AppStart
             return new MongoClient(mongoClientSettings);
         }
 
-        #endregion Methods
+        #endregion Private Methods
     }
 }

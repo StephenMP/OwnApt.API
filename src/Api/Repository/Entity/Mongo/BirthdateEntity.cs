@@ -5,12 +5,12 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 {
     public class BirthdateEntity : Equatable
     {
-        #region Properties
+        #region Public Properties
 
         public int Day { get; set; }
         public Month Month { get; set; }
         public int Year { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

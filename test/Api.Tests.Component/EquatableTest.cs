@@ -8,7 +8,7 @@ namespace Api.Tests.Component
 {
     public class EquatableTest
     {
-        #region Methods
+        #region Public Methods
 
         [Fact]
         public void CanEquateModels()
@@ -24,6 +24,6 @@ namespace Api.Tests.Component
             }
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

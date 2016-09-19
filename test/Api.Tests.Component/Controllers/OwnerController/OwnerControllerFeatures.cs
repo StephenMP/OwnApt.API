@@ -8,24 +8,28 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
 {
     public class OwnerControllerFeatures : IDisposable
     {
-        #region Fields
+        #region Public Fields
 
         public OwnerControllerSteps steps;
 
+        #endregion Public Fields
+
+        #region Private Fields
+
         private bool disposedValue;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public OwnerControllerFeatures()
         {
             this.steps = new OwnerControllerSteps();
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         [Fact]
         public async Task CanCreateOwnerAsync()
@@ -46,6 +50,10 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
             GC.SuppressFinalize(this);
         }
 
+        #endregion Public Methods
+
+        #region Protected Methods
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -59,6 +67,6 @@ namespace Api.Tests.Component.Controllers.OwnerControllerTests
             }
         }
 
-        #endregion Methods
+        #endregion Protected Methods
     }
 }

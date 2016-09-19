@@ -6,7 +6,7 @@ namespace OwnApt.Api.Domain.Interface
 {
     public interface IPropertyService
     {
-        #region Methods
+        #region Public Methods
 
         Task<PropertyModel> CreateAsync(PropertyModel property);
 
@@ -22,6 +22,6 @@ namespace OwnApt.Api.Domain.Interface
 
         Task UpdateAsync(PropertyModel property);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

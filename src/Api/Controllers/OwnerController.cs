@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Extension;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -8,22 +9,22 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class OwnerController : Controller
     {
-        #region Fields
+        #region Private Fields
 
         private readonly IOwnerService ownerService;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors
 
         public OwnerController(IOwnerService ownerService)
         {
             this.ownerService = ownerService;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Methods
+        #region Public Methods
 
         [HttpPost]
         public async Task<IActionResult> CreateOwnerAsync([FromBody] OwnerModel model)
@@ -34,7 +35,7 @@ namespace OwnApt.Api.Controllers
             }
 
             var ownerModel = await this.ownerService.CreateAsync(model);
-            var resourceUri = Request == null ? "" : $"{Request.Host}{Request.Path}/{model.Id}";
+            var resourceUri = Request.GetResourcePathSafe(model.Id);
 
             return Created(resourceUri, ownerModel);
         }
@@ -63,14 +64,9 @@ namespace OwnApt.Api.Controllers
             return Ok(ownerModel);
         }
 
-        [HttpPut("{ownerId}")]
-        public async Task<IActionResult> UpdateOwnerAsync(string ownerId, [FromBody] OwnerModel model)
+        [HttpPut]
+        public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
         {
-            if (string.IsNullOrEmpty(ownerId))
-            {
-                return new BadRequestObjectResult($"{nameof(ownerId)} is null or empty");
-            }
-
             if (model == null)
             {
                 return new BadRequestObjectResult($"{nameof(model)} was null");
@@ -80,6 +76,6 @@ namespace OwnApt.Api.Controllers
             return Ok();
         }
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }
