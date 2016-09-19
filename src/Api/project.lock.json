@@ -17,7 +17,7 @@
           "lib/netstandard1.6/ApiContract.dll": {}
         }
       },
-      "Authentication/14.7354.4775": {
+      "Authentication/14.7414.5796": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -1831,7 +1831,7 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OwnApt/14.7392.4702": {
+      "OwnApt/14.7414.5775": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4086,12 +4086,12 @@
         "lib/netstandard1.6/ApiContract.dll"
       ]
     },
-    "Authentication/14.7354.4775": {
-      "sha512": "LBX6bm8E3NmHVgePPeYVM0KfK8l9XJ/mExshqg/YBpIjvp5TVidQA2y6TMRKspaKMKFVBQulnbdLwtoc9CJpBQ==",
+    "Authentication/14.7414.5796": {
+      "sha512": "2tH9FWt0xmaq6b8ecbryb2KxtbK9xsMV7yaFtZdCH1mKA/j5t9rNHv8Ug9+gLGYUbuHdOHLljSsjvijRkRxhEg==",
       "type": "package",
-      "path": "Authentication/14.7354.4775",
+      "path": "Authentication/14.7414.5796",
       "files": [
-        "Authentication.14.7354.4775.nupkg.sha512",
+        "Authentication.14.7414.5796.nupkg.sha512",
         "Authentication.nuspec",
         "lib/netstandard1.6/Authentication.dll"
       ]
@@ -5525,12 +5525,12 @@
         "tools/install.ps1"
       ]
     },
-    "OwnApt/14.7392.4702": {
-      "sha512": "oP/10fiaIyEaqHG/zeV2t2zRStIjfSqbOlIcIX4YXQJtQ8R5pQy6oH4xmybv/YYKLROUl7cE1cRGkop/Kzyx6w==",
+    "OwnApt/14.7414.5775": {
+      "sha512": "ygT3U+KqUo71KRY3jeNL7lFBDIai1ARDbTWG7KPJzLOz0LNdPnq0zsUf3jPTsbUKiAexyCnODounYpIMWpNkTg==",
       "type": "package",
-      "path": "OwnApt/14.7392.4702",
+      "path": "OwnApt/14.7414.5775",
       "files": [
-        "OwnApt.14.7392.4702.nupkg.sha512",
+        "OwnApt.14.7414.5775.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -10449,7 +10449,7 @@
   "projectFileDependencyGroups": {
     "": [
       "ApiContract >= 14.7414.5577",
-      "Authentication >= 14.7354.4775",
+      "Authentication >= 14.7414.5796",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 1.0.0",
@@ -10468,7 +10468,7 @@
       "MongoDB.Driver >= 2.3.0-rc1",
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
-      "OwnApt >= 14.7392.4702",
+      "OwnApt >= 14.7414.5775",
       "Swashbuckle.SwaggerGen >= 6.0.0-beta901",
       "Swashbuckle.SwaggerUi >= 6.0.0-beta901",
       "System.Reflection.TypeExtensions >= 4.1.0",

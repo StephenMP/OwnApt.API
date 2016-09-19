@@ -3,8 +3,6 @@ using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers

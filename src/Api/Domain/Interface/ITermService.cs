@@ -8,9 +8,12 @@ namespace OwnApt.Api.Domain.Interface
         #region Public Methods
 
         Task<TermModel> CreateAsync(TermModel termId);
-        Task UpdateAsync(TermModel termId);
-        Task<TermModel> ReadAsync(string termId);
+
         Task DeleteAsync(string termId);
+
+        Task<TermModel> ReadAsync(string termId);
+
+        Task UpdateAsync(TermModel termId);
 
         #endregion Public Methods
     }

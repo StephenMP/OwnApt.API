@@ -6,6 +6,7 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
+using OwnApt.Api.Repository.Sql.Core;
 using OwnApt.TestEnvironment.Environment;
 using System;
 using System.Net;

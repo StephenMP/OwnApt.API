@@ -122,7 +122,7 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
 
         internal async Task WhenICallUpdatePropertyAsync()
         {
-            this.controllerIActionResult = await this.propertyController.UpdatePropertyAsync(this.propertyId, this.mockedPropertyModel);
+            this.controllerIActionResult = await this.propertyController.UpdatePropertyAsync(this.mockedPropertyModel);
         }
 
         #endregion Internal Methods

@@ -3,6 +3,7 @@ using OwnApt.Api.Contract.Dto;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
+using OwnApt.Api.Filters;
 using OwnApt.Common.Enum;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -30,30 +31,29 @@ namespace OwnApt.Api.Controllers
         #region Public Methods
 
         [HttpPut("owner/add")]
+        [ValidateModel]
         public async Task<IActionResult> AddOwnerToPropertiesAsync([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
         {
-            if (mapOwnerToPropertiesDto == null)
-            {
-                return new BadRequestObjectResult($"{nameof(mapOwnerToPropertiesDto)} is null or empty");
-            }
-
             await this.propertyService.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto);
-
             return Ok();
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> CreatePropertyAsync([FromBody] PropertyModel model)
         {
-            if (model == null)
-            {
-                return new BadRequestObjectResult($"{nameof(model)} was null");
-            }
-
             var propertyModel = await this.propertyService.CreateAsync(model);
             var resourceUri = Request.GetResourcePathSafe(model.Id);
 
             return Created(resourceUri, propertyModel);
+        }
+
+        [HttpDelete("{propertyId}")]
+        [ValidateModel]
+        public async Task<IActionResult> DeletePropertyAsync(string propertyId)
+        {
+            await this.propertyService.DeleteAsync(propertyId);
+            return Ok();
         }
 
         [HttpPost("createProperty")]
@@ -109,62 +109,34 @@ namespace OwnApt.Api.Controllers
             return Ok(createdModel.Id);
         }
 
-        [HttpDelete("{propertyId}")]
-        public async Task<IActionResult> DeletePropertyAsync(string propertyId)
-        {
-            if (string.IsNullOrEmpty(propertyId))
-            {
-                return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
-            }
-
-            await this.propertyService.DeleteAsync(propertyId);
-            return Ok();
-        }
-
         [HttpGet("owner/{ownerId}")]
+        [ValidateModel]
         public async Task<IActionResult> ReadPropertiesForOwnerAsync(string ownerId)
         {
-            if (string.IsNullOrEmpty(ownerId))
-            {
-                return new BadRequestObjectResult($"{nameof(ownerId)} is null or empty");
-            }
-
             var propertyModelList = await this.propertyService.ReadPropertiesForOwnerAsync(ownerId);
             return Ok(propertyModelList);
         }
 
         [HttpGet("tenant/{tenantId}")]
+        [ValidateModel]
         public async Task<IActionResult> ReadPropertiesForTenantAsync(string tenantId)
         {
-            if (string.IsNullOrEmpty(tenantId))
-            {
-                return new BadRequestObjectResult($"{nameof(tenantId)} is null or empty");
-            }
-
             var propertyModelList = await this.propertyService.ReadPropertiesForTenantAsync(tenantId);
             return Ok(propertyModelList);
         }
 
         [HttpGet("{propertyId}")]
+        [ValidateModel]
         public async Task<IActionResult> ReadPropertyAsync(string propertyId)
         {
-            if (string.IsNullOrEmpty(propertyId))
-            {
-                return new BadRequestObjectResult($"{nameof(propertyId)} is null or empty");
-            }
-
             var propertyModel = await this.propertyService.ReadAsync(propertyId);
             return Ok(propertyModel);
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<IActionResult> UpdatePropertyAsync([FromBody] PropertyModel model)
         {
-            if (model == null)
-            {
-                return new BadRequestObjectResult($"{nameof(model)} was null");
-            }
-
             await this.propertyService.UpdateAsync(model);
             return Ok();
         }

@@ -2,6 +2,7 @@
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
+using OwnApt.Api.Filters;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -27,13 +28,9 @@ namespace OwnApt.Api.Controllers
         #region Public Methods
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> CreateOwnerAsync([FromBody] OwnerModel model)
         {
-            if (model == null)
-            {
-                return new BadRequestObjectResult($"{nameof(model)} was null");
-            }
-
             var ownerModel = await this.ownerService.CreateAsync(model);
             var resourceUri = Request.GetResourcePathSafe(model.Id);
 
@@ -41,37 +38,25 @@ namespace OwnApt.Api.Controllers
         }
 
         [HttpDelete("{ownerId}")]
+        [ValidateModel]
         public async Task<IActionResult> DeleteOwnerAsync(string ownerId)
         {
-            if (string.IsNullOrEmpty(ownerId))
-            {
-                return new BadRequestObjectResult($"{nameof(ownerId)} is null or empty");
-            }
-
             await this.ownerService.DeleteAsync(ownerId);
             return Ok();
         }
 
         [HttpGet("{ownerId}")]
+        [ValidateModel]
         public async Task<IActionResult> ReadOwnerAsync(string ownerId)
         {
-            if (string.IsNullOrWhiteSpace(ownerId))
-            {
-                return new BadRequestObjectResult($"{nameof(ownerId)} was null or empty");
-            }
-
             var ownerModel = await this.ownerService.ReadAsync(ownerId);
             return Ok(ownerModel);
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
         {
-            if (model == null)
-            {
-                return new BadRequestObjectResult($"{nameof(model)} was null");
-            }
-
             await this.ownerService.UpdateAsync(model);
             return Ok();
         }
