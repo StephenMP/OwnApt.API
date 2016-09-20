@@ -77,8 +77,8 @@ namespace OwnApt.Api.Domain.Mapping
 
         private void ConfigureTerm()
         {
-            CreateMap<TermModel, TermEntity>();
-            CreateMap<TermEntity, TermModel>();
+            CreateMap<LeaseTermModel, LeaseTermEntity>();
+            CreateMap<LeaseTermEntity, LeaseTermModel>();
         }
 
         private void ConfigureZip()

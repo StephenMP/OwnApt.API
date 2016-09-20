@@ -2,7 +2,7 @@
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface ITermRepository : IRepository<TermModel>
+    public interface ILeaseTermRepository : IRepository<LeaseTermModel>
     {
     }
 }

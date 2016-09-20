@@ -106,14 +106,14 @@ namespace OwnApt.Api.AppStart
         {
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
             services.AddTransient<IOwnerRepository, MongoOwnerRepository>();
-            services.AddTransient<ITermRepository, TermRepository>();
+            services.AddTransient<ILeaseTermRepository, LeaseTermRepository>();
         }
 
         private static void AddServices(IServiceCollection services)
         {
             services.AddTransient<IPropertyService, PropertyService>();
             services.AddTransient<IOwnerService, OwnerService>();
-            services.AddTransient<ITermService, TermService>();
+            services.AddTransient<ILeaseTermService, LeaseTermService>();
         }
 
         private static void AddSql(IServiceCollection services)

@@ -17,20 +17,20 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         #region Public Properties
 
-        public DbSet<TermEntity> Term { get; set; }
+        public DbSet<LeaseTermEntity> Term { get; set; }
 
         #endregion Public Properties
 
         #region Public Methods
 
-        public async Task<TermEntity> UspReadTermAsync(string id)
+        public async Task<LeaseTermEntity> UspLeaseTermReadAsync(string id)
         {
-            var termParams = new object[]
+            var paramters = new object[]
             {
-                new MySqlParameter("termId", id)
+                new MySqlParameter("leaseTermId", id)
             };
 
-            var result = await this.Set<TermEntity>().FromSql("CALL uspTermRead(@termId)", termParams).FirstOrDefaultAsync();
+            var result = await this.Set<LeaseTermEntity>().FromSql("CALL uspLeaseTermRead(@leaseTermId)", paramters).FirstOrDefaultAsync();
 
             return result;
         }

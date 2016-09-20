@@ -12,15 +12,15 @@ namespace OwnApt.Api.Controllers
     {
         #region Private Fields
 
-        private readonly ITermService termService;
+        private readonly ILeaseTermService leaseTermService;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public LeaseController(ITermService termService)
+        public LeaseController(ILeaseTermService leaseTermService)
         {
-            this.termService = termService;
+            this.leaseTermService = leaseTermService;
         }
 
         #endregion Public Constructors
@@ -29,36 +29,20 @@ namespace OwnApt.Api.Controllers
 
         [HttpPost]
         [ValidateModel]
-        public async Task<IActionResult> CreateTermAsync([FromBody] TermModel termModel)
+        public async Task<IActionResult> CreateLeaseTermAsync([FromBody] LeaseTermModel termModel)
         {
-            var model = await this.termService.CreateAsync(termModel);
-            var resourceUri = Request.GetResourcePathSafe(model.TermId);
+            var model = await this.leaseTermService.CreateAsync(termModel);
+            var resourceUri = Request.GetResourcePathSafe(model.LeaseTermId);
 
             return Created(resourceUri, model);
         }
 
-        [HttpDelete("{termId}")]
+        [HttpGet("{leaseTermId}")]
         [ValidateModel]
-        public async Task<IActionResult> DeleteTermAsync(string termId)
+        public async Task<IActionResult> ReadLeaseTermAsync(string leaseTermId)
         {
-            await this.termService.DeleteAsync(termId);
-            return Ok();
-        }
-
-        [HttpGet("{termId}")]
-        [ValidateModel]
-        public async Task<IActionResult> ReadTermAsync(string termId)
-        {
-            var model = await this.termService.ReadAsync(termId);
+            var model = await this.leaseTermService.ReadAsync(leaseTermId);
             return Ok(model);
-        }
-
-        [HttpPut]
-        [ValidateModel]
-        public async Task<IActionResult> UpdateTermAsync([FromBody] TermModel termModel)
-        {
-            await this.termService.UpdateAsync(termModel);
-            return Ok();
         }
 
         #endregion Public Methods

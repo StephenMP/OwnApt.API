@@ -1,25 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Moq;
+﻿using Moq;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using System;
-using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers.PropertyControllerTests
 {
-    internal class PropertyControllerSteps
+    internal class PropertyControllerSteps : ControllerSteps
     {
         #region Private Fields
 
         private readonly Random random = new Random();
-        private object controllerContent;
-        private IActionResult controllerIActionResult;
         private PropertyModel mockedPropertyModel;
         private PropertyController propertyController;
         private string propertyId;
@@ -82,47 +77,24 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             Assert.Equal(this.propertyId, propertyModel.Id);
         }
 
-        internal void ThenICanVerifyIReceived<T>(HttpStatusCode statusCode)
-        {
-            if (statusCode == HttpStatusCode.OK)
-            {
-                if (typeof(T) != typeof(Missing))
-                {
-                    var content = Assert.IsType<OkObjectResult>(this.controllerIActionResult);
-                    this.controllerContent = content.Value;
-                    Assert.Equal((int)statusCode, content.StatusCode.Value);
-                }
-                else
-                {
-                    Assert.IsType<OkResult>(this.controllerIActionResult);
-                }
-            }
-            else if (statusCode == HttpStatusCode.Created)
-            {
-                var content = Assert.IsType<CreatedResult>(this.controllerIActionResult);
-                this.controllerContent = content.Value;
-                Assert.Equal((int)statusCode, content.StatusCode.Value);
-            }
-        }
-
         internal async Task WhenICallCreatePropertyAsync()
         {
-            this.controllerIActionResult = await this.propertyController.CreatePropertyAsync(this.mockedPropertyModel);
+            this.controllerResponse = await this.propertyController.CreatePropertyAsync(this.mockedPropertyModel);
         }
 
         internal async Task WhenICallDeletePropertyAsync()
         {
-            this.controllerIActionResult = await this.propertyController.DeletePropertyAsync(this.propertyId);
+            this.controllerResponse = await this.propertyController.DeletePropertyAsync(this.propertyId);
         }
 
         internal async Task WhenICallReadPropertyAsync()
         {
-            this.controllerIActionResult = await this.propertyController.ReadPropertyAsync(this.propertyId);
+            this.controllerResponse = await this.propertyController.ReadPropertyAsync(this.propertyId);
         }
 
         internal async Task WhenICallUpdatePropertyAsync()
         {
-            this.controllerIActionResult = await this.propertyController.UpdatePropertyAsync(this.mockedPropertyModel);
+            this.controllerResponse = await this.propertyController.UpdatePropertyAsync(this.mockedPropertyModel);
         }
 
         #endregion Internal Methods

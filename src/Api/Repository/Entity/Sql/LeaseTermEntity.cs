@@ -4,13 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OwnApt.Api.Repository.Entity.Sql
 {
-    [Table("Term")]
-    public class TermEntity
+    [Table("LeaseTerm")]
+    public class LeaseTermEntity
     {
         #region Public Properties
 
         [Column("EndDate")]
         public DateTime EndDate { get; set; }
+
+        [Key, Column("LeaseTermId")]
+        public string LeaseTermId { get; set; }
 
         [Column("PropertyId")]
         public string PropertyId { get; set; }
@@ -20,9 +23,6 @@ namespace OwnApt.Api.Repository.Entity.Sql
 
         [Column("StartDate")]
         public DateTime StartDate { get; set; }
-
-        [Key, Column("TermId")]
-        public string TermId { get; set; }
 
         #endregion Public Properties
     }

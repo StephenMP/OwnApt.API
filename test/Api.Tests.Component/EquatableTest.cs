@@ -14,7 +14,7 @@ namespace Api.Tests.Component
         public void CanEquateModels()
         {
             var assemblyName = new AssemblyName(nameof(Api));
-            var classTypes = Assembly.Load(assemblyName).GetTypes().Where(t => t != typeof(OwnApt.Common.Dto.Equatable) && typeof(Equatable).IsAssignableFrom(t));
+            var classTypes = Assembly.Load(assemblyName).GetTypes().Where(t => t != typeof(Equatable) && typeof(Equatable).IsAssignableFrom(t));
 
             foreach (var type in classTypes)
             {
