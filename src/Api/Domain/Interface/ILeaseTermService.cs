@@ -11,6 +11,8 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<LeaseTermModel> ReadAsync(string termId);
 
+        Task<LeaseTermModel> ReadByPropertyIdAsync(string propertyId);
+
         #endregion Public Methods
     }
 }

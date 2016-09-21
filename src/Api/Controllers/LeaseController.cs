@@ -45,6 +45,14 @@ namespace OwnApt.Api.Controllers
             return Ok(model);
         }
 
+        [HttpGet("property/{propertyId}")]
+        [ValidateModel]
+        public async Task<IActionResult> ReadLeaseTermByPropertyAsync(string propertyId)
+        {
+            var model = await this.leaseTermService.ReadByPropertyIdAsync(propertyId);
+            return Ok(model);
+        }
+
         #endregion Public Methods
     }
 }

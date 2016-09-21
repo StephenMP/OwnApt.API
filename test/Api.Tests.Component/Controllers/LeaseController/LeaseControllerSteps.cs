@@ -18,6 +18,7 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
         #region Private Fields
 
         private string currentLeaseTermId;
+        private string currentPropertyId;
         private bool disposedValue;
         private LeaseContext leaseContext;
         private LeaseController leaseController;
@@ -75,12 +76,14 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
         {
             this.newLeaseTermModel = TestRandom.LeaseTermModel;
             this.currentLeaseTermId = this.newLeaseTermModel.LeaseTermId;
+            this.currentPropertyId = this.newLeaseTermModel.PropertyId;
         }
 
         internal void GivenIHaveALeaseTermToRead()
         {
             this.leaseTermEntity = TestRandom.LeaseTermEntity;
             this.currentLeaseTermId = this.leaseTermEntity.LeaseTermId;
+            this.currentPropertyId = this.leaseTermEntity.PropertyId;
             this.leaseContext.Add(leaseTermEntity);
             this.leaseContext.SaveChanges();
         }
@@ -119,6 +122,11 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
             this.controllerResponse = await this.leaseController.ReadLeaseTermAsync(this.currentLeaseTermId);
         }
 
+        internal async Task WhenICallReadLeaseTermByPropertyIdAsync()
+        {
+            this.controllerResponse = await this.leaseController.ReadLeaseTermByPropertyAsync(this.currentPropertyId);
+        }
+
         #endregion Internal Methods
 
         #region Protected Methods
@@ -153,20 +161,20 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
 
         public static LeaseTermEntity LeaseTermEntity => new LeaseTermEntity
         {
-            EndDate = DateTime.Now,
+            EndDate = DateTime.UtcNow.AddDays(1),
             LeaseTermId = TestRandom.String,
             PropertyId = TestRandom.String,
             Rent = TestRandom.Int,
-            StartDate = DateTime.Now
+            StartDate = DateTime.UtcNow.AddDays(-1)
         };
 
         public static LeaseTermModel LeaseTermModel => new LeaseTermModel
         {
-            EndDate = DateTime.Now,
+            EndDate = DateTime.UtcNow.AddDays(1),
             LeaseTermId = TestRandom.String,
             PropertyId = TestRandom.String,
             Rent = TestRandom.Int,
-            StartDate = DateTime.Now
+            StartDate = DateTime.UtcNow.AddDays(-1)
         };
 
         public static string String => Guid.NewGuid().ToString("N");

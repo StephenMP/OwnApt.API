@@ -11,8 +11,8 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
     {
         #region Private Fields
 
+        private readonly LeaseControllerSteps steps;
         private bool disposedValue;
-        private LeaseControllerSteps steps;
 
         #endregion Private Fields
 
@@ -45,6 +45,15 @@ namespace Api.Tests.Component.Controllers.LeaseControllerTests
         {
             this.steps.GivenIHaveALeaseControllerEnvironment();
             await this.steps.WhenICallReadLeaseTermAsync();
+            this.steps.ThenICanVerifyIReceived<LeaseTermModel>(HttpStatusCode.OK);
+            this.steps.ThenICanVerifyICanReadLeaseTerm();
+        }
+
+        [Fact]
+        public async Task CanReadLeaseTermByPropertyId()
+        {
+            this.steps.GivenIHaveALeaseControllerEnvironment();
+            await this.steps.WhenICallReadLeaseTermByPropertyIdAsync();
             this.steps.ThenICanVerifyIReceived<LeaseTermModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyICanReadLeaseTerm();
         }

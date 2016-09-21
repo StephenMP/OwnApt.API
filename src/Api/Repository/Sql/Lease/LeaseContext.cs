@@ -17,7 +17,7 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         #region Public Properties
 
-        public DbSet<LeaseTermEntity> Term { get; set; }
+        public DbSet<LeaseTermEntity> LeaseTerm { get; set; }
 
         #endregion Public Properties
 

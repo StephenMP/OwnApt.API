@@ -32,7 +32,7 @@ namespace OwnApt.Api.Repository.Sql.Lease
         public async Task<LeaseTermModel> CreateAsync(LeaseTermModel model)
         {
             var entity = this.mapper.Map<LeaseTermEntity>(model);
-            this.leaseContex.Term.Add(entity);
+            this.leaseContex.LeaseTerm.Add(entity);
 
             await this.leaseContex.SaveChangesAsync();
 
@@ -46,7 +46,23 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         public async Task<LeaseTermModel> ReadAsync(string id)
         {
-            var entity = await this.leaseContex.Term.SingleOrDefaultAsync(e => e.LeaseTermId == id);
+            var entity = await this.leaseContex.LeaseTerm.SingleOrDefaultAsync(e => e.LeaseTermId == id);
+            var model = this.mapper.Map<LeaseTermModel>(entity);
+
+            return model;
+        }
+
+        public async Task<LeaseTermModel> ReadByPropertyIdAsync(string propertyId)
+        {
+            var entity = await this.leaseContex
+                                   .LeaseTerm
+                                   .SingleOrDefaultAsync
+                                   (e =>
+                                        e.StartDate <= DateTime.UtcNow
+                                        && e.EndDate > DateTime.UtcNow
+                                        && e.PropertyId == propertyId
+                                    );
+
             var model = this.mapper.Map<LeaseTermModel>(entity);
 
             return model;

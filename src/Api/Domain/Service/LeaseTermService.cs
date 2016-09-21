@@ -34,6 +34,11 @@ namespace OwnApt.Api.Domain.Service
             return await this.termRepository.ReadAsync(leaseTermId);
         }
 
+        public async Task<LeaseTermModel> ReadByPropertyIdAsync(string propertyId)
+        {
+            return await this.termRepository.ReadByPropertyIdAsync(propertyId);
+        }
+
         #endregion Public Methods
     }
 }
