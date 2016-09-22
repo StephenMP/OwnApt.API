@@ -1,5 +1,6 @@
 ﻿using OwnApt.Common.Dto;
 using OwnApt.Common.Enum;
+using System;
 using System.Collections.Generic;
 
 namespace OwnApt.Api.Repository.Entity.Mongo
@@ -8,7 +9,7 @@ namespace OwnApt.Api.Repository.Entity.Mongo
     {
         #region Public Properties
 
-        public BirthdateEntity Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
         public ContactEntity Contact { get; set; }
         public ContactEntity EmergencyContact { get; set; }
         public Gender Gender { get; set; }

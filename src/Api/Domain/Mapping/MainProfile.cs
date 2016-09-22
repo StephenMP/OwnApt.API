@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Entity.Sql;
@@ -14,13 +15,26 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureTerm();
             ConfigureAddress();
             ConfigureAmenity();
-            ConfigureBirthdate();
             ConfigureContact();
             ConfigureFeatures();
             ConfigureName();
             ConfigureParking();
             ConfigurePhone();
             ConfigureZip();
+            ConfigureProperty();
+            ConfigureOwner();
+        }
+
+        private void ConfigureOwner()
+        {
+            CreateMap<OwnerModel, OwnerEntity>();
+            CreateMap<OwnerEntity, OwnerModel>();
+        }
+
+        private void ConfigureProperty()
+        {
+            CreateMap<PropertyModel, PropertyEntity>();
+            CreateMap<PropertyEntity, PropertyModel>();
         }
 
         #endregion Public Constructors
@@ -37,12 +51,6 @@ namespace OwnApt.Api.Domain.Mapping
         {
             CreateMap<AmenityModel, AmenityEntity>();
             CreateMap<AmenityEntity, AmenityModel>();
-        }
-
-        private void ConfigureBirthdate()
-        {
-            CreateMap<BirthdateModel, BirthdateEntity>();
-            CreateMap<BirthdateEntity, BirthdateModel>();
         }
 
         private void ConfigureContact()

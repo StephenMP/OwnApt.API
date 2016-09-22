@@ -1,5 +1,4 @@
-﻿using OwnApt.Api.Contract.Dto;
-using OwnApt.Api.Contract.Model;
+﻿using OwnApt.Api.Contract.Model;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Interface
@@ -12,13 +11,7 @@ namespace OwnApt.Api.Domain.Interface
 
         Task DeleteAsync(string id);
 
-        Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto);
-
         Task<PropertyModel> ReadAsync(string id);
-
-        Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId);
-
-        Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId);
 
         Task UpdateAsync(PropertyModel property);
 

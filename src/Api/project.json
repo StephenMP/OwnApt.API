@@ -26,9 +26,8 @@
     "MongoDB.Driver": "2.3.0-rc1",
     "System.Reflection.TypeExtensions": "4.1.0",
     "Authentication": "14.7414.5796",
-    "OwnApt": "14.7414.5775",
-    "ApiContract": "14.7434.3850"
-  },
+    "ApiContract": "14.7450.9569",
+    "OwnApt": "14.7450.9196" },
 
   "tools": {
     "Microsoft.EntityFrameworkCore.Tools": "1.0.0-preview2-final",

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OwnApt.Api.Contract.Dto;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
@@ -29,14 +28,6 @@ namespace OwnApt.Api.Controllers
         #endregion Public Constructors
 
         #region Public Methods
-
-        [HttpPut("owner/add")]
-        [ValidateModel]
-        public async Task<IActionResult> AddOwnerToPropertiesAsync([FromBody] MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
-        {
-            await this.propertyService.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto);
-            return Ok();
-        }
 
         [HttpPost]
         [ValidateModel]
@@ -107,22 +98,6 @@ namespace OwnApt.Api.Controllers
             var createdModel = await this.propertyService.CreateAsync(model);
 
             return Ok(createdModel.Id);
-        }
-
-        [HttpGet("owner/{ownerId}")]
-        [ValidateModel]
-        public async Task<IActionResult> ReadPropertiesForOwnerAsync(string ownerId)
-        {
-            var propertyModelList = await this.propertyService.ReadPropertiesForOwnerAsync(ownerId);
-            return Ok(propertyModelList);
-        }
-
-        [HttpGet("tenant/{tenantId}")]
-        [ValidateModel]
-        public async Task<IActionResult> ReadPropertiesForTenantAsync(string tenantId)
-        {
-            var propertyModelList = await this.propertyService.ReadPropertiesForTenantAsync(tenantId);
-            return Ok(propertyModelList);
         }
 
         [HttpGet("{propertyId}")]

@@ -34,8 +34,6 @@ namespace OwnApt.Api.AppStart
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile<PropertyProfile>();
-                cfg.AddProfile<OwnerProfile>();
                 cfg.AddProfile<MainProfile>();
             }).CreateMapper();
         }

@@ -11,7 +11,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Api.Tests.Component.Controllers.OwnerControllerTests
+namespace Api.Tests.Component.Controllers
 {
     public class OwnerControllerSteps : ControllerSteps, IDisposable
     {

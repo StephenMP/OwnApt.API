@@ -49,37 +49,11 @@ namespace OwnApt.Api.Repository.Mongo
             await this.PropertiesCollection.DeleteOneAsync(p => p.Id == id);
         }
 
-        public async Task MapOwnerToPropertiesAsync(string ownerId, params string[] propertyIds)
-        {
-            var cursor = await this.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
-            var properties = await cursor.ToListAsync();
-
-            foreach (var property in properties)
-            {
-                property.OwnerIds.Add(ownerId);
-                await this.PropertiesCollection.ReplaceOneAsync(p => p.Id == property.Id, property);
-            }
-        }
-
         public async Task<PropertyModel> ReadAsync(string id)
         {
             var asyncCursor = await this.PropertiesCollection.FindAsync(p => p.Id == id);
             var propertyEntity = await asyncCursor.FirstOrDefaultAsync();
             return this.mapper.Map<PropertyModel>(propertyEntity);
-        }
-
-        public async Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId)
-        {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.OwnerIds.Any(o => o.Contains(ownerId)));
-            var propertyModels = await propertyEntities.ToListAsync();
-            return this.mapper.Map<PropertyModel[]>(propertyModels);
-        }
-
-        public async Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId)
-        {
-            var propertyEntities = await this.PropertiesCollection.FindAsync(p => p.TenantIds.Any(t => t.Contains(tenantId)));
-            var propertyModels = await propertyEntities.ToListAsync();
-            return this.mapper.Map<PropertyModel[]>(propertyModels);
         }
 
         public async Task UpdateAsync(PropertyModel model)

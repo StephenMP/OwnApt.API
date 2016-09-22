@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Api.Tests.Component.Controllers.PropertyControllerTests
+namespace Api.Tests.Component.Controllers
 {
     internal class PropertyControllerSteps : ControllerSteps
     {
@@ -30,8 +30,6 @@ namespace Api.Tests.Component.Controllers.PropertyControllerTests
             var mockedPropertyRepository = new Mock<IPropertyRepository>();
             mockedPropertyRepository.Setup(p => p.CreateAsync(this.mockedPropertyModel)).Returns(Task.FromResult(this.mockedPropertyModel));
             mockedPropertyRepository.Setup(p => p.ReadAsync(this.propertyId)).Returns(Task.FromResult(this.mockedPropertyModel));
-            mockedPropertyRepository.Setup(p => p.ReadPropertiesForOwnerAsync(this.propertyId)).Returns(Task.FromResult(new PropertyModel[] { this.mockedPropertyModel }));
-            mockedPropertyRepository.Setup(p => p.ReadPropertiesForTenantAsync(this.propertyId)).Returns(Task.FromResult(new PropertyModel[] { this.mockedPropertyModel }));
             mockedPropertyRepository.Setup(p => p.UpdateAsync(this.mockedPropertyModel)).Returns(Task.FromResult(true));
             mockedPropertyRepository.Setup(p => p.DeleteAsync(this.propertyId)).Returns(Task.FromResult(true));
 

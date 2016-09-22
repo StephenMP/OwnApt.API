@@ -3,12 +3,12 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7434.3850": {
+      "ApiContract/14.7450.9569": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
           "NETStandard.Library": "1.6.0",
-          "OwnApt": "14.7392.4702"
+          "OwnApt": "14.7450.9196"
         },
         "compile": {
           "lib/netstandard1.6/ApiContract.dll": {}
@@ -1831,10 +1831,11 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OwnApt/14.7414.5775": {
+      "OwnApt/14.7450.9196": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Annotations": "4.1.0",
           "System.ComponentModel.Primitives": "4.1.0"
         },
         "compile": {
@@ -4076,12 +4077,12 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7434.3850": {
-      "sha512": "OjOdVjyqy8KqmaZu/vjNBpgXKcs1WhENZkP3LNg+wR5AUKtq7a6ETfNnq89OVJfyZunz0vVB+An4qFNVaAN+oA==",
+    "ApiContract/14.7450.9569": {
+      "sha512": "58Sxw+/grO8fVX6OXMw4EUIpdrEi5QpcY/XSz17OJKtrQ92f+l8x8okPWufVy5A2TMbEEcuiRMAXYABZPRMWAg==",
       "type": "package",
-      "path": "ApiContract/14.7434.3850",
+      "path": "ApiContract/14.7450.9569",
       "files": [
-        "ApiContract.14.7434.3850.nupkg.sha512",
+        "ApiContract.14.7450.9569.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
@@ -5525,12 +5526,12 @@
         "tools/install.ps1"
       ]
     },
-    "OwnApt/14.7414.5775": {
-      "sha512": "ygT3U+KqUo71KRY3jeNL7lFBDIai1ARDbTWG7KPJzLOz0LNdPnq0zsUf3jPTsbUKiAexyCnODounYpIMWpNkTg==",
+    "OwnApt/14.7450.9196": {
+      "sha512": "M9FrdSH6Xbw9qw/ValqPdf3qQiRVzRkZ74R/GltV6/PCr5RyDZuLKvc7SMmK2NdxYtw5ACTJ+3ee/u9HkGsr5Q==",
       "type": "package",
-      "path": "OwnApt/14.7414.5775",
+      "path": "OwnApt/14.7450.9196",
       "files": [
-        "OwnApt.14.7414.5775.nupkg.sha512",
+        "OwnApt.14.7450.9196.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -10448,7 +10449,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "ApiContract >= 14.7434.3850",
+      "ApiContract >= 14.7450.9569",
       "Authentication >= 14.7414.5796",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
@@ -10468,7 +10469,7 @@
       "MongoDB.Driver >= 2.3.0-rc1",
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
-      "OwnApt >= 14.7414.5775",
+      "OwnApt >= 14.7450.9196",
       "Swashbuckle.SwaggerGen >= 6.0.0-beta901",
       "Swashbuckle.SwaggerUi >= 6.0.0-beta901",
       "System.Reflection.TypeExtensions >= 4.1.0",

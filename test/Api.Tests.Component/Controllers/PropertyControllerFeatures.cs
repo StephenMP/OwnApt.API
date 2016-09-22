@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Api.Tests.Component.Controllers.PropertyControllerTests
+namespace Api.Tests.Component.Controllers
 {
     public class PropertyControllerFeatures
     {

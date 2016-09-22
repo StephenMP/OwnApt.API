@@ -37,7 +37,6 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<OwnerModel> CreateAsync(OwnerModel model)
         {
-            model.Id = Guid.NewGuid().ToString("N");
             var ownerEntity = this.mapper.Map<OwnerEntity>(model);
             await this.OwnerCollection.InsertOneAsync(ownerEntity);
 

@@ -11,7 +11,7 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Api.Tests.Component.Controllers.LeaseControllerTests
+namespace Api.Tests.Component.Controllers
 {
     public class LeaseControllerSteps : ControllerSteps, IDisposable
     {

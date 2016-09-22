@@ -1,5 +1,4 @@
-﻿using OwnApt.Api.Contract.Dto;
-using OwnApt.Api.Contract.Model;
+﻿using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
@@ -35,24 +34,9 @@ namespace OwnApt.Api.Domain.Service
             await this.propertyRepository.DeleteAsync(id);
         }
 
-        public async Task MapOwnerToPropertiesAsync(MapOwnerToPropertiesDto mapOwnerToPropertiesDto)
-        {
-            await this.propertyRepository.MapOwnerToPropertiesAsync(mapOwnerToPropertiesDto.OwnerId, mapOwnerToPropertiesDto.PropertyIds);
-        }
-
         public async Task<PropertyModel> ReadAsync(string id)
         {
             return await this.propertyRepository.ReadAsync(id);
-        }
-
-        public async Task<PropertyModel[]> ReadPropertiesForOwnerAsync(string ownerId)
-        {
-            return await this.propertyRepository.ReadPropertiesForOwnerAsync(ownerId);
-        }
-
-        public async Task<PropertyModel[]> ReadPropertiesForTenantAsync(string tenantId)
-        {
-            return await this.propertyRepository.ReadPropertiesForTenantAsync(tenantId);
         }
 
         public async Task UpdateAsync(PropertyModel property)
