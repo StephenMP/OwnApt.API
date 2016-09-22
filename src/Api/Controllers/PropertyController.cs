@@ -55,13 +55,14 @@ namespace OwnApt.Api.Controllers
             {
                 Address = new AddressModel
                 {
-                    Address1 = "3467 N. Arrowwood Way",
-                    City = "Meridian",
-                    County = "Ada",
-                    State = State.ID,
+                    Address1 = "1234 W Test Ave",
+                    City = "Test Town",
+                    County = "Test County",
+                    State = State.WY,
                     Zip = new ZipModel
                     {
-                        Base = "83646"
+                        Base = "12345",
+                        Extension = "6789"
                     }
                 },
                 Features = new FeaturesModel
@@ -90,7 +91,7 @@ namespace OwnApt.Api.Controllers
                         new ParkingModel { Type = "Street", Description = "Street parking available on opposite side of street." }
                     },
                     Rooms = 3,
-                    SqFootage = 1415
+                    SqFootage = 2000
                 },
                 PropertyType = PropertyType.SingleFamilyHome
             };

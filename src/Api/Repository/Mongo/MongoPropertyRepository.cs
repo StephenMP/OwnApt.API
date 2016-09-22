@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
+using OwnApt.Common.Utility.Data;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<PropertyModel> CreateAsync(PropertyModel model)
         {
-            model.Id = Guid.NewGuid().ToString("N");
+            model.Id = DataUtility.GenerateId();
             var propertyEntity = this.mapper.Map<PropertyEntity>(model);
             await this.PropertiesCollection.InsertOneAsync(propertyEntity);
             return model;
