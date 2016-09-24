@@ -9,15 +9,17 @@ namespace Api.Tests.Component.Repository.Mongo
         #region Private Fields
 
         private bool disposedValue;
-        private readonly TestingEnvironment testEnvironment;
+        private readonly OwnAptTestEnvironment testEnvironment;
 
         #endregion Private Fields
 
         public MongoClassFixture()
         {
-            this.testEnvironment = new TestingEnvironment();
-            this.testEnvironment.AddMongo();
-            this.MongoClient = this.testEnvironment.MongoClient();
+            this.testEnvironment = OwnAptTestEnvironment
+                                    .CreateEnvironment()
+                                    .UseMongo();
+
+            this.MongoClient = this.testEnvironment.GetMongoClient();
         }
 
         public IMongoClient MongoClient { get; private set; }

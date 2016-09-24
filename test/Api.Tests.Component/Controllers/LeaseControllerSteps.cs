@@ -28,7 +28,7 @@ namespace Api.Tests.Component.Controllers
         private ILeaseTermRepository leaseTermRepository;
         private ILeaseTermService leaseTermService;
         private LeaseTermModel newLeaseTermModel;
-        private TestingEnvironment testEnvironment;
+        private OwnAptTestEnvironment testEnvironment;
 
         #endregion Private Fields
 
@@ -46,7 +46,7 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveALeaseContext()
         {
-            this.leaseContext = new LeaseContext(this.testEnvironment.SqlDbContextOptions<LeaseContext>());
+            this.leaseContext = new LeaseContext(this.testEnvironment.GetSqlDbContextOptions<LeaseContext>());
         }
 
         internal void GivenIHaveALeaseController()
@@ -98,8 +98,9 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveATestEnvironment()
         {
-            this.testEnvironment = new TestingEnvironment();
-            this.testEnvironment.AddSqlContext<LeaseContext>();
+            this.testEnvironment = OwnAptTestEnvironment
+                                        .CreateEnvironment()
+                                        .UseSql<LeaseContext>();
         }
 
         internal void ThenICanVerifyICanCreateLeaseTerm()

@@ -17,13 +17,12 @@ namespace Api.Tests.Component.Controllers
     {
         #region Private Fields
 
-        private CoreContext coreContext;
         private bool disposedValue;
         private OwnerController ownerController;
         private OwnerModel ownerModel;
         private IOwnerRepository ownerRepository;
         private IOwnerService ownerService;
-        private TestingEnvironment testEnvironment;
+        private OwnAptTestEnvironment testEnvironment;
 
         #endregion Private Fields
 
@@ -39,11 +38,6 @@ namespace Api.Tests.Component.Controllers
 
         #region Internal Methods
 
-        internal void GivenIHaveACoreContext()
-        {
-            this.coreContext = new CoreContext(this.testEnvironment.SqlDbContextOptions<CoreContext>());
-        }
-
         internal void GivenIHaveAnOwnerController()
         {
             this.ownerController = new OwnerController(this.ownerService);
@@ -51,15 +45,14 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveAOwnerEnvironment()
         {
-            this.testEnvironment = new TestingEnvironment();
-
-            // Add Mongo Dependency
-            this.testEnvironment.AddMongo();
+            this.testEnvironment = OwnAptTestEnvironment
+                                    .CreateEnvironment()
+                                    .UseMongo();
         }
 
         internal void GivenIHaveAOwnerRepository()
         {
-            this.ownerRepository = new MongoOwnerRepository(this.testEnvironment.MongoClient(), OwnAptStartup.BuildMapper());
+            this.ownerRepository = new MongoOwnerRepository(this.testEnvironment.GetMongoClient(), OwnAptStartup.BuildMapper());
         }
 
         internal void GivenIHaveAOwnerService()
@@ -100,7 +93,6 @@ namespace Api.Tests.Component.Controllers
                 if (disposing)
                 {
                     this.testEnvironment?.Dispose();
-                    this.coreContext?.Dispose();
                     this.ownerController?.Dispose();
                 }
 
