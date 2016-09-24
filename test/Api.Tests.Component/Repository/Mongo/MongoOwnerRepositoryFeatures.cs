@@ -22,13 +22,15 @@ namespace Api.Tests.Component.Repository.Mongo
             this.steps.GivenIHaveAnOwnerId();
             this.steps.GivenIHaveAnOwnerToCreate();
             await this.steps.WhenICallCreateAsync();
-            this.steps.ThenICanVerifyICreateOwner();
+            this.steps.ThenICanVerifyICreateOrReadOwner();
 
             await this.steps.WhenICallReadAsync();
-            this.steps.ThenICanVerifyICreateOwner();
+            this.steps.ThenICanVerifyICreateOrReadOwner();
 
             this.steps.GivenIHaveAnOwnerToUpdate();
             await this.steps.WhenICallUpdateAsync();
+            await this.steps.WhenICallReadAsync();
+            this.steps.ThenICanVerifyIUpdateOwner();
 
             await this.steps.WhenICallDeleteAsync();
             await this.steps.WhenICallReadAsync();

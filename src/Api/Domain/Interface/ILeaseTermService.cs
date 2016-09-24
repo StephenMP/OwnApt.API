@@ -9,7 +9,7 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<LeaseTermModel> CreateAsync(LeaseTermModel termId);
 
-        Task<LeaseTermModel> ReadAsync(string termId);
+        Task<LeaseTermModel> ReadAsync(int termId);
 
         Task<LeaseTermModel> ReadByPropertyIdAsync(string propertyId);
 

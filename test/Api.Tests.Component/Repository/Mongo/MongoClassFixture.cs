@@ -1,5 +1,6 @@
 ﻿using OwnApt.TestEnvironment.Environment;
 using System;
+using MongoDB.Driver;
 
 namespace Api.Tests.Component.Repository.Mongo
 {
@@ -8,16 +9,18 @@ namespace Api.Tests.Component.Repository.Mongo
         #region Private Fields
 
         private bool disposedValue;
+        private readonly TestingEnvironment testEnvironment;
 
         #endregion Private Fields
 
         public MongoClassFixture()
         {
-            this.TestEnvironment = new TestingEnvironment();
-            this.TestEnvironment.AddMongo();
+            this.testEnvironment = new TestingEnvironment();
+            this.testEnvironment.AddMongo();
+            this.MongoClient = this.testEnvironment.MongoClient();
         }
 
-        public TestingEnvironment TestEnvironment { get; private set; }
+        public IMongoClient MongoClient { get; private set; }
 
         #region Public Methods
 
@@ -37,7 +40,7 @@ namespace Api.Tests.Component.Repository.Mongo
             {
                 if (disposing)
                 {
-                    this.TestEnvironment?.Dispose();
+                    this.testEnvironment?.Dispose();
                 }
 
                 disposedValue = true;

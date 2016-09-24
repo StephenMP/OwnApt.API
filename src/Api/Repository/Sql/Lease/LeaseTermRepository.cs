@@ -39,20 +39,19 @@ namespace OwnApt.Api.Repository.Sql.Lease
             return model;
         }
 
-        public Task DeleteAsync(string id)
+        public Task DeleteAsync(int id)
         {
-            throw new NotSupportedException();
+            // We do not delete lease terms
+            throw new NotSupportedException("We do not delete lease terms");
         }
 
-        public async Task<LeaseTermModel> ReadAsync(string id)
+        public async Task<LeaseTermModel> ReadAsync(int id)
         {
             var entity = await this.leaseContex
                                    .LeaseTerm
                                    .AsNoTracking()
-                                   .SingleOrDefaultAsync
-                                   (e => 
-                                        e.LeaseTermId == id
-                                    );
+                                   .Include(e => e.LeasePeriods)
+                                   .SingleOrDefaultAsync(e => e.LeaseTermId == id);
 
             var model = this.mapper.Map<LeaseTermModel>(entity);
 
@@ -65,10 +64,9 @@ namespace OwnApt.Api.Repository.Sql.Lease
                                    .LeaseTerm
                                    .AsNoTracking()
                                    .SingleOrDefaultAsync
-                                   (e =>
-                                        e.StartDate <= DateTime.UtcNow
-                                        && e.EndDate > DateTime.UtcNow
-                                        && e.PropertyId == propertyId
+                                   (e => e.StartDate <= DateTime.UtcNow
+                                         && e.EndDate > DateTime.UtcNow
+                                         && e.PropertyId == propertyId
                                     );
 
             var model = this.mapper.Map<LeaseTermModel>(entity);
@@ -78,7 +76,8 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         public Task UpdateAsync(LeaseTermModel model)
         {
-            throw new NotSupportedException();
+            // We do not update lease terms
+            throw new NotSupportedException("We do not update lease terms");
         }
 
         #endregion Public Methods

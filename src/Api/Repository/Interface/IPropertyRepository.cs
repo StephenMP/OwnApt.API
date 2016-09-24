@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface IPropertyRepository : IRepository<PropertyModel>
+    public interface IPropertyRepository : IRepository<PropertyModel, PropertyModel, string>
     {
     }
 }

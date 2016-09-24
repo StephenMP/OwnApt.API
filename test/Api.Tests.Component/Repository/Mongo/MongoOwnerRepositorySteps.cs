@@ -1,11 +1,9 @@
 ﻿using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
-using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Mongo;
 using OwnApt.Common.Enum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,35 +11,52 @@ namespace Api.Tests.Component.Repository.Mongo
 {
     public class MongoOwnerRepositorySteps : IDisposable
     {
-        private MongoClassFixture testFixture;
+        #region Private Fields
+
+        private bool disposedValue;
+        private string ownerId;
+        private OwnerModel ownerModel;
+        private OwnerModel ownerModelToUpdate;
+        private MongoOwnerRepository ownerRepository;
+        private OwnerModel resultModel;
+        private readonly MongoClassFixture testFixture;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MongoOwnerRepositorySteps(MongoClassFixture testFixture)
         {
             this.testFixture = testFixture;
         }
 
-        #region IDisposable Support
-        private bool disposedValue;
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion Public Methods
+
+        #region Internal Methods
+
+        internal void GivenIHaveAMongoOwnerRepository()
+        {
+            this.ownerRepository = new MongoOwnerRepository(this.testFixture.MongoClient, OwnAptStartup.BuildMapper());
+        }
 
         internal void GivenIHaveAnOwnerId()
         {
             this.ownerId = TestRandom.String;
         }
 
-        private MongoOwnerRepository ownerRepository;
-        private OwnerModel ownerModel;
-        private OwnerModel resultModel;
-        private string ownerId;
-        private OwnerModel ownerModelToUpdate;
-
-        internal async Task WhenICallCreateAsync()
+        internal void GivenIHaveAnOwnerToCreate()
         {
-            this.resultModel = await this.ownerRepository.CreateAsync(this.ownerModel);
-        }
-
-        internal async Task WhenICallReadAsync()
-        {
-            this.resultModel = await this.ownerRepository.ReadAsync(this.ownerId);
+            this.ownerModel = OwnerRandom.OwnerModel(this.ownerId);
         }
 
         internal void GivenIHaveAnOwnerToUpdate()
@@ -49,31 +64,11 @@ namespace Api.Tests.Component.Repository.Mongo
             this.ownerModelToUpdate = OwnerRandom.OwnerModel(this.ownerId);
         }
 
-        internal void ThenICanVerifyIUpdateOwner()
+        internal void ThenICanVerifyICreateOrReadOwner()
         {
-            Assert.NotEqual(this.resultModel.Birthdate.Date, this.ownerModel.Birthdate.Date);
-            Assert.NotEqual(this.resultModel.Contact, this.ownerModel.Contact);
-            Assert.NotEqual(this.resultModel.EmergencyContact, this.ownerModel.EmergencyContact);
-            Assert.NotEqual(this.resultModel.Gender, this.ownerModel.Gender);
-            Assert.NotEqual(this.resultModel.Id, this.ownerModel.Id);
-            Assert.NotEqual(this.resultModel.Name, this.ownerModel.Name);
-
-            Assert.Equal(this.resultModel.Birthdate.Date, this.ownerModel.Birthdate.Date);
-            Assert.Equal(this.resultModel.Contact, this.ownerModel.Contact);
-            Assert.Equal(this.resultModel.EmergencyContact, this.ownerModel.EmergencyContact);
-            Assert.Equal(this.resultModel.Gender, this.ownerModel.Gender);
-            Assert.Equal(this.resultModel.Id, this.ownerModel.Id);
-            Assert.Equal(this.resultModel.Name, this.ownerModel.Name);
-        }
-
-        internal async Task WhenICallUpdateAsync()
-        {
-            await this.ownerRepository.UpdateAsync(this.ownerModelToUpdate);
-        }
-
-        internal async Task WhenICallDeleteAsync()
-        {
-            await this.ownerRepository.DeleteAsync(this.ownerId);
+            this.resultModel.Birthdate = this.resultModel.Birthdate.Date;
+            this.ownerModel.Birthdate = this.ownerModel.Birthdate.Date;
+            Assert.Equal(this.resultModel, this.ownerModel);
         }
 
         internal void ThenICanVerifyIDeleteOwner()
@@ -81,15 +76,39 @@ namespace Api.Tests.Component.Repository.Mongo
             Assert.Null(this.resultModel);
         }
 
-        internal void ThenICanVerifyICreateOwner()
+        internal void ThenICanVerifyIUpdateOwner()
         {
-            Assert.Equal(this.resultModel.Birthdate.Date, this.ownerModel.Birthdate.Date);
-            Assert.Equal(this.resultModel.Contact, this.ownerModel.Contact);
-            Assert.Equal(this.resultModel.EmergencyContact, this.ownerModel.EmergencyContact);
-            Assert.Equal(this.resultModel.Gender, this.ownerModel.Gender);
-            Assert.Equal(this.resultModel.Id, this.ownerModel.Id);
-            Assert.Equal(this.resultModel.Name, this.ownerModel.Name);
+            this.resultModel.Birthdate = this.resultModel.Birthdate.Date;
+            this.ownerModel.Birthdate = this.ownerModel.Birthdate.Date;
+            this.ownerModelToUpdate.Birthdate = this.ownerModelToUpdate.Birthdate.Date;
+
+            Assert.NotEqual(this.resultModel, this.ownerModel);
+            Assert.Equal(this.resultModel, this.ownerModelToUpdate);
         }
+
+        internal async Task WhenICallCreateAsync()
+        {
+            this.resultModel = await this.ownerRepository.CreateAsync(this.ownerModel);
+        }
+
+        internal async Task WhenICallDeleteAsync()
+        {
+            await this.ownerRepository.DeleteAsync(this.ownerId);
+        }
+
+        internal async Task WhenICallReadAsync()
+        {
+            this.resultModel = await this.ownerRepository.ReadAsync(this.ownerId);
+        }
+
+        internal async Task WhenICallUpdateAsync()
+        {
+            await this.ownerRepository.UpdateAsync(this.ownerModelToUpdate);
+        }
+
+        #endregion Internal Methods
+
+        #region Protected Methods
 
         protected virtual void Dispose(bool disposing)
         {
@@ -104,25 +123,13 @@ namespace Api.Tests.Component.Repository.Mongo
             }
         }
 
-        internal void GivenIHaveAnOwnerToCreate()
-        {
-            this.ownerModel = OwnerRandom.OwnerModel(this.ownerId);
-        }
-
-        internal void GivenIHaveAMongoOwnerRepository()
-        {
-            this.ownerRepository = new MongoOwnerRepository(this.testFixture.TestEnvironment.MongoClient(), OwnAptStartup.BuildMapper());
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        #endregion Protected Methods
     }
 
-    internal static class OwnerRandom {
+    internal static class OwnerRandom
+    {
+        #region Public Methods
+
         public static OwnerModel OwnerModel(string ownerId) => new OwnerModel
         {
             Birthdate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
@@ -195,5 +202,7 @@ namespace Api.Tests.Component.Repository.Mongo
                     TestRandom.String
                 }
         };
+
+        #endregion Public Methods
     }
 }

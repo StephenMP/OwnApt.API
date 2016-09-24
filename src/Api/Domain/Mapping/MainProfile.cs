@@ -3,6 +3,7 @@ using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Entity.Sql;
+using OwnApt.Common.Enum;
 
 namespace OwnApt.Api.Domain.Mapping
 {
@@ -12,7 +13,8 @@ namespace OwnApt.Api.Domain.Mapping
 
         public MainProfile()
         {
-            ConfigureTerm();
+            ConfigureLeaseTerm();
+            ConfigureLeasePeriod();
             ConfigureAddress();
             ConfigureAmenity();
             ConfigureContact();
@@ -23,6 +25,15 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureZip();
             ConfigureProperty();
             ConfigureOwner();
+        }
+
+        private void ConfigureLeasePeriod()
+        {
+            CreateMap<LeasePeriodModel, LeasePeriodEntity>()
+                .ForMember(d => d.LeasePeriodStatusId, opt => opt.MapFrom(src => (int)src.LeasePeriodStatus));
+
+            CreateMap<LeasePeriodEntity, LeasePeriodModel>()
+                .ForMember(d => d.LeasePeriodStatus, opt => opt.MapFrom(src => (LeasePeriodStatus)src.LeasePeriodStatusId));
         }
 
         private void ConfigureOwner()
@@ -83,7 +94,7 @@ namespace OwnApt.Api.Domain.Mapping
             CreateMap<PhoneEntity, PhoneModel>();
         }
 
-        private void ConfigureTerm()
+        private void ConfigureLeaseTerm()
         {
             CreateMap<LeaseTermModel, LeaseTermEntity>();
             CreateMap<LeaseTermEntity, LeaseTermModel>();

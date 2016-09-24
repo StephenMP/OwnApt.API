@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface ILeaseTermRepository : IRepository<LeaseTermModel>
+    public interface ILeaseTermRepository : IRepository<LeaseTermModel, LeaseTermModel, int>
     {
         #region Public Methods
 

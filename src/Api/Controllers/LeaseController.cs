@@ -39,7 +39,7 @@ namespace OwnApt.Api.Controllers
 
         [HttpGet("{leaseTermId}")]
         [ValidateModel]
-        public async Task<IActionResult> ReadLeaseTermAsync(string leaseTermId)
+        public async Task<IActionResult> ReadLeaseTermAsync(int leaseTermId)
         {
             var model = await this.leaseTermService.ReadAsync(leaseTermId);
             return Ok(model);

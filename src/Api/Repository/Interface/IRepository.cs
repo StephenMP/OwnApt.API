@@ -2,17 +2,17 @@
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface IRepository<TModel>
+    public interface IRepository<TModelIn, TModelOut, TPrimaryKey>
     {
         #region Public Methods
 
-        Task<TModel> CreateAsync(TModel model);
+        Task<TModelOut> CreateAsync(TModelIn model);
 
-        Task DeleteAsync(string id);
+        Task DeleteAsync(TPrimaryKey id);
 
-        Task<TModel> ReadAsync(string id);
+        Task<TModelOut> ReadAsync(TPrimaryKey id);
 
-        Task UpdateAsync(TModel model);
+        Task UpdateAsync(TModelIn model);
 
         #endregion Public Methods
     }

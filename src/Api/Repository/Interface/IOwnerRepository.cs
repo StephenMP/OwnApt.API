@@ -2,7 +2,7 @@
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface IOwnerRepository : IRepository<OwnerModel>
+    public interface IOwnerRepository : IRepository<OwnerModel, OwnerModel, string>
     {
     }
 }

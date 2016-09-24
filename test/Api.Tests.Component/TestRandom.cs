@@ -11,5 +11,6 @@ namespace Api.Tests.Component
         public static string String => Guid.NewGuid().ToString("N");
         public static int Integer => random.Next();
         public static double Double => random.NextDouble();
+        public static bool Boolean => Convert.ToBoolean(random.Next(0, 1));
     }
 }

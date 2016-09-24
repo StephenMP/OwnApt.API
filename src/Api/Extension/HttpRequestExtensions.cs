@@ -11,7 +11,7 @@ namespace OwnApt.Api.Extension
             return request == null ? "" : $"{request.Host}{request.Path}";
         }
 
-        public static string GetResourcePathSafe(this HttpRequest request, string id)
+        public static string GetResourcePathSafe<TPrimaryKey>(this HttpRequest request, TPrimaryKey id)
         {
             return request == null ? "" : $"{request.Host}{request.Path}/{id}";
         }

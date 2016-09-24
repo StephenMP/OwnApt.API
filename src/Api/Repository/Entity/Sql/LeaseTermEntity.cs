@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,7 @@ namespace OwnApt.Api.Repository.Entity.Sql
         public DateTime EndDate { get; set; }
 
         [Key, Column("LeaseTermId")]
-        public string LeaseTermId { get; set; }
+        public int LeaseTermId { get; set; }
 
         [Column("PropertyId")]
         public string PropertyId { get; set; }
@@ -23,6 +24,11 @@ namespace OwnApt.Api.Repository.Entity.Sql
 
         [Column("StartDate")]
         public DateTime StartDate { get; set; }
+
+        [Column("Active")]
+        public bool Active { get; set; }
+
+        public List<LeasePeriodEntity> LeasePeriods { get; set; }
 
         #endregion Public Properties
     }

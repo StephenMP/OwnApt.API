@@ -29,7 +29,7 @@ namespace OwnApt.Api.Domain.Service
             return await this.termRepository.CreateAsync(termModel);
         }
 
-        public async Task<LeaseTermModel> ReadAsync(string leaseTermId)
+        public async Task<LeaseTermModel> ReadAsync(int leaseTermId)
         {
             return await this.termRepository.ReadAsync(leaseTermId);
         }
