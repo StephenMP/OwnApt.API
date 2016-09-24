@@ -63,6 +63,7 @@ namespace OwnApt.Api.Repository.Sql.Lease
             var entity = await this.leaseContex
                                    .LeaseTerm
                                    .AsNoTracking()
+                                   .Include(e => e.LeasePeriods)
                                    .SingleOrDefaultAsync
                                    (e => e.StartDate <= DateTime.UtcNow
                                          && e.EndDate > DateTime.UtcNow
