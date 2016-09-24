@@ -15,9 +15,9 @@ namespace Api.Tests.Component.Repository.Mongo
 
         public MongoClassFixture()
         {
-            this.testEnvironment = OwnAptTestEnvironment
-                                    .CreateEnvironment()
-                                    .UseMongo();
+            this.testEnvironment = new OwnAptTestEnvironmentBuilder()
+                                        .AddMongo()
+                                        .BuildEnvironment();
 
             this.MongoClient = this.testEnvironment.GetMongoClient();
         }

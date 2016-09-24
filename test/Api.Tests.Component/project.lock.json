@@ -4356,7 +4356,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "TestEnvironment/14.7474.4143": {
+      "TestEnvironment/14.7475.7273": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Hosting": "1.0.0",
@@ -11103,12 +11103,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "TestEnvironment/14.7474.4143": {
-      "sha512": "ATZ6AoLJr8WDK9N8jnmuGaFRZs++StPXP+bhYTR863Tx56AjU3Eq8yYqUsgTUbTdH7sTGSdFwYyY8k4blVyrkg==",
+    "TestEnvironment/14.7475.7273": {
+      "sha512": "+PCebVAohDbQ5Ltbkrnl8g3p+qEh4HUGyznvoVReB8zwGcIREaCrk5UrxI0+yWQ863Asp8DMWys9HvuTrJSXSQ==",
       "type": "package",
-      "path": "TestEnvironment/14.7474.4143",
+      "path": "TestEnvironment/14.7475.7273",
       "files": [
-        "TestEnvironment.14.7474.4143.nupkg.sha512",
+        "TestEnvironment.14.7475.7273.nupkg.sha512",
         "TestEnvironment.nuspec",
         "lib/netstandard1.6/TestEnvironment.dll"
       ]
@@ -11232,7 +11232,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
-      "TestEnvironment >= 14.7474.4143",
+      "TestEnvironment >= 14.7475.7273",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "moq.netcore >= 4.4.0-beta8",
       "xunit >= 2.2.0-beta2-build3300"

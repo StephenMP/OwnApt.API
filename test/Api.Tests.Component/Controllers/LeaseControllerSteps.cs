@@ -98,9 +98,9 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveATestEnvironment()
         {
-            this.testEnvironment = OwnAptTestEnvironment
-                                        .CreateEnvironment()
-                                        .UseSql<LeaseContext>();
+            this.testEnvironment = new OwnAptTestEnvironmentBuilder()
+                                        .AddSqlContext<LeaseContext>()
+                                        .BuildEnvironment();
         }
 
         internal void ThenICanVerifyICanCreateLeaseTerm()

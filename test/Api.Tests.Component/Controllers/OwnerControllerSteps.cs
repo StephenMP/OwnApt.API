@@ -45,9 +45,9 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveAOwnerEnvironment()
         {
-            this.testEnvironment = OwnAptTestEnvironment
-                                    .CreateEnvironment()
-                                    .UseMongo();
+            this.testEnvironment = new OwnAptTestEnvironmentBuilder()
+                                    .AddMongo()
+                                    .BuildEnvironment();
         }
 
         internal void GivenIHaveAOwnerRepository()
