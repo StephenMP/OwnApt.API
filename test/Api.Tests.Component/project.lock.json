@@ -2109,7 +2109,7 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "OwnApt/14.7469.5876": {
+      "OwnApt/14.7478.3006": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4356,7 +4356,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "TestEnvironment/14.7475.7273": {
+      "TestEnvironment/14.7478.2391": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Hosting": "1.0.0",
@@ -4497,7 +4497,7 @@
           "MongoDB.Driver": "2.3.0-rc1",
           "MySql.Data.Core": "7.0.4-IR-191",
           "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
-          "OwnApt": "14.7469.5876",
+          "OwnApt": "14.7478.3006",
           "Swashbuckle.SwaggerGen": "6.0.0-beta901",
           "Swashbuckle.SwaggerUi": "6.0.0-beta901",
           "System.Reflection.TypeExtensions": "4.1.0",
@@ -6183,12 +6183,12 @@
         "lib/netstandard1.0/NuGet.Versioning.xml"
       ]
     },
-    "OwnApt/14.7469.5876": {
-      "sha512": "redExK4mFPdujlX+qPW1XoCliO1lMayNd//gNUhTpbsp0sjRyZcyt3TMyrMTCwqiG7w5cS2D6rTDING3t8dsbQ==",
+    "OwnApt/14.7478.3006": {
+      "sha512": "P/NN0JYqGtR6Rj1u/hNrBPPYh80DPy94x6OoBycjjywnH3x6DHCqCgRUQPFgA0y9S+xewyzxFwFmYcc4GJTxgg==",
       "type": "package",
-      "path": "OwnApt/14.7469.5876",
+      "path": "OwnApt/14.7478.3006",
       "files": [
-        "OwnApt.14.7469.5876.nupkg.sha512",
+        "OwnApt.14.7478.3006.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -11103,12 +11103,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "TestEnvironment/14.7475.7273": {
-      "sha512": "+PCebVAohDbQ5Ltbkrnl8g3p+qEh4HUGyznvoVReB8zwGcIREaCrk5UrxI0+yWQ863Asp8DMWys9HvuTrJSXSQ==",
+    "TestEnvironment/14.7478.2391": {
+      "sha512": "WkXQZWAnMhoOhB75U5lV3k2+vuRUMqGo7H6G+7OLvHrq92N+7SK088n9X//kI7S8G5VEW8+WuWLdteVU9JMqEA==",
       "type": "package",
-      "path": "TestEnvironment/14.7475.7273",
+      "path": "TestEnvironment/14.7478.2391",
       "files": [
-        "TestEnvironment.14.7475.7273.nupkg.sha512",
+        "TestEnvironment.14.7478.2391.nupkg.sha512",
         "TestEnvironment.nuspec",
         "lib/netstandard1.6/TestEnvironment.dll"
       ]
@@ -11232,7 +11232,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Api >= 1.0.0-*",
-      "TestEnvironment >= 14.7475.7273",
+      "TestEnvironment >= 14.7478.2391",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "moq.netcore >= 4.4.0-beta8",
       "xunit >= 2.2.0-beta2-build3300"

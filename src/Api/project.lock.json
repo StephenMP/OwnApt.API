@@ -1831,7 +1831,7 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OwnApt/14.7469.5876": {
+      "OwnApt/14.7478.3006": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -5526,12 +5526,12 @@
         "tools/install.ps1"
       ]
     },
-    "OwnApt/14.7469.5876": {
-      "sha512": "redExK4mFPdujlX+qPW1XoCliO1lMayNd//gNUhTpbsp0sjRyZcyt3TMyrMTCwqiG7w5cS2D6rTDING3t8dsbQ==",
+    "OwnApt/14.7478.3006": {
+      "sha512": "P/NN0JYqGtR6Rj1u/hNrBPPYh80DPy94x6OoBycjjywnH3x6DHCqCgRUQPFgA0y9S+xewyzxFwFmYcc4GJTxgg==",
       "type": "package",
-      "path": "OwnApt/14.7469.5876",
+      "path": "OwnApt/14.7478.3006",
       "files": [
-        "OwnApt.14.7469.5876.nupkg.sha512",
+        "OwnApt.14.7478.3006.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -10469,7 +10469,7 @@
       "MongoDB.Driver >= 2.3.0-rc1",
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
-      "OwnApt >= 14.7469.5876",
+      "OwnApt >= 14.7478.3006",
       "Swashbuckle.SwaggerGen >= 6.0.0-beta901",
       "Swashbuckle.SwaggerUi >= 6.0.0-beta901",
       "System.Reflection.TypeExtensions >= 4.1.0",
