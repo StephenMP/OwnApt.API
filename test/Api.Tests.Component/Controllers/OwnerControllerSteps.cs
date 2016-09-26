@@ -40,7 +40,7 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveAnOwnerController()
         {
-            this.ownerController = new OwnerController(this.ownerService);
+            this.ownerController = new OwnerController(this.ownerService, null);
         }
 
         internal void GivenIHaveAOwnerEnvironment()

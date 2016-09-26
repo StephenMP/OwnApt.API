@@ -51,7 +51,7 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveALeaseController()
         {
-            this.leaseController = new LeaseController(this.leaseTermService);
+            this.leaseController = new LeaseController(this.leaseTermService, null);
         }
 
         internal void GivenIHaveALeaseControllerEnvironment()

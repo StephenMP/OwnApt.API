@@ -64,6 +64,12 @@ namespace OwnApt.Api.AppStart
             AddMongo(services);
             AddSql(services);
             AddSwagger(services);
+            AddMemoryCache(services);
+        }
+
+        private static void AddMemoryCache(IServiceCollection services)
+        {
+            services.AddMemoryCache();
         }
 
         #endregion Public Methods

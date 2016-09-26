@@ -58,6 +58,13 @@ namespace OwnApt.Api.Repository.Mongo
             return this.mapper.Map<PropertyModel>(propertyEntity);
         }
 
+        public async Task<PropertyModel[]> ReadManyAsync(string[] propertyIds)
+        {
+            var asyncCursor = await this.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
+            var propertyEntity = await asyncCursor.ToListAsync();
+            return this.mapper.Map<PropertyModel[]>(propertyEntity);
+        }
+
         public async Task UpdateAsync(PropertyModel model)
         {
             var propertyEntity = this.mapper.Map<PropertyEntity>(model);

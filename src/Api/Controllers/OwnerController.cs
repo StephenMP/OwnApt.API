@@ -1,26 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
+using System;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class OwnerController : Controller
+    public class OwnerController : ApiController
     {
-        #region Private Fields
-
         private readonly IOwnerService ownerService;
-
-        #endregion Private Fields
+        private readonly string cachePrefix;
 
         #region Public Constructors
 
-        public OwnerController(IOwnerService ownerService)
+        public OwnerController(IOwnerService ownerService, IMemoryCache cache) : base(cache)
         {
             this.ownerService = ownerService;
+            this.cachePrefix = nameof(OwnerController);
         }
 
         #endregion Public Constructors
@@ -33,6 +33,7 @@ namespace OwnApt.Api.Controllers
         {
             var ownerModel = await this.ownerService.CreateAsync(model);
             var resourceUri = Request.GetResourcePathSafe(model.Id);
+            this.SetCache($"{this.cachePrefix}:{ownerModel.Id}", ownerModel);
 
             return Created(resourceUri, ownerModel);
         }
@@ -42,6 +43,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> DeleteOwnerAsync(string ownerId)
         {
             await this.ownerService.DeleteAsync(ownerId);
+            this.RemoveCache($"{this.cachePrefix}:{ownerId}");
             return Ok();
         }
 
@@ -49,8 +51,16 @@ namespace OwnApt.Api.Controllers
         [ValidateModel]
         public async Task<IActionResult> ReadOwnerAsync(string ownerId)
         {
-            var ownerModel = await this.ownerService.ReadAsync(ownerId);
-            return Ok(ownerModel);
+            OwnerModel model = null;
+            if(this.CheckCache($"{this.cachePrefix}:{ownerId}", out model))
+            {
+                return Ok(model);
+            }
+
+            model = await this.ownerService.ReadAsync(ownerId);
+            this.SetCache($"{this.cachePrefix}:{ownerId}", model);
+
+            return Ok(model);
         }
 
         [HttpPut]
@@ -58,6 +68,8 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
         {
             await this.ownerService.UpdateAsync(model);
+            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
+
             return Ok();
         }
 

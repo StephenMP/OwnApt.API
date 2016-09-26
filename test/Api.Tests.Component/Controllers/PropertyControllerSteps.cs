@@ -38,7 +38,7 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveAPropertyController()
         {
-            this.propertyController = new PropertyController(this.propertyService);
+            this.propertyController = new PropertyController(this.propertyService, null);
         }
 
         internal void GivenIHaveAPropertyId()

@@ -2,6 +2,7 @@
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
+using System;
 
 namespace OwnApt.Api.Domain.Service
 {
@@ -37,6 +38,11 @@ namespace OwnApt.Api.Domain.Service
         public async Task<PropertyModel> ReadAsync(string id)
         {
             return await this.propertyRepository.ReadAsync(id);
+        }
+
+        public async Task<PropertyModel[]> ReadManyAsync(string[] propertyIds)
+        {
+            return await this.propertyRepository.ReadManyAsync(propertyIds);
         }
 
         public async Task UpdateAsync(PropertyModel property)

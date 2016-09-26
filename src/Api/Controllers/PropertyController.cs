@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
 using OwnApt.Common.Enum;
+using OwnApt.Common.Extension;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,19 +13,21 @@ using System.Threading.Tasks;
 namespace OwnApt.Api.Controllers
 {
     [Route("api/v1/[controller]")]
-    public class PropertyController : Controller
+    public class PropertyController : ApiController
     {
         #region Private Fields
 
         private readonly IPropertyService propertyService;
+        private readonly string cachePrefix;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public PropertyController(IPropertyService propertyService)
+        public PropertyController(IPropertyService propertyService, IMemoryCache cache) : base(cache)
         {
             this.propertyService = propertyService;
+            this.cachePrefix = nameof(PropertyController);
         }
 
         #endregion Public Constructors
@@ -36,6 +40,7 @@ namespace OwnApt.Api.Controllers
         {
             var propertyModel = await this.propertyService.CreateAsync(model);
             var resourceUri = Request.GetResourcePathSafe(model.Id);
+            this.SetCache($"{this.cachePrefix}:{propertyModel.Id}", propertyModel);
 
             return Created(resourceUri, propertyModel);
         }
@@ -44,6 +49,7 @@ namespace OwnApt.Api.Controllers
         [ValidateModel]
         public async Task<IActionResult> DeletePropertyAsync(string propertyId)
         {
+            this.RemoveCache($"{this.cachePrefix}:{propertyId}");
             await this.propertyService.DeleteAsync(propertyId);
             return Ok();
         }
@@ -121,8 +127,32 @@ namespace OwnApt.Api.Controllers
         [ValidateModel]
         public async Task<IActionResult> ReadPropertyAsync(string propertyId)
         {
-            var propertyModel = await this.propertyService.ReadAsync(propertyId);
-            return Ok(propertyModel);
+            PropertyModel model = null;
+
+            if (this.CheckCache($"{this.cachePrefix}:{propertyId}", out model))
+            {
+                return Ok(model);
+            }
+
+            model = await this.propertyService.ReadAsync(propertyId);
+            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [ValidateModel]
+        public async Task<IActionResult> ReadPropertiesAsync([FromQuery] string[] propertyIds)
+        {
+            PropertyModel[] models = null;
+
+            if (this.CheckCache($"{this.cachePrefix}:{propertyIds.GetHashCodeSafe()}", out models))
+            {
+                return Ok(models);
+            }
+
+            models = await this.propertyService.ReadManyAsync(propertyIds);
+            this.SetCache($"{this.cachePrefix}:{propertyIds.GetHashCodeSafe()}", models);
+            return Ok(models);
         }
 
         [HttpPut]
@@ -130,6 +160,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> UpdatePropertyAsync([FromBody] PropertyModel model)
         {
             await this.propertyService.UpdateAsync(model);
+            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
             return Ok();
         }
 
