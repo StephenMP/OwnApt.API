@@ -4,6 +4,7 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
 using OwnApt.Common.Enum;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -45,6 +46,21 @@ namespace OwnApt.Api.Controllers
         {
             await this.propertyService.DeleteAsync(propertyId);
             return Ok();
+        }
+
+        [HttpPost("updateProperty")]
+        /* Here for IT support of adding properties only. Delete once BO solution is in place */
+        public async Task<IActionResult> ITSupport_UpdatePropertyAsync()
+        {
+            var propertyId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
+            var propertyModel = await this.propertyService.ReadAsync(propertyId);
+
+            // Add any update stuff here to the model //
+            propertyModel.ImageUri = new Uri("https://lh3.googleusercontent.com/-igsJobY4sO5SiKosAqvdRpOpIIXc6kLlRw1PbVrBT2SqbZo3xobzy1qBokPnWxljfUbybDd=w600-h337-no");
+            ////////////////////////////////////////////
+
+            await this.propertyService.UpdateAsync(propertyModel);
+            return Ok(propertyModel);
         }
 
         [HttpPost("createProperty")]

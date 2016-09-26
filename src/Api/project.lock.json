@@ -3,12 +3,12 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7469.5651": {
+      "ApiContract/14.7486.9909": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
           "NETStandard.Library": "1.6.0",
-          "OwnApt": "14.7468.7966"
+          "OwnApt": "14.7478.3006"
         },
         "compile": {
           "lib/netstandard1.6/ApiContract.dll": {}
@@ -17,7 +17,7 @@
           "lib/netstandard1.6/ApiContract.dll": {}
         }
       },
-      "Authentication/14.7414.5796": {
+      "Authentication/14.7478.2443": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
@@ -4077,22 +4077,22 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7469.5651": {
-      "sha512": "DRyWBN469EQ1WR3EuMX0jRqydP6ZzZVdN6rFj5+UISNuZJ4vxEYPpv3FpOCOuS+3d6FAhm4uaKdOGDgdRA1D0w==",
+    "ApiContract/14.7486.9909": {
+      "sha512": "Y60AjogpMrcpEKAd+t3QBPpI1EK2G6S0wNdMMJA2Do5GIUpjxnZALk3Td5r1s6gerCvQkl130IdWKRdXL+XTZA==",
       "type": "package",
-      "path": "ApiContract/14.7469.5651",
+      "path": "ApiContract/14.7486.9909",
       "files": [
-        "ApiContract.14.7469.5651.nupkg.sha512",
+        "ApiContract.14.7486.9909.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
     },
-    "Authentication/14.7414.5796": {
-      "sha512": "2tH9FWt0xmaq6b8ecbryb2KxtbK9xsMV7yaFtZdCH1mKA/j5t9rNHv8Ug9+gLGYUbuHdOHLljSsjvijRkRxhEg==",
+    "Authentication/14.7478.2443": {
+      "sha512": "kqkwzaeCOD+4SKPVap5sMzt81uKDHimX8RCFr7CPuuVT4AeiLOqZsUdLX6rUGrzbItT84y9x64EQMOn08KOK1Q==",
       "type": "package",
-      "path": "Authentication/14.7414.5796",
+      "path": "Authentication/14.7478.2443",
       "files": [
-        "Authentication.14.7414.5796.nupkg.sha512",
+        "Authentication.14.7478.2443.nupkg.sha512",
         "Authentication.nuspec",
         "lib/netstandard1.6/Authentication.dll"
       ]
@@ -10449,8 +10449,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "ApiContract >= 14.7469.5651",
-      "Authentication >= 14.7414.5796",
+      "ApiContract >= 14.7486.9909",
+      "Authentication >= 14.7478.2443",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 1.0.0",

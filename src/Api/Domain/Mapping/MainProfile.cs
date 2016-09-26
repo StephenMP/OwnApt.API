@@ -44,8 +44,11 @@ namespace OwnApt.Api.Domain.Mapping
 
         private void ConfigureProperty()
         {
-            CreateMap<PropertyModel, PropertyEntity>();
-            CreateMap<PropertyEntity, PropertyModel>();
+            CreateMap<PropertyModel, PropertyEntity>()
+                .ForMember(d => d.ImageUriString, opt => opt.MapFrom(src => src.ImageUri.AbsoluteUri));
+
+            CreateMap<PropertyEntity, PropertyModel>()
+                .ForMember(d => d.ImageUri, opt => opt.MapFrom(src => new Uri(src.ImageUriString)));
         }
 
         #endregion Public Constructors

@@ -1,6 +1,5 @@
 ﻿using OwnApt.Common.Dto;
 using OwnApt.Common.Enum;
-using System.Collections.Generic;
 
 namespace OwnApt.Api.Repository.Entity.Mongo
 {
@@ -11,6 +10,7 @@ namespace OwnApt.Api.Repository.Entity.Mongo
         public AddressEntity Address { get; set; }
         public FeaturesEntity Features { get; set; }
         public string Id { get; set; }
+        public string ImageUriString { get; set; }
         public PropertyType PropertyType { get; set; }
 
         #endregion Public Properties
