@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
+using OwnApt.Common.Security;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -99,15 +102,17 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> CreateRegisteredTokenAsync([FromBody] RegisteredTokenModel model)
         {
             var resultModel = await this.registeredTokenService.CreateAsync(model);
-            this.SetCache(resultModel.TokenId, resultModel);
+            this.SetCache(resultModel.Token, resultModel);
 
             return Created(new Uri(this.Request.GetResourcePathSafe(model.Token).Replace("/register", "")), resultModel);
         }
 
-        [HttpGet("signup/token/{token}")]
+        [HttpPost("signup/token")]
         [ValidateModel]
-        public async Task<IActionResult> ReadRegisteredTokenByTokenAsync(string token)
+        public async Task<IActionResult> ReadRegisteredTokenByTokenAsync([FromBody] RegisteredTokenModel tokenModel)
         {
+            var token = tokenModel.Token;
+
             RegisteredTokenModel model = null;
             if (this.CheckCache(token, out model))
             {
