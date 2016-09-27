@@ -11,24 +11,28 @@ namespace OwnApt.Api.Controllers
     {
         readonly IMemoryCache cache;
         private MemoryCacheEntryOptions cacheOptions;
+        private string cacheKeyPrefix;
 
         public ApiController(IMemoryCache cache)
         {
             this.cache = cache;
             this.cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1));
+            this.cacheKeyPrefix = this.GetType().Name;
         }
 
-        protected void SetCache<TObj>(object key, TObj model) where TObj : class
+        private string CacheKey<TKey>(TKey id) => $"{this.cacheKeyPrefix}:{id}";
+
+        protected void SetCache<TKey, TObj>(TKey id, TObj model)
         {
-            this.cache?.Set(key, model, this.cacheOptions);
+            this.cache?.Set(this.CacheKey(id), model, this.cacheOptions);
         }
 
-        protected void RemoveCache(object key)
+        protected void RemoveCache<TKey>(TKey id)
         {
-            this.cache?.Remove(key);
+            this.cache?.Remove(this.CacheKey(id));
         }
 
-        protected bool CheckCache<TObj>(object key, out TObj value) where TObj : class
+        protected bool CheckCache<TKey, TObj>(TKey id, out TObj value) where TObj : class
         {
             if(this.cache == null)
             {
@@ -36,7 +40,7 @@ namespace OwnApt.Api.Controllers
                 return false;
             }
 
-            return this.cache.TryGetValue(key, out value);
+            return this.cache.TryGetValue(this.CacheKey(id), out value);
         }
     }
 }

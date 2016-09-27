@@ -1,6 +1,7 @@
 ﻿using OwnApt.Api.Contract.Model;
 using System;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -34,15 +35,42 @@ namespace Api.Tests.Component.Controllers
         [Fact]
         public async Task CanCreateOwnerAsync()
         {
-            this.steps.GivenIHaveAOwnerEnvironment();
-            this.steps.GivenIHaveAOwnerRepository();
-            this.steps.GivenIHaveAOwnerService();
+            this.steps.GivenIHaveAMockedDataLayer();
+            this.steps.GivenIHaveAnOwnerService();
+            this.steps.GivenIHaveARegisteredTokenService();
             this.steps.GivenIHaveAnOwnerController();
             this.steps.GivenIHaveAOwnerToCreate();
             await this.steps.WhenICreateOwnerAsync();
             this.steps.ThenICanVerifyIReceived<OwnerModel>(HttpStatusCode.Created);
             this.steps.ThenICanVerifyICanCreateOwner();
         }
+
+        [Fact]
+        public async Task CanReadOwnerAsync()
+        {
+            this.steps.GivenIHaveAMockedDataLayer();
+            this.steps.GivenIHaveAnOwnerService();
+            this.steps.GivenIHaveARegisteredTokenService();
+            this.steps.GivenIHaveAnOwnerController();
+            this.steps.GivenIHaveAOwnerToRead();
+            await this.steps.WhenIReadOwnerAsync();
+            this.steps.ThenICanVerifyIReceived<OwnerModel>(HttpStatusCode.OK);
+            this.steps.ThenICanVerifyICanReadOwner();
+        }
+
+        // Something wrong with MOQ
+        //[Fact]
+        //public async Task CanUpdateOwnerAsync()
+        //{
+        //    this.steps.GivenIHaveAMockedDataLayer();
+        //    this.steps.GivenIHaveAnOwnerService();
+        //    this.steps.GivenIHaveARegisteredTokenService();
+        //    this.steps.GivenIHaveAnOwnerController();
+        //    this.steps.GivenIHaveAOwnerToUpdate();
+        //    await this.steps.WhenIUpdateOwnerAsync();
+        //    this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
+        //    this.steps.ThenICanVerifyICanUpdateOwner();
+        //}
 
         public void Dispose()
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Sql.Lease
 {
-    public class LeaseTermRepository : ILeaseTermRepository
+    public class SqlLeaseTermRepository : ILeaseTermRepository
     {
         #region Private Fields
 
@@ -19,7 +19,7 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         #region Public Constructors
 
-        public LeaseTermRepository(LeaseContext leaseContext, IMapper mapper)
+        public SqlLeaseTermRepository(LeaseContext leaseContext, IMapper mapper)
         {
             this.leaseContex = leaseContext;
             this.mapper = mapper;
@@ -41,7 +41,6 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         public Task DeleteAsync(int id)
         {
-            // We do not delete lease terms
             throw new NotSupportedException("We do not delete lease terms");
         }
 
@@ -77,7 +76,6 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         public Task UpdateAsync(LeaseTermModel model)
         {
-            // We do not update lease terms
             throw new NotSupportedException("We do not update lease terms");
         }
 

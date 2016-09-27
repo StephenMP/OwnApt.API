@@ -66,7 +66,7 @@ namespace Api.Tests.Component.Controllers
 
         internal void GivenIHaveALeaseTermRepository()
         {
-            this.leaseTermRepository = new LeaseTermRepository(this.leaseContext, OwnAptStartup.BuildMapper());
+            this.leaseTermRepository = new SqlLeaseTermRepository(this.leaseContext, OwnAptStartup.BuildMapper());
         }
 
         internal void GivenIHaveALeaseTermService()

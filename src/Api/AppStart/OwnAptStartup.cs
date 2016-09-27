@@ -110,7 +110,8 @@ namespace OwnApt.Api.AppStart
         {
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
             services.AddTransient<IOwnerRepository, MongoOwnerRepository>();
-            services.AddTransient<ILeaseTermRepository, LeaseTermRepository>();
+            services.AddTransient<ILeaseTermRepository, SqlLeaseTermRepository>();
+            services.AddTransient<IRegisteredTokenRepository, SqlRegisteredTokenRepository>();
         }
 
         private static void AddServices(IServiceCollection services)
@@ -118,6 +119,7 @@ namespace OwnApt.Api.AppStart
             services.AddTransient<IPropertyService, PropertyService>();
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<ILeaseTermService, LeaseTermService>();
+            services.AddTransient<IRegisteredTokenService, RegisteredTokenService>();
         }
 
         private static void AddSql(IServiceCollection services)
@@ -126,7 +128,7 @@ namespace OwnApt.Api.AppStart
             var userID = Configuration["SqlCore:Uid"];
             var password = Configuration["SqlCore:Password"];
 
-            var connnectionStringBuilder = new MySqlConnectionStringBuilder
+            var coreConnection = new MySqlConnectionStringBuilder
             {
                 Server = server,
                 UserID = userID,
@@ -137,13 +139,21 @@ namespace OwnApt.Api.AppStart
 
             services.AddDbContext<CoreContext>(options =>
             {
-                options.UseMySQL(connnectionStringBuilder.ToString());
+                options.UseMySQL(coreConnection.ToString());
             });
 
-            connnectionStringBuilder.Database = "Lease";
+            var leaseConnection = new MySqlConnectionStringBuilder
+            {
+                Server = server,
+                UserID = userID,
+                Password = password,
+                SslMode = MySqlSslMode.None,
+                Database = "Lease"
+            };
+
             services.AddDbContext<LeaseContext>(options =>
             {
-                options.UseMySQL(connnectionStringBuilder.ToString());
+                options.UseMySQL(leaseConnection.ToString());
             });
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
 using System;
@@ -13,14 +14,19 @@ namespace OwnApt.Api.Controllers
     public class OwnerController : ApiController
     {
         private readonly IOwnerService ownerService;
-        private readonly string cachePrefix;
+        readonly IRegisteredTokenService registeredTokenService;
 
         #region Public Constructors
 
-        public OwnerController(IOwnerService ownerService, IMemoryCache cache) : base(cache)
+        public OwnerController
+        (
+            IOwnerService ownerService, 
+            IRegisteredTokenService registeredTokenService, 
+            IMemoryCache cache
+        ) : base(cache)
         {
             this.ownerService = ownerService;
-            this.cachePrefix = nameof(OwnerController);
+            this.registeredTokenService = registeredTokenService;
         }
 
         #endregion Public Constructors
@@ -31,11 +37,10 @@ namespace OwnApt.Api.Controllers
         [ValidateModel]
         public async Task<IActionResult> CreateOwnerAsync([FromBody] OwnerModel model)
         {
-            var ownerModel = await this.ownerService.CreateAsync(model);
-            var resourceUri = Request.GetResourcePathSafe(model.Id);
-            this.SetCache($"{this.cachePrefix}:{ownerModel.Id}", ownerModel);
+            var resultModel = await this.ownerService.CreateAsync(model);
+            this.SetCache(resultModel.Id, resultModel);
 
-            return Created(resourceUri, ownerModel);
+            return Created(this.Request.GetResourcePathSafe(model.Id), resultModel);
         }
 
         [HttpDelete("{ownerId}")]
@@ -43,7 +48,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> DeleteOwnerAsync(string ownerId)
         {
             await this.ownerService.DeleteAsync(ownerId);
-            this.RemoveCache($"{this.cachePrefix}:{ownerId}");
+            this.RemoveCache(ownerId);
             return Ok();
         }
 
@@ -52,13 +57,13 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> ReadOwnerAsync(string ownerId)
         {
             OwnerModel model = null;
-            if(this.CheckCache($"{this.cachePrefix}:{ownerId}", out model))
+            if(this.CheckCache(ownerId, out model))
             {
                 return Ok(model);
             }
 
             model = await this.ownerService.ReadAsync(ownerId);
-            this.SetCache($"{this.cachePrefix}:{ownerId}", model);
+            this.SetCache(ownerId, model);
 
             return Ok(model);
         }
@@ -68,9 +73,51 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
         {
             await this.ownerService.UpdateAsync(model);
-            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
+            this.SetCache(model.Id, model);
 
             return Ok();
+        }
+
+        [HttpGet("signup/token/id/{tokenId}")]
+        [ValidateModel]
+        public async Task<IActionResult> ReadRegisteredTokenAsync(int tokenId)
+        {
+            RegisteredTokenModel model = null;
+            if(this.CheckCache(tokenId, out model))
+            {
+                return Ok(model);
+            }
+
+            model = await this.registeredTokenService.ReadAsync(tokenId);
+            this.SetCache(tokenId, model);
+
+            return Ok(model);
+        }
+
+        [HttpPost("signup/token/register")]
+        [ValidateModel]
+        public async Task<IActionResult> CreateRegisteredTokenAsync([FromBody] RegisteredTokenModel model)
+        {
+            var resultModel = await this.registeredTokenService.CreateAsync(model);
+            this.SetCache(resultModel.TokenId, resultModel);
+
+            return Created(new Uri(this.Request.GetResourcePathSafe(model.Token).Replace("/register", "")), resultModel);
+        }
+
+        [HttpGet("signup/token/{token}")]
+        [ValidateModel]
+        public async Task<IActionResult> ReadRegisteredTokenByTokenAsync(string token)
+        {
+            RegisteredTokenModel model = null;
+            if (this.CheckCache(token, out model))
+            {
+                return Ok(model);
+            }
+
+            model = await this.registeredTokenService.ReadByTokenAsync(token);
+            this.SetCache(token, model);
+
+            return Ok(model);
         }
 
         #endregion Public Methods

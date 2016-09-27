@@ -18,7 +18,6 @@ namespace OwnApt.Api.Controllers
         #region Private Fields
 
         private readonly IPropertyService propertyService;
-        private readonly string cachePrefix;
 
         #endregion Private Fields
 
@@ -27,7 +26,6 @@ namespace OwnApt.Api.Controllers
         public PropertyController(IPropertyService propertyService, IMemoryCache cache) : base(cache)
         {
             this.propertyService = propertyService;
-            this.cachePrefix = nameof(PropertyController);
         }
 
         #endregion Public Constructors
@@ -40,7 +38,7 @@ namespace OwnApt.Api.Controllers
         {
             var propertyModel = await this.propertyService.CreateAsync(model);
             var resourceUri = Request.GetResourcePathSafe(model.Id);
-            this.SetCache($"{this.cachePrefix}:{propertyModel.Id}", propertyModel);
+            this.SetCache(propertyModel.Id, propertyModel);
 
             return Created(resourceUri, propertyModel);
         }
@@ -49,7 +47,7 @@ namespace OwnApt.Api.Controllers
         [ValidateModel]
         public async Task<IActionResult> DeletePropertyAsync(string propertyId)
         {
-            this.RemoveCache($"{this.cachePrefix}:{propertyId}");
+            this.RemoveCache(propertyId);
             await this.propertyService.DeleteAsync(propertyId);
             return Ok();
         }
@@ -129,13 +127,13 @@ namespace OwnApt.Api.Controllers
         {
             PropertyModel model = null;
 
-            if (this.CheckCache($"{this.cachePrefix}:{propertyId}", out model))
+            if (this.CheckCache(propertyId, out model))
             {
                 return Ok(model);
             }
 
             model = await this.propertyService.ReadAsync(propertyId);
-            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
+            this.SetCache(model.Id, model);
             return Ok(model);
         }
 
@@ -145,13 +143,13 @@ namespace OwnApt.Api.Controllers
         {
             PropertyModel[] models = null;
 
-            if (this.CheckCache($"{this.cachePrefix}:{propertyIds.GetHashCodeSafe()}", out models))
+            if (this.CheckCache(propertyIds.GetHashCodeSafe(), out models))
             {
                 return Ok(models);
             }
 
             models = await this.propertyService.ReadManyAsync(propertyIds);
-            this.SetCache($"{this.cachePrefix}:{propertyIds.GetHashCodeSafe()}", models);
+            this.SetCache(propertyIds.GetHashCodeSafe(), models);
             return Ok(models);
         }
 
@@ -160,7 +158,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> UpdatePropertyAsync([FromBody] PropertyModel model)
         {
             await this.propertyService.UpdateAsync(model);
-            this.SetCache($"{this.cachePrefix}:{model.Id}", model);
+            this.SetCache(model.Id, model);
             return Ok();
         }
 

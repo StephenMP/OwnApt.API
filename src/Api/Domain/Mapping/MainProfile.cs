@@ -13,6 +13,7 @@ namespace OwnApt.Api.Domain.Mapping
 
         public MainProfile()
         {
+            ConfigureRegisteredToken();
             ConfigureLeaseTerm();
             ConfigureLeasePeriod();
             ConfigureAddress();
@@ -25,6 +26,12 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureZip();
             ConfigureProperty();
             ConfigureOwner();
+        }
+
+        private void ConfigureRegisteredToken()
+        {
+            CreateMap<RegisteredTokenModel, RegisteredTokenEntity>();
+            CreateMap<RegisteredTokenEntity, RegisteredTokenModel>();
         }
 
         private void ConfigureLeasePeriod()
