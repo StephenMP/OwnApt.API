@@ -14,11 +14,14 @@ namespace Api
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
-                //.UseUrls("http://0.0.0.0:5000")
-                .Build();
+                .UseStartup<Startup>();
 
-            host.Run();
+            if (args.Length == 1)
+            {
+                host.UseUrls(args[0]);
+            }
+
+            host.Build().Run();
         }
 
         #endregion Public Methods

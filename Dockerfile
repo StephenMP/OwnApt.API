@@ -11,4 +11,4 @@ COPY src/Api /app
 RUN ["dotnet", "build"]
 
 EXPOSE 5000/tcp
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "run", "http://0.0.0.0:5000"]
