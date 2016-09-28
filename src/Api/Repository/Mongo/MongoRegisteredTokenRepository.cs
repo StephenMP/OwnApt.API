@@ -20,7 +20,7 @@ namespace OwnApt.Api.Repository.Mongo
 
         public MongoRegisteredTokenRepository(IMongoClient mongoClient, IMapper mapper)
         {
-            this.metadataDatabase = mongoClient.GetDatabase("Metadata");
+            this.metadataDatabase = mongoClient.GetDatabase("Core");
             this.mapper = mapper;
         }
 

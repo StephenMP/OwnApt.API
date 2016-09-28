@@ -14,6 +14,10 @@ namespace OwnApt.Api.Repository.Entity.Mongo
 
         public string Token { get; set; }
         public string Id { get; set; }
+        public string Nonce { get; set; }
+        public string[] PropertyIds { get; set; }
+        public string SuppliedNonce { get; set; }
+        public DateTime UtcDateIssued { get; set; }
 
         #endregion Public Properties
     }
