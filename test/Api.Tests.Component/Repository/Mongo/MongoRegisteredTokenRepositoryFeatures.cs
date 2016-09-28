@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Api.Tests.Component.Repository.Sql
+namespace Api.Tests.Component.Repository.Mongo
 {
     public class SqlRegisteredTokenRepositoryFeatures : IDisposable
     {
-        private readonly SqlRegisteredTokenRepositorySteps steps;
+        private readonly MongoRegisteredTokenRepositorySteps steps;
 
         public SqlRegisteredTokenRepositoryFeatures()
         {
-            this.steps = new SqlRegisteredTokenRepositorySteps();
+            this.steps = new MongoRegisteredTokenRepositorySteps();
         }
 
         [Fact]
@@ -20,7 +20,6 @@ namespace Api.Tests.Component.Repository.Sql
         {
             this.steps.GivenIHaveAnEnvironment();
             this.steps.GivenIHaveARegisteredTokenToRead();
-            this.steps.GivenIHaveACoreContext();
             this.steps.GivenIHaveARegisteredTokenRepository();
             await this.steps.WhenIReadByTokenAsync();
             this.steps.ThenICanVerifyICanReadRegisteredTokenByTokenAsync();
@@ -31,7 +30,6 @@ namespace Api.Tests.Component.Repository.Sql
         {
             this.steps.GivenIHaveAnEnvironment();
             this.steps.GivenIHaveARegisteredTokenToRead();
-            this.steps.GivenIHaveACoreContext();
             this.steps.GivenIHaveARegisteredTokenRepository();
             await this.steps.WhenIReadByIdAsync();
             this.steps.ThenICanVerifyICanReadRegisteredTokenByTokenAsync();
@@ -42,7 +40,6 @@ namespace Api.Tests.Component.Repository.Sql
         {
             this.steps.GivenIHaveAnEnvironment();
             this.steps.GivenIHaveARegisteredTokenToCreate();
-            this.steps.GivenIHaveACoreContext();
             this.steps.GivenIHaveARegisteredTokenRepository();
             await this.steps.WhenICreateAsync();
             this.steps.ThenICanVerifyICanCanCreateRegisteredTokenAsync();

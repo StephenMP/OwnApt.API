@@ -36,14 +36,12 @@ namespace Api.Tests.Component.Controllers
 
         private IOwnerService ownerService;
         private OwnAptTestEnvironment testEnvironment;
-        private CoreContext coreContext;
         private IRegisteredTokenService registeredTokenService;
         private string currentOwnerId;
 
         internal void GivenIHaveARegisteredTokenRepository()
         {
-            this.coreContext = new CoreContext(this.testEnvironment.GetSqlDbContextOptions<CoreContext>());
-            this.registeredTokenRepository = new SqlRegisteredTokenRepository(coreContext, OwnAptStartup.BuildMapper());
+            this.registeredTokenRepository = new MongoRegisteredTokenRepository(this.testEnvironment.GetMongoClient(), OwnAptStartup.BuildMapper());
         }
 
         internal async Task WhenIReadOwnerAsync()
@@ -151,7 +149,6 @@ namespace Api.Tests.Component.Controllers
                 {
                     this.testEnvironment?.Dispose();
                     this.ownerController?.Dispose();
-                    this.coreContext?.Dispose();
                 }
 
                 disposedValue = true;

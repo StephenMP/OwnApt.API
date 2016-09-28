@@ -111,7 +111,7 @@ namespace OwnApt.Api.AppStart
             services.AddTransient<IPropertyRepository, MongoPropertyRepository>();
             services.AddTransient<IOwnerRepository, MongoOwnerRepository>();
             services.AddTransient<ILeaseTermRepository, SqlLeaseTermRepository>();
-            services.AddTransient<IRegisteredTokenRepository, SqlRegisteredTokenRepository>();
+            services.AddTransient<IRegisteredTokenRepository, MongoRegisteredTokenRepository>();
         }
 
         private static void AddServices(IServiceCollection services)

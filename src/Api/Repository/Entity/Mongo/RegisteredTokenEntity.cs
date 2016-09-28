@@ -6,18 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OwnApt.Api.Repository.Entity.Sql
+namespace OwnApt.Api.Repository.Entity.Mongo
 {
-    [Table("RegisteredToken")]
     public class RegisteredTokenEntity : Equatable
     {
         #region Public Properties
 
-        [Column("Token")]
         public string Token { get; set; }
-
-        [Key, Column("TokenId")]
-        public int TokenId { get; set; }
+        public string Id { get; set; }
 
         #endregion Public Properties
     }

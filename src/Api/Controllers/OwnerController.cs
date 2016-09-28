@@ -83,7 +83,7 @@ namespace OwnApt.Api.Controllers
 
         [HttpGet("signup/token/id/{tokenId}")]
         [ValidateModel]
-        public async Task<IActionResult> ReadRegisteredTokenAsync(int tokenId)
+        public async Task<IActionResult> ReadRegisteredTokenAsync(string tokenId)
         {
             RegisteredTokenModel model = null;
             if(this.CheckCache(tokenId, out model))
@@ -107,12 +107,10 @@ namespace OwnApt.Api.Controllers
             return Created(new Uri(this.Request.GetResourcePathSafe(model.Token).Replace("/register", "")), resultModel);
         }
 
-        [HttpPost("signup/token")]
+        [HttpGet("signup/token")]
         [ValidateModel]
-        public async Task<IActionResult> ReadRegisteredTokenByTokenAsync([FromBody] RegisteredTokenModel tokenModel)
+        public async Task<IActionResult> ReadRegisteredTokenByTokenAsync([FromQuery] string token)
         {
-            var token = tokenModel.Token;
-
             RegisteredTokenModel model = null;
             if (this.CheckCache(token, out model))
             {

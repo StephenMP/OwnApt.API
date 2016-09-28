@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7494.2360": {
+      "ApiContract/14.7503.9077": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
@@ -2109,7 +2109,7 @@
           "lib/netstandard1.0/NuGet.Versioning.dll": {}
         }
       },
-      "OwnApt/14.7478.3006": {
+      "OwnApt/14.7503.951": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4477,7 +4477,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.0",
         "dependencies": {
-          "ApiContract": "14.7494.2360",
+          "ApiContract": "14.7503.9077",
           "Authentication": "14.7478.2443",
           "AutoMapper": "5.1.1",
           "Microsoft.AspNetCore.Diagnostics": "1.0.0",
@@ -4497,7 +4497,7 @@
           "MongoDB.Driver": "2.3.0",
           "MySql.Data.Core": "7.0.4-IR-191",
           "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
-          "OwnApt": "14.7478.3006",
+          "OwnApt": "14.7503.951",
           "Swashbuckle.SwaggerGen": "6.0.0-beta901",
           "Swashbuckle.SwaggerUi": "6.0.0-beta901",
           "System.Reflection.TypeExtensions": "4.1.0",
@@ -4513,12 +4513,12 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7494.2360": {
-      "sha512": "AsgVsXcb513SokyPMXJuXJZ3IjBoQtb3Nz+uukB9QJGCI46J8UPtganf1Dhljw/UZlEx7T0H8R2y4TAQNiR9JA==",
+    "ApiContract/14.7503.9077": {
+      "sha512": "WXr6dgsAhTHa/nRZNF5iKI04Kx9WNqs9uA83rtiC9PeTnJMvodNcTMvPpakmFd/UouIgo8GGvIFL8c78rJLdXg==",
       "type": "package",
-      "path": "ApiContract/14.7494.2360",
+      "path": "ApiContract/14.7503.9077",
       "files": [
-        "ApiContract.14.7494.2360.nupkg.sha512",
+        "ApiContract.14.7503.9077.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
@@ -6183,12 +6183,12 @@
         "lib/netstandard1.0/NuGet.Versioning.xml"
       ]
     },
-    "OwnApt/14.7478.3006": {
-      "sha512": "P/NN0JYqGtR6Rj1u/hNrBPPYh80DPy94x6OoBycjjywnH3x6DHCqCgRUQPFgA0y9S+xewyzxFwFmYcc4GJTxgg==",
+    "OwnApt/14.7503.951": {
+      "sha512": "M1SjtjIFc1VM2X3bSkVLRnyHkp67V+i1BvC9j3OclUN93VgGyQu1oA+Xevd+qnG4+9Wp1etnGHOhrunHYWL7Kg==",
       "type": "package",
-      "path": "OwnApt/14.7478.3006",
+      "path": "OwnApt/14.7503.951",
       "files": [
-        "OwnApt.14.7478.3006.nupkg.sha512",
+        "OwnApt.14.7503.951.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]

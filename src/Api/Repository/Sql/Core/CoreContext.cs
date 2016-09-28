@@ -11,8 +11,6 @@ namespace OwnApt.Api.Repository.Sql.Core
         {
         }
 
-        public DbSet<RegisteredTokenEntity> RegisteredToken { get; set; }
-
         #endregion Public Constructors
     }
 }

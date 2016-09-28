@@ -103,12 +103,12 @@ namespace Api.Tests.Component.Controllers
 
         private void MockRegisteredTokenRepository()
         {
-            this.mockedRegisteredTokenEntity = new RegisteredTokenEntity { TokenId = new Random().Next(), Token = Guid.NewGuid().ToString() };
+            this.mockedRegisteredTokenEntity = new RegisteredTokenEntity { Id = Guid.NewGuid().ToString(), Token = Guid.NewGuid().ToString() };
             this.mockedRegisteredTokenModel = this.mapper.Map<RegisteredTokenModel>(this.mockedRegisteredTokenEntity);
 
             this.mockedRegisteredTokenRepository = new Mock<IRegisteredTokenRepository>();
             mockedRegisteredTokenRepository.Setup(s => s.CreateAsync(this.mockedRegisteredTokenModel)).Returns(Task.FromResult(this.mockedRegisteredTokenModel));
-            mockedRegisteredTokenRepository.Setup(s => s.ReadAsync(this.mockedRegisteredTokenEntity.TokenId)).Returns(Task.FromResult(this.mockedRegisteredTokenModel));
+            mockedRegisteredTokenRepository.Setup(s => s.ReadAsync(this.mockedRegisteredTokenEntity.Id)).Returns(Task.FromResult(this.mockedRegisteredTokenModel));
             mockedRegisteredTokenRepository.Setup(s => s.ReadByTokenAsync(this.mockedRegisteredTokenEntity.Token)).Returns(Task.FromResult(this.mockedRegisteredTokenModel));
 
             this.registeredTokenRepository = mockedRegisteredTokenRepository.Object;

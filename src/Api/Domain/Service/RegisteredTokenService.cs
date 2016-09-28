@@ -10,7 +10,7 @@ namespace OwnApt.Api.Domain.Service
         #region Public Methods
 
         Task<RegisteredTokenModel> CreateAsync(RegisteredTokenModel model);
-        Task<RegisteredTokenModel> ReadAsync(int id);
+        Task<RegisteredTokenModel> ReadAsync(string id);
         Task<RegisteredTokenModel> ReadByTokenAsync(string token);
 
         #endregion Public Methods
@@ -40,7 +40,7 @@ namespace OwnApt.Api.Domain.Service
             return await this.registeredTokenRepository.CreateAsync(model);
         }
 
-        public async Task<RegisteredTokenModel> ReadAsync(int id)
+        public async Task<RegisteredTokenModel> ReadAsync(string id)
         {
             return await this.registeredTokenRepository.ReadAsync(id);
         }
