@@ -74,7 +74,7 @@ namespace Api.Tests.Component.Repository.Mongo
             this.currentRegisteredTokenId = this.registeredTokenEntity.Id;
             this.currentRegisteredToken = this.registeredTokenEntity.Token;
 
-            this.testEnvironment.ImportMongoDataAsync("Core", "Metadata", new RegisteredTokenEntity[] { this.registeredTokenEntity });
+            this.testEnvironment.ImportMongoDataAsync("Core", "RegisteredToken", new RegisteredTokenEntity[] { this.registeredTokenEntity });
         }
 
         internal void GivenIHaveARegisteredTokenRepository()

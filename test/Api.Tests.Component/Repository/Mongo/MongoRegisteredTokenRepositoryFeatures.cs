@@ -6,11 +6,11 @@ using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo
 {
-    public class SqlRegisteredTokenRepositoryFeatures : IDisposable
+    public class MongoRegisteredTokenRepositoryFeatures : IDisposable
     {
         private readonly MongoRegisteredTokenRepositorySteps steps;
 
-        public SqlRegisteredTokenRepositoryFeatures()
+        public MongoRegisteredTokenRepositoryFeatures()
         {
             this.steps = new MongoRegisteredTokenRepositorySteps();
         }
