@@ -94,9 +94,9 @@ namespace Api.Tests.Component.Controllers
 
             this.mockedOwnerRepository = new Mock<IOwnerRepository>();
             mockedOwnerRepository.Setup(s => s.CreateAsync(this.mockedOwnerModel)).Returns(Task.FromResult(this.mockedOwnerModel));
-            mockedOwnerRepository.Setup(s => s.DeleteAsync(this.mockedOwnerModel.Id)).Verifiable();
+            mockedOwnerRepository.Setup(s => s.DeleteAsync(this.mockedOwnerModel.Id)).Returns(Task.CompletedTask);
             mockedOwnerRepository.Setup(s => s.ReadAsync(this.mockedOwnerModel.Id)).Returns(Task.FromResult(this.mockedOwnerModel));
-            mockedOwnerRepository.Setup(s => s.UpdateAsync(this.mockedOwnerModel)).Verifiable();
+            mockedOwnerRepository.Setup(s => s.UpdateAsync(this.mockedOwnerModel)).Returns(Task.CompletedTask);
 
             this.ownerRepository = mockedOwnerRepository.Object;
         }

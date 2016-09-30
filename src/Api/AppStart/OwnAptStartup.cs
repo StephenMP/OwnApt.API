@@ -11,6 +11,8 @@ using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo;
+using OwnApt.Api.Repository.Mongo.Core;
+using OwnApt.Api.Repository.Mongo.Metadata;
 using OwnApt.Api.Repository.Sql.Core;
 using OwnApt.Api.Repository.Sql.Lease;
 using OwnApt.Authentication.Api.Filter;
@@ -99,6 +101,8 @@ namespace OwnApt.Api.AppStart
         private static void AddMongo(IServiceCollection services)
         {
             services.AddSingleton<IMongoClient>(BuildMongoClient());
+            services.AddScoped<IMongoCoreContext, MongoCoreContext>();
+            services.AddScoped<IMongoMetadataContext, MongoMetadataContext>();
         }
 
         private static void AddMvc(IApplicationBuilder app)
@@ -137,7 +141,7 @@ namespace OwnApt.Api.AppStart
                 Database = "Core"
             };
 
-            services.AddDbContext<CoreContext>(options =>
+            services.AddDbContext<SqlCoreContext>(options =>
             {
                 options.UseMySQL(coreConnection.ToString());
             });

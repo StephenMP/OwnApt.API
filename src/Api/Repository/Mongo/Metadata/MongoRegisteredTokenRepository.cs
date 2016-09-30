@@ -11,26 +11,25 @@ using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Common.Utility.Data;
 using OwnApt.Common.Extension;
 
-namespace OwnApt.Api.Repository.Mongo
+namespace OwnApt.Api.Repository.Mongo.Metadata
 {
     public class MongoRegisteredTokenRepository : IRegisteredTokenRepository
     {
-        private IMapper mapper;
-        private IMongoDatabase metadataDatabase;
+        private readonly IMapper mapper;
+        private readonly IMongoMetadataContext mongoMetadataContext;
 
-        public MongoRegisteredTokenRepository(IMongoClient mongoClient, IMapper mapper)
+        public MongoRegisteredTokenRepository(IMongoMetadataContext mongoMetadataContext, IMapper mapper)
         {
-            this.metadataDatabase = mongoClient.GetDatabase("Core");
+            this.mongoMetadataContext = mongoMetadataContext;
             this.mapper = mapper;
         }
 
-        private IMongoCollection<RegisteredTokenEntity> RegisteredTokenCollection => this.metadataDatabase.GetCollection<RegisteredTokenEntity>("RegisteredToken");
 
         public async Task<RegisteredTokenModel> CreateAsync(RegisteredTokenModel model)
         {
             model.Id = model.Id.ValueIfNullOrWhitespace(DataUtility.GenerateId());
             var entity = this.mapper.Map<RegisteredTokenEntity>(model);
-            await this.RegisteredTokenCollection.InsertOneAsync(entity);
+            await this.mongoMetadataContext.RegisteredTokenCollection.InsertOneAsync(entity);
 
             return model;
         }
@@ -42,7 +41,7 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<RegisteredTokenModel> ReadAsync(string id)
         {
-            var cursor = await this.RegisteredTokenCollection.FindAsync(t => t.Id == id);
+            var cursor = await this.mongoMetadataContext.RegisteredTokenCollection.FindAsync(t => t.Id == id);
             var entity = await cursor.FirstOrDefaultAsync();
             var model = this.mapper.Map<RegisteredTokenModel>(entity);
 
@@ -51,7 +50,7 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<RegisteredTokenModel> ReadByTokenAsync(string token)
         {
-            var cursor = await this.RegisteredTokenCollection.FindAsync(t => t.Token == token);
+            var cursor = await this.mongoMetadataContext.RegisteredTokenCollection.FindAsync(t => t.Token == token);
             var entity = await cursor.FirstOrDefaultAsync();
             var model = this.mapper.Map<RegisteredTokenModel>(entity);
 

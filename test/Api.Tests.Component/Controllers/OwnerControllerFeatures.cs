@@ -46,6 +46,18 @@ namespace Api.Tests.Component.Controllers
         }
 
         [Fact]
+        public async Task CanDeleteOwnerAsync()
+        {
+            this.steps.GivenIHaveAMockedDataLayer();
+            this.steps.GivenIHaveAnOwnerService();
+            this.steps.GivenIHaveARegisteredTokenService();
+            this.steps.GivenIHaveAnOwnerController();
+            this.steps.GivenIHaveAOwnerToDelete();
+            await this.steps.WhenIDeleteOwnerAsync();
+            this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
+        }
+
+        [Fact]
         public async Task CanReadOwnerAsync()
         {
             this.steps.GivenIHaveAMockedDataLayer();
@@ -58,19 +70,17 @@ namespace Api.Tests.Component.Controllers
             this.steps.ThenICanVerifyICanReadOwner();
         }
 
-        // Something wrong with MOQ
-        //[Fact]
-        //public async Task CanUpdateOwnerAsync()
-        //{
-        //    this.steps.GivenIHaveAMockedDataLayer();
-        //    this.steps.GivenIHaveAnOwnerService();
-        //    this.steps.GivenIHaveARegisteredTokenService();
-        //    this.steps.GivenIHaveAnOwnerController();
-        //    this.steps.GivenIHaveAOwnerToUpdate();
-        //    await this.steps.WhenIUpdateOwnerAsync();
-        //    this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
-        //    this.steps.ThenICanVerifyICanUpdateOwner();
-        //}
+        [Fact]
+        public async Task CanUpdateOwnerAsync()
+        {
+            this.steps.GivenIHaveAMockedDataLayer();
+            this.steps.GivenIHaveAnOwnerService();
+            this.steps.GivenIHaveARegisteredTokenService();
+            this.steps.GivenIHaveAnOwnerController();
+            this.steps.GivenIHaveAOwnerToUpdate();
+            await this.steps.WhenIUpdateOwnerAsync();
+            this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.OK);
+        }
 
         public void Dispose()
         {

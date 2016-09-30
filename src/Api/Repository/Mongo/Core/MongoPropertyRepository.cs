@@ -9,22 +9,22 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OwnApt.Api.Repository.Mongo
+namespace OwnApt.Api.Repository.Mongo.Core
 {
     public class MongoPropertyRepository : IPropertyRepository
     {
         #region Private Fields
 
-        private readonly IMongoDatabase coreDatabase;
         private readonly IMapper mapper;
+       private readonly IMongoCoreContext mongoCoreContext;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public MongoPropertyRepository(IMongoClient mongoClient, IMapper mapper)
+        public MongoPropertyRepository(IMongoCoreContext mongoCoreContext, IMapper mapper)
         {
-            this.coreDatabase = mongoClient.GetDatabase("Core");
+            this.mongoCoreContext = mongoCoreContext;
             this.mapper = mapper;
         }
 
@@ -32,7 +32,6 @@ namespace OwnApt.Api.Repository.Mongo
 
         #region Private Properties
 
-        private IMongoCollection<PropertyEntity> PropertiesCollection => this.coreDatabase.GetCollection<PropertyEntity>("Property");
 
         #endregion Private Properties
 
@@ -42,25 +41,25 @@ namespace OwnApt.Api.Repository.Mongo
         {
             model.Id = model.Id.ValueIfNullOrWhitespace(DataUtility.GenerateId());
             var propertyEntity = this.mapper.Map<PropertyEntity>(model);
-            await this.PropertiesCollection.InsertOneAsync(propertyEntity);
+            await this.mongoCoreContext.PropertiesCollection.InsertOneAsync(propertyEntity);
             return model;
         }
 
         public async Task DeleteAsync(string id)
         {
-            await this.PropertiesCollection.DeleteOneAsync(p => p.Id == id);
+            await this.mongoCoreContext.PropertiesCollection.DeleteOneAsync(p => p.Id == id);
         }
 
         public async Task<PropertyModel> ReadAsync(string id)
         {
-            var asyncCursor = await this.PropertiesCollection.FindAsync(p => p.Id == id);
+            var asyncCursor = await this.mongoCoreContext.PropertiesCollection.FindAsync(p => p.Id == id);
             var propertyEntity = await asyncCursor.FirstOrDefaultAsync();
             return this.mapper.Map<PropertyModel>(propertyEntity);
         }
 
         public async Task<PropertyModel[]> ReadManyAsync(string[] propertyIds)
         {
-            var asyncCursor = await this.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
+            var asyncCursor = await this.mongoCoreContext.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
             var propertyEntity = await asyncCursor.ToListAsync();
             return this.mapper.Map<PropertyModel[]>(propertyEntity);
         }
@@ -68,7 +67,7 @@ namespace OwnApt.Api.Repository.Mongo
         public async Task UpdateAsync(PropertyModel model)
         {
             var propertyEntity = this.mapper.Map<PropertyEntity>(model);
-            await this.PropertiesCollection.ReplaceOneAsync(p => p.Id == model.Id, propertyEntity);
+            await this.mongoCoreContext.PropertiesCollection.ReplaceOneAsync(p => p.Id == model.Id, propertyEntity);
         }
 
         #endregion Public Methods

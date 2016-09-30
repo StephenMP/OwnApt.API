@@ -73,45 +73,36 @@ namespace OwnApt.Api.Controllers
         {
             var model = new PropertyModel
             {
+                PropertyDescription = "The Rubalcava Plaza",
+                ImageUri = new Uri("https://lh3.googleusercontent.com/i-GqPkBfyoxGdA0aBDjJMvUnnw3H67oHdeYRneUka5P4qqr97jpOkyXj_wK09EiE9wqzQ1XjvzyaxAD9eI_zsElATr4MW9FT9Vxfqr6uRSjcKclWmFveWYWC0-8e82QR-j5lHIKS81qu82NUDLHBLDbg7hVcFnFcn5RqNf-qcPSe-5QbNJdWQ4f9wh1BGcAhG4lPXeDpE5bE46SQbSHNBzNLdYHlpBwM6JOoRS_qsPItRixLxOITwXO9UHm_jqOC_XsvE3naUzwn-sQCjksaDj66e2Icp9C-iQQOJgtojQv5Xuq_mnoXdacj66K_PJfRpTB2UCNKDQrjMhjHL6Du4Ct5EE5xwPzqxOWmpyl_HYZ5EONG1bhmPWUW6HDXuMahcpfe613XRXkzGx55ryqjkD0MKPfUnEoN5_W3YuvQypx9CpeW5gNXf0815K6dKgLyySIibVuEOMwv-wKfjelKKPivCLCN6jcU9a8_lR4a-9PPYmWZVZ69DB8xWLnXxB8ngbPlWnuXKjEhUP1mdQqqNZr2Zs-Iqmh_yhq7E-9OrxmLkCQsdVU_eAvyQi5fZSAJt9iuqs5PcqGyHDpZM1pncz4LkkqikKqKc9v0h7iWD_fenyw=w500-h334-no"),
                 Address = new AddressModel
                 {
-                    Address1 = "1234 W Test Ave",
-                    City = "Test Town",
-                    County = "Test County",
-                    State = State.WY,
+                    Address1 = "8214 Princess Ct.",
+                    City = "Neverland",
+                    County = "Lost Boys County",
+                    State = State.HI,
                     Zip = new ZipModel
                     {
-                        Base = "12345",
-                        Extension = "6789"
+                        Base = "00000",
+                        Extension = "9999"
                     }
                 },
                 Features = new FeaturesModel
                 {
                     Amenities = new List<AmenityModel>
                     {
-                        new AmenityModel { Type = "Two Car Garage", Description = "Two car garage with added storage space." },
-                        new AmenityModel { Type = "W/D Hookups", Description = "Washer and dryer hookups." },
-                        new AmenityModel { Type = "Hardwood Floors", Description = "Dark hardwood flooring." },
-                        new AmenityModel { Type = "Refridgerator", Description = "Stainless steel refridgerator." },
-                        new AmenityModel { Type = "Microwave & Hood", Description = "Stainless steel microwave and hood." },
-                        new AmenityModel { Type = "Gas Heating", Description = "Forced air gas heating." },
-                        new AmenityModel { Type = "Open Concept", Description = "Fully open concept." },
-                        new AmenityModel { Type = "Natural Lighting", Description = "Numerous windows allowing for plenty of natural light." },
-                        new AmenityModel { Type = "Gas Range", Description = "Stainless steel gas stovetop/range." },
-                        new AmenityModel { Type = "Central AC", Description = "Central air conditioning (electric)." },
-                        new AmenityModel { Type = "Automatic Sprinklers", Description = "Fully automatic sprinkers" },
-                        new AmenityModel { Type = "Pressurized Irrigation", Description = "The sprinklers run off of pressurized irrigation." }
+                        new AmenityModel { Type = "Magical Garage", Description = "A garage magically appears for each car!" },
+                        new AmenityModel { Type = "Magic Walkin Closets", Description = "They grow larger along with your wordrobe" },
+                        new AmenityModel { Type = "Solid Glass Floors", Description = "Just like Cinderella's slippers!" }
                     },
-                    Bathrooms = 2,
-                    Levels = 1,
+                    Bathrooms = 20,
+                    Levels = 6,
                     Parking = new List<ParkingModel>
                     {
-                        new ParkingModel { Type = "Garage", Description = "Two car garage." },
-                        new ParkingModel { Type = "Driveway", Description = "Driveway can fit up to three cars." },
-                        new ParkingModel { Type = "Street", Description = "Street parking available on opposite side of street." }
+                        new ParkingModel { Type = "Magical Garage", Description = "A garage magically appears for each car!" }
                     },
-                    Rooms = 3,
-                    SqFootage = 2000
+                    Rooms = 20,
+                    SqFootage = 10000
                 },
                 PropertyType = PropertyType.SingleFamilyHome
             };

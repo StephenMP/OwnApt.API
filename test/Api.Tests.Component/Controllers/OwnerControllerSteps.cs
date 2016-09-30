@@ -1,19 +1,10 @@
-﻿using Moq;
-using OwnApt.Api.AppStart;
-using OwnApt.Api.Contract.Model;
+﻿using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
-using OwnApt.Api.Repository.Entity.Mongo;
-using OwnApt.Api.Repository.Entity.Sql;
-using OwnApt.Api.Repository.Interface;
-using OwnApt.Api.Repository.Mongo;
-using OwnApt.Api.Repository.Sql.Core;
-using OwnApt.TestEnvironment.Environment;
 using System;
 using System.Threading.Tasks;
 using Xunit;
-using AutoMapper;
 
 namespace Api.Tests.Component.Controllers
 {
@@ -21,65 +12,14 @@ namespace Api.Tests.Component.Controllers
     {
         #region Private Fields
 
+        private string currentOwnerId;
         private bool disposedValue;
         private OwnerController ownerController;
         private OwnerModel ownerModel;
 
-        internal void GivenIHaveAMockedDataLayer()
-        {
-            var dataLayerMockOptions = new DataLayerMockOptions()
-                                            .MockOwnerRepository()
-                                            .MockRegisteredTokenRepository();
-
-            this.GivenIHaveAMockedDataLayer(dataLayerMockOptions);
-        }
-
         private IOwnerService ownerService;
-        private OwnAptTestEnvironment testEnvironment;
+
         private IRegisteredTokenService registeredTokenService;
-        private string currentOwnerId;
-
-        internal void GivenIHaveARegisteredTokenRepository()
-        {
-            this.registeredTokenRepository = new MongoRegisteredTokenRepository(this.testEnvironment.GetMongoClient(), OwnAptStartup.BuildMapper());
-        }
-
-        internal async Task WhenIReadOwnerAsync()
-        {
-            this.controllerResponse = await this.ownerController.ReadOwnerAsync(this.currentOwnerId);
-        }
-
-        internal void ThenICanVerifyICanReadOwner()
-        {
-            var model = this.controllerResponse as OwnerModel;
-            Assert.Equal(this.mockedOwnerModel.Id, this.mockedOwnerModel.Id);
-            Assert.Equal(this.mockedOwnerModel.Name, this.mockedOwnerModel.Name);
-        }
-
-        internal void GivenIHaveAOwnerToRead()
-        {
-            this.currentOwnerId = this.mockedOwnerEntity.Id;
-        }
-
-        internal async Task WhenIUpdateOwnerAsync()
-        {
-            this.controllerResponse = await this.ownerController.UpdateOwnerAsync(this.ownerModel);
-        }
-
-        internal void ThenICanVerifyICanUpdateOwner()
-        {
-            this.mockedOwnerRepository.Verify(m => m.UpdateAsync(this.mockedOwnerModel));
-        }
-
-        internal void GivenIHaveAOwnerToUpdate()
-        {
-            this.ownerModel = this.mockedOwnerModel;
-        }
-
-        internal void GivenIHaveARegisteredTokenService()
-        {
-            this.registeredTokenService = new RegisteredTokenService(this.registeredTokenRepository);
-        }
 
         #endregion Private Fields
 
@@ -95,22 +35,18 @@ namespace Api.Tests.Component.Controllers
 
         #region Internal Methods
 
+        internal void GivenIHaveAMockedDataLayer()
+        {
+            var dataLayerMockOptions = new DataLayerMockOptions()
+                                            .MockOwnerRepository()
+                                            .MockRegisteredTokenRepository();
+
+            this.GivenIHaveAMockedDataLayer(dataLayerMockOptions);
+        }
+
         internal void GivenIHaveAnOwnerController()
         {
             this.ownerController = new OwnerController(this.ownerService, this.registeredTokenService, null);
-        }
-
-        internal void GivenIHaveAOwnerEnvironment()
-        {
-            this.testEnvironment = new OwnAptTestEnvironmentBuilder()
-                                    .AddMongo()
-                                    .AddSqlContext<CoreContext>()
-                                    .BuildEnvironment();
-        }
-
-        internal void GivenIHaveAOwnerRepository()
-        {
-            this.ownerRepository = new MongoOwnerRepository(this.testEnvironment.GetMongoClient(), OwnAptStartup.BuildMapper());
         }
 
         internal void GivenIHaveAnOwnerService()
@@ -123,6 +59,26 @@ namespace Api.Tests.Component.Controllers
             this.ownerModel = this.mockedOwnerModel;
         }
 
+        internal void GivenIHaveAOwnerToDelete()
+        {
+            this.currentOwnerId = this.mockedOwnerEntity.Id;
+        }
+
+        internal void GivenIHaveAOwnerToRead()
+        {
+            this.currentOwnerId = this.mockedOwnerEntity.Id;
+        }
+
+        internal void GivenIHaveAOwnerToUpdate()
+        {
+            this.ownerModel = this.mockedOwnerModel;
+        }
+
+        internal void GivenIHaveARegisteredTokenService()
+        {
+            this.registeredTokenService = new RegisteredTokenService(this.registeredTokenRepository);
+        }
+
         internal void ThenICanVerifyICanCreateOwner()
         {
             var owner = this.controllerContent as OwnerModel;
@@ -132,9 +88,31 @@ namespace Api.Tests.Component.Controllers
             Assert.Equal("Doe", owner.Name.LastName);
         }
 
+        internal void ThenICanVerifyICanReadOwner()
+        {
+            var model = this.controllerResponse as OwnerModel;
+            Assert.Equal(this.mockedOwnerModel.Id, this.mockedOwnerModel.Id);
+            Assert.Equal(this.mockedOwnerModel.Name, this.mockedOwnerModel.Name);
+        }
+
         internal async Task WhenICreateOwnerAsync()
         {
             this.controllerResponse = await this.ownerController.CreateOwnerAsync(this.ownerModel);
+        }
+
+        internal async Task WhenIDeleteOwnerAsync()
+        {
+            this.controllerResponse = await this.ownerController.DeleteOwnerAsync(this.currentOwnerId);
+        }
+
+        internal async Task WhenIReadOwnerAsync()
+        {
+            this.controllerResponse = await this.ownerController.ReadOwnerAsync(this.currentOwnerId);
+        }
+
+        internal async Task WhenIUpdateOwnerAsync()
+        {
+            this.controllerResponse = await this.ownerController.UpdateOwnerAsync(this.ownerModel);
         }
 
         #endregion Internal Methods
@@ -147,7 +125,6 @@ namespace Api.Tests.Component.Controllers
             {
                 if (disposing)
                 {
-                    this.testEnvironment?.Dispose();
                     this.ownerController?.Dispose();
                 }
 
