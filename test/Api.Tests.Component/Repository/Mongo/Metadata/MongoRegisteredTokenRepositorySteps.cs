@@ -16,7 +16,7 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
 {
     public class MongoRegisteredTokenRepositorySteps
     {
-        private MongoEnvironmentClassFixture mongoFixture;
+        private readonly MongoEnvironmentClassFixture mongoFixture;
         private IMongoMetadataContext mongoMetadataContext;
         private IRegisteredTokenRepository mongoRegisteredTokenRepository;
         private string currentRegisteredTokenId;
