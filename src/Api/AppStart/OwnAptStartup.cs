@@ -85,17 +85,17 @@ namespace OwnApt.Api.AppStart
 
         private static void AddFilters(IServiceCollection services)
         {
-            //if (HostEnvironment.IsDevelopment())
-            //{
-            //    services.AddMvc();
-            //}
-            //else
-            //{
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddMvc();
+            }
+            else
+            {
                 services.AddMvc(options =>
                 {
                     options.Filters.Add(typeof(HmacAuthenticationFilter));
                 });
-            //}
+            }
         }
 
         private static void AddMongo(IServiceCollection services)
