@@ -10,7 +10,7 @@ namespace OwnApt.Api.Controllers
         #region Private Fields
 
         private readonly IMemoryCacheService cache;
-        private string cacheKeyPrefix;
+        private readonly string cacheKeyPrefix;
         private MemoryCacheEntryOptions cacheOptions;
 
         #endregion Private Fields

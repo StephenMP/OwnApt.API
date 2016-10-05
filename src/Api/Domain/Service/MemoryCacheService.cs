@@ -17,8 +17,8 @@ namespace OwnApt.Api.Domain.Service
         #region Private Fields
 
         private bool disposedValue;
-        private IMemoryCache memoryCache;
-        private IList<object> cacheKeys;
+        private readonly IMemoryCache memoryCache;
+        private readonly IList<object> cacheKeys;
 
         #endregion Private Fields
 
