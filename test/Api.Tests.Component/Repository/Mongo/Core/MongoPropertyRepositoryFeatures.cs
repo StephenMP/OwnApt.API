@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Core
@@ -44,16 +43,6 @@ namespace Api.Tests.Component.Repository.Mongo.Core
         }
 
         [Fact]
-        public async Task CanReadPropertyAsync()
-        {
-            this.steps.GivenIHaveAMongoCoreContext();
-            this.steps.GivenIHaveAMongoPropertyRepository();
-            await this.steps.GivenIHaveAPropertyToRead();
-            await this.steps.WhenICallReadAsync();
-            this.steps.ThenICanVerifyICanReadPropertyAsync();
-        }
-
-        [Fact]
         public async Task CanReadManyPropertyAsync()
         {
             this.steps.GivenIHaveAMongoCoreContext();
@@ -61,6 +50,16 @@ namespace Api.Tests.Component.Repository.Mongo.Core
             await this.steps.GivenIHaveManyPropertiesToRead();
             await this.steps.WhenICallReadManyAsync();
             this.steps.ThenICanVerifyICanReadManyPropertyAsync();
+        }
+
+        [Fact]
+        public async Task CanReadPropertyAsync()
+        {
+            this.steps.GivenIHaveAMongoCoreContext();
+            this.steps.GivenIHaveAMongoPropertyRepository();
+            await this.steps.GivenIHaveAPropertyToRead();
+            await this.steps.WhenICallReadAsync();
+            this.steps.ThenICanVerifyICanReadPropertyAsync();
         }
 
         [Fact]

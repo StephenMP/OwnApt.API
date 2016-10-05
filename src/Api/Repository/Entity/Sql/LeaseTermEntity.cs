@@ -10,8 +10,13 @@ namespace OwnApt.Api.Repository.Entity.Sql
     {
         #region Public Properties
 
+        [Column("Active")]
+        public bool Active { get; set; }
+
         [Column("EndDate")]
         public DateTime EndDate { get; set; }
+
+        public List<LeasePeriodEntity> LeasePeriods { get; set; }
 
         [Key, Column("LeaseTermId")]
         public int LeaseTermId { get; set; }
@@ -24,11 +29,6 @@ namespace OwnApt.Api.Repository.Entity.Sql
 
         [Column("StartDate")]
         public DateTime StartDate { get; set; }
-
-        [Column("Active")]
-        public bool Active { get; set; }
-
-        public List<LeasePeriodEntity> LeasePeriods { get; set; }
 
         #endregion Public Properties
     }

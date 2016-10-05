@@ -5,7 +5,6 @@ using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Common.Extension;
 using OwnApt.Common.Utility.Data;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +15,7 @@ namespace OwnApt.Api.Repository.Mongo.Core
         #region Private Fields
 
         private readonly IMapper mapper;
-       private readonly IMongoCoreContext mongoCoreContext;
+        private readonly IMongoCoreContext mongoCoreContext;
 
         #endregion Private Fields
 
@@ -29,11 +28,6 @@ namespace OwnApt.Api.Repository.Mongo.Core
         }
 
         #endregion Public Constructors
-
-        #region Private Properties
-
-
-        #endregion Private Properties
 
         #region Public Methods
 

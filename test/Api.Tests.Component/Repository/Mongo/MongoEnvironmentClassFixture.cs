@@ -1,13 +1,18 @@
 ﻿using OwnApt.TestEnvironment.Environment;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Api.Tests.Component.Repository.Mongo
 {
     public class MongoEnvironmentClassFixture : IDisposable
     {
+        #region Private Fields
+
+        private bool disposedValue;
+
+        #endregion Private Fields
+
+        #region Public Constructors
+
         public MongoEnvironmentClassFixture()
         {
             this.Environment = new OwnAptTestEnvironmentBuilder()
@@ -15,10 +20,25 @@ namespace Api.Tests.Component.Repository.Mongo
                                         .BuildEnvironment();
         }
 
+        #endregion Public Constructors
+
+        #region Public Properties
+
         public OwnAptTestEnvironment Environment { get; private set; }
 
-        #region IDisposable Support
-        private bool disposedValue;
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion Public Methods
+
+        #region Protected Methods
 
         protected virtual void Dispose(bool disposing)
         {
@@ -33,11 +53,6 @@ namespace Api.Tests.Component.Repository.Mongo
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
+        #endregion Protected Methods
     }
 }

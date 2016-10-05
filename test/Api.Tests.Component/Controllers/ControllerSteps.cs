@@ -4,7 +4,6 @@ using Moq;
 using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
-using OwnApt.Api.Repository.Entity.Sql;
 using OwnApt.Api.Repository.Interface;
 using System;
 using System.Net;
@@ -16,19 +15,26 @@ namespace Api.Tests.Component.Controllers
 {
     public class ControllerSteps
     {
-        public ControllerSteps()
-        {
-            this.mapper = OwnAptStartup.BuildMapper();
-        }
         #region Protected Fields
 
         protected object controllerContent;
+
         protected IActionResult controllerResponse;
+
         protected OwnerEntity mockedOwnerEntity;
+
         protected OwnerModel mockedOwnerModel;
+
+        protected Mock<IOwnerRepository> mockedOwnerRepository;
+
         protected RegisteredTokenEntity mockedRegisteredTokenEntity;
+
         protected RegisteredTokenModel mockedRegisteredTokenModel;
+
+        protected Mock<IRegisteredTokenRepository> mockedRegisteredTokenRepository;
+
         protected IOwnerRepository ownerRepository;
+
         protected IRegisteredTokenRepository registeredTokenRepository;
 
         #endregion Protected Fields
@@ -36,10 +42,17 @@ namespace Api.Tests.Component.Controllers
         #region Private Fields
 
         private IMapper mapper;
-        protected Mock<IOwnerRepository> mockedOwnerRepository;
-        protected Mock<IRegisteredTokenRepository> mockedRegisteredTokenRepository;
 
         #endregion Private Fields
+
+        #region Public Constructors
+
+        public ControllerSteps()
+        {
+            this.mapper = OwnAptStartup.BuildMapper();
+        }
+
+        #endregion Public Constructors
 
         #region Public Methods
 

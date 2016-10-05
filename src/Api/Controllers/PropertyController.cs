@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
 using OwnApt.Common.Enum;
@@ -23,7 +24,7 @@ namespace OwnApt.Api.Controllers
 
         #region Public Constructors
 
-        public PropertyController(IPropertyService propertyService, IMemoryCache cache) : base(cache)
+        public PropertyController(IPropertyService propertyService, IMemoryCacheService cache) : base(cache)
         {
             this.propertyService = propertyService;
         }
@@ -50,21 +51,6 @@ namespace OwnApt.Api.Controllers
             this.RemoveCache(propertyId);
             await this.propertyService.DeleteAsync(propertyId);
             return Ok();
-        }
-
-        [HttpPost("updateProperty")]
-        /* Here for IT support of adding properties only. Delete once BO solution is in place */
-        public async Task<IActionResult> ITSupport_UpdatePropertyAsync()
-        {
-            var propertyId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
-            var propertyModel = await this.propertyService.ReadAsync(propertyId);
-
-            // Add any update stuff here to the model //
-            propertyModel.ImageUri = new Uri("https://lh3.googleusercontent.com/-igsJobY4sO5SiKosAqvdRpOpIIXc6kLlRw1PbVrBT2SqbZo3xobzy1qBokPnWxljfUbybDd=w600-h337-no");
-            ////////////////////////////////////////////
-
-            await this.propertyService.UpdateAsync(propertyModel);
-            return Ok(propertyModel);
         }
 
         [HttpPost("createProperty")]
@@ -112,20 +98,19 @@ namespace OwnApt.Api.Controllers
             return Ok(createdModel.Id);
         }
 
-        [HttpGet("{propertyId}")]
-        [ValidateModel]
-        public async Task<IActionResult> ReadPropertyAsync(string propertyId)
+        [HttpPost("updateProperty")]
+        /* Here for IT support of adding properties only. Delete once BO solution is in place */
+        public async Task<IActionResult> ITSupport_UpdatePropertyAsync()
         {
-            PropertyModel model = null;
+            var propertyId = "f45cf61f92c448ebbeb4f63ff8d7e0f3";
+            var propertyModel = await this.propertyService.ReadAsync(propertyId);
 
-            if (this.CheckCache(propertyId, out model))
-            {
-                return Ok(model);
-            }
+            // Add any update stuff here to the model //
+            propertyModel.ImageUri = new Uri("https://lh3.googleusercontent.com/-igsJobY4sO5SiKosAqvdRpOpIIXc6kLlRw1PbVrBT2SqbZo3xobzy1qBokPnWxljfUbybDd=w600-h337-no");
+            ////////////////////////////////////////////
 
-            model = await this.propertyService.ReadAsync(propertyId);
-            this.SetCache(model.Id, model);
-            return Ok(model);
+            await this.propertyService.UpdateAsync(propertyModel);
+            return Ok(propertyModel);
         }
 
         [HttpGet]
@@ -142,6 +127,22 @@ namespace OwnApt.Api.Controllers
             models = await this.propertyService.ReadManyAsync(propertyIds);
             this.SetCache(propertyIds.GetHashCodeSafe(), models);
             return Ok(models);
+        }
+
+        [HttpGet("{propertyId}")]
+        [ValidateModel]
+        public async Task<IActionResult> ReadPropertyAsync(string propertyId)
+        {
+            PropertyModel model = null;
+
+            if (this.CheckCache(propertyId, out model))
+            {
+                return Ok(model);
+            }
+
+            model = await this.propertyService.ReadAsync(propertyId);
+            this.SetCache(model.Id, model);
+            return Ok(model);
         }
 
         [HttpPut]

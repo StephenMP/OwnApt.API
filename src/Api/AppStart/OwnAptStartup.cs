@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MySql.Data.MySqlClient;
 using MySQL.Data.EntityFrameworkCore.Extensions;
@@ -10,12 +11,12 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
-using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Mongo.Core;
 using OwnApt.Api.Repository.Mongo.Metadata;
 using OwnApt.Api.Repository.Sql.Core;
 using OwnApt.Api.Repository.Sql.Lease;
 using OwnApt.Authentication.Api.Filter;
+using Serilog;
 using Swashbuckle.Swagger.Model;
 using System;
 
@@ -53,13 +54,13 @@ namespace OwnApt.Api.AppStart
                 app.UseDeveloperExceptionPage();
             }
 
-            AddMvc(app);
-            AddSwagger(app);
+            UseMvc(app);
+            UseSwagger(app);
         }
 
-        public static void UseOwnAptServices(this IServiceCollection services)
+        public static void AddOwnAptServices(this IServiceCollection services)
         {
-            AddFilters(services);
+            AddMvc(services);
             AddAutoMapper(services);
             AddRepositories(services);
             AddServices(services);
@@ -69,21 +70,46 @@ namespace OwnApt.Api.AppStart
             AddMemoryCache(services);
         }
 
-        private static void AddMemoryCache(IServiceCollection services)
-        {
-            services.AddMemoryCache();
-        }
-
         #endregion Public Methods
 
         #region Private Methods
+
+        private static void ConfigureLogging(ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        {
+            /* Serilog Configuration */
+            var logentriesToken = Configuration["Logging:LogentriesToken"];
+            var loggerConfig = new LoggerConfiguration()
+                .Enrich.FromLogContext();
+
+            if (HostEnvironment.IsDevelopment())
+            {
+                loggerConfig
+                    .MinimumLevel.Information()
+                    .WriteTo.Console();
+            }
+            else
+            {
+                loggerConfig
+                    .MinimumLevel.Warning()
+                    .WriteTo.Logentries(logentriesToken)
+                    .WriteTo.Console();
+                //.MinimumLevel.Information()
+                //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
+            }
+
+            Log.Logger = loggerConfig.CreateLogger();
+
+            loggerFactory.AddSerilog();
+            appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
+        }
 
         private static void AddAutoMapper(IServiceCollection services)
         {
             services.AddSingleton<IMapper>(BuildMapper());
         }
 
-        private static void AddFilters(IServiceCollection services)
+        private static void AddMvc(IServiceCollection services)
         {
             if (HostEnvironment.IsDevelopment())
             {
@@ -98,6 +124,11 @@ namespace OwnApt.Api.AppStart
             }
         }
 
+        private static void AddMemoryCache(IServiceCollection services)
+        {
+            services.AddMemoryCache();
+        }
+
         private static void AddMongo(IServiceCollection services)
         {
             services.AddSingleton<IMongoClient>(BuildMongoClient());
@@ -105,7 +136,7 @@ namespace OwnApt.Api.AppStart
             services.AddScoped<IMongoMetadataContext, MongoMetadataContext>();
         }
 
-        private static void AddMvc(IApplicationBuilder app)
+        private static void UseMvc(IApplicationBuilder app)
         {
             app.UseMvc();
         }
@@ -124,6 +155,7 @@ namespace OwnApt.Api.AppStart
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<ILeaseTermService, LeaseTermService>();
             services.AddTransient<IRegisteredTokenService, RegisteredTokenService>();
+            services.AddTransient<IMemoryCacheService, MemoryCacheService>();
         }
 
         private static void AddSql(IServiceCollection services)
@@ -161,7 +193,7 @@ namespace OwnApt.Api.AppStart
             });
         }
 
-        private static void AddSwagger(IApplicationBuilder app)
+        private static void UseSwagger(IApplicationBuilder app)
         {
             app.UseSwagger("api/{apiVersion}/info.json");
             app.UseSwaggerUi("api/v1/info", "/api/v1/info.json");

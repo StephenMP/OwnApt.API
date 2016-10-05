@@ -1,7 +1,6 @@
 ﻿using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
-using System;
 
 namespace OwnApt.Api.Domain.Service
 {
@@ -10,7 +9,9 @@ namespace OwnApt.Api.Domain.Service
         #region Public Methods
 
         Task<RegisteredTokenModel> CreateAsync(RegisteredTokenModel model);
+
         Task<RegisteredTokenModel> ReadAsync(string id);
+
         Task<RegisteredTokenModel> ReadByTokenAsync(string token);
 
         #endregion Public Methods

@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
-using OwnApt.Common.Security;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -16,16 +13,20 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class OwnerController : ApiController
     {
+        #region Private Fields
+
         private readonly IOwnerService ownerService;
-        readonly IRegisteredTokenService registeredTokenService;
+        private readonly IRegisteredTokenService registeredTokenService;
+
+        #endregion Private Fields
 
         #region Public Constructors
 
         public OwnerController
         (
-            IOwnerService ownerService, 
-            IRegisteredTokenService registeredTokenService, 
-            IMemoryCache cache
+            IOwnerService ownerService,
+            IRegisteredTokenService registeredTokenService,
+            IMemoryCacheService cache
         ) : base(cache)
         {
             this.ownerService = ownerService;
@@ -46,6 +47,16 @@ namespace OwnApt.Api.Controllers
             return Created(this.Request.GetResourcePathSafe(model.Id), resultModel);
         }
 
+        [HttpPost("signup/token/register")]
+        [ValidateModel]
+        public async Task<IActionResult> CreateRegisteredTokenAsync([FromBody] RegisteredTokenModel model)
+        {
+            var resultModel = await this.registeredTokenService.CreateAsync(model);
+            this.SetCache(resultModel.Token, resultModel);
+
+            return Created(new Uri(this.Request.GetResourcePathSafe(model.Token).Replace("/register", "")), resultModel);
+        }
+
         [HttpDelete("{ownerId}")]
         [ValidateModel]
         public async Task<IActionResult> DeleteOwnerAsync(string ownerId)
@@ -60,7 +71,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> ReadOwnerAsync(string ownerId)
         {
             OwnerModel model = null;
-            if(this.CheckCache(ownerId, out model))
+            if (this.CheckCache(ownerId, out model))
             {
                 return Ok(model);
             }
@@ -71,22 +82,12 @@ namespace OwnApt.Api.Controllers
             return Ok(model);
         }
 
-        [HttpPut]
-        [ValidateModel]
-        public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
-        {
-            await this.ownerService.UpdateAsync(model);
-            this.SetCache(model.Id, model);
-
-            return Ok();
-        }
-
         [HttpGet("signup/token/id/{tokenId}")]
         [ValidateModel]
         public async Task<IActionResult> ReadRegisteredTokenAsync(string tokenId)
         {
             RegisteredTokenModel model = null;
-            if(this.CheckCache(tokenId, out model))
+            if (this.CheckCache(tokenId, out model))
             {
                 return Ok(model);
             }
@@ -95,16 +96,6 @@ namespace OwnApt.Api.Controllers
             this.SetCache(tokenId, model);
 
             return Ok(model);
-        }
-
-        [HttpPost("signup/token/register")]
-        [ValidateModel]
-        public async Task<IActionResult> CreateRegisteredTokenAsync([FromBody] RegisteredTokenModel model)
-        {
-            var resultModel = await this.registeredTokenService.CreateAsync(model);
-            this.SetCache(resultModel.Token, resultModel);
-
-            return Created(new Uri(this.Request.GetResourcePathSafe(model.Token).Replace("/register", "")), resultModel);
         }
 
         [HttpGet("signup/token")]
@@ -121,6 +112,16 @@ namespace OwnApt.Api.Controllers
             this.SetCache(token, model);
 
             return Ok(model);
+        }
+
+        [HttpPut]
+        [ValidateModel]
+        public async Task<IActionResult> UpdateOwnerAsync([FromBody] OwnerModel model)
+        {
+            await this.ownerService.UpdateAsync(model);
+            this.SetCache(model.Id, model);
+
+            return Ok();
         }
 
         #endregion Public Methods

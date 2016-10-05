@@ -1,34 +1,39 @@
-﻿using OwnApt.Api.AppStart;
+﻿using AutoMapper;
+using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
+using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
-using OwnApt.Api.Repository.Mongo;
 using OwnApt.Api.Repository.Mongo.Core;
 using OwnApt.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
-using AutoMapper;
-using OwnApt.Api.Repository.Entity.Mongo;
 
 namespace Api.Tests.Component.Repository.Mongo.Core
 {
     public class MongoPropertyRepositorySteps
     {
-        private IMongoCoreContext mongoCoreContext;
+        #region Private Fields
+
         private readonly MongoEnvironmentClassFixture mongoFixture;
-        private IPropertyRepository mongoPropertyRepository;
         private string currentPropertyId;
-        private PropertyModel propertyModelToCreate;
-        private PropertyModel resultModel;
+        private string[] currentPropertyIds;
         private IMapper mapper;
+        private IMongoCoreContext mongoCoreContext;
+        private IPropertyRepository mongoPropertyRepository;
+        private PropertyEntity propertyEntityToUpdate;
+        private PropertyModel[] propertyModelsToRead;
+        private PropertyModel propertyModelToCreate;
         private PropertyModel propertyModelToDelete;
         private PropertyModel propertyModelToRead;
-        private string[] currentPropertyIds;
-        private PropertyModel[] propertyModelsToRead;
-        private PropertyModel[] resultModels;
         private PropertyModel propertyModelToUpdate;
-        private PropertyEntity propertyEntityToUpdate;
+        private PropertyModel resultModel;
+        private PropertyModel[] resultModels;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MongoPropertyRepositorySteps(MongoEnvironmentClassFixture mongoFixture)
         {
@@ -36,56 +41,32 @@ namespace Api.Tests.Component.Repository.Mongo.Core
             this.mapper = OwnAptStartup.BuildMapper();
         }
 
+        #endregion Public Constructors
+
+        #region Internal Methods
+
         internal void GivenIHaveAMongoCoreContext()
         {
             this.mongoCoreContext = new MongoCoreContext(this.mongoFixture.Environment.GetMongoClient());
         }
 
-        internal void ThenICanVerifyICanCreatePropertyAsync()
+        internal void GivenIHaveAMongoPropertyRepository()
         {
-            Assert.Equal(this.propertyModelToCreate, this.resultModel);
+            this.mongoPropertyRepository = new MongoPropertyRepository(this.mongoCoreContext, OwnAptStartup.BuildMapper());
         }
 
-        internal async Task ThenICanVerifyICanDeletePropertyAsync()
+        internal void GivenIHaveAnPropertyToCreate()
         {
-            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
-            Assert.Null(this.resultModel);
+            this.currentPropertyId = TestRandom.String;
+            this.propertyModelToCreate = PropertyRandom.PropertyModel(this.currentPropertyId);
         }
 
-        internal async Task WhenICallReadAsync()
+        internal async Task GivenIHaveAnPropertyToDelete()
         {
-            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
-        }
-
-        internal void ThenICanVerifyICanReadPropertyAsync()
-        {
-            Assert.Equal(this.propertyModelToRead, this.resultModel);
-        }
-
-        internal void ThenICanVerifyICanReadManyPropertyAsync()
-        {
-            foreach (var result in this.resultModels)
-            {
-                Assert.Contains(result, this.propertyModelsToRead);
-            }
-        }
-
-        internal async Task ThenICanVerifyICanUpdatePropertyAsync()
-        {
-            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
-            var originalModel = this.mapper.Map<PropertyModel>(this.propertyEntityToUpdate);
-
-            Assert.NotEqual(originalModel.ImageUri, this.resultModel.ImageUri);
-
-            this.resultModel.ImageUri = originalModel.ImageUri;
-
-            Assert.Equal(originalModel, this.resultModel);
-        }
-
-        internal async Task WhenICallUpdateAsync()
-        {
-            this.propertyModelToUpdate.ImageUri = new Uri("http://this.is.new");
-            await this.mongoPropertyRepository.UpdateAsync(this.propertyModelToUpdate);
+            this.currentPropertyId = TestRandom.String;
+            this.propertyModelToDelete = PropertyRandom.PropertyModel(this.currentPropertyId);
+            var propertyEntityToDelete = this.mapper.Map<PropertyEntity>(this.propertyModelToDelete);
+            await this.ImportData(propertyEntityToDelete);
         }
 
         internal async Task GivenIHaveAnPropertyToUpdate()
@@ -96,9 +77,12 @@ namespace Api.Tests.Component.Repository.Mongo.Core
             await this.ImportData(this.propertyEntityToUpdate);
         }
 
-        internal async Task WhenICallReadManyAsync()
+        internal async Task GivenIHaveAPropertyToRead()
         {
-            this.resultModels = await this.mongoPropertyRepository.ReadManyAsync(this.currentPropertyIds);
+            this.currentPropertyId = TestRandom.String;
+            this.propertyModelToRead = PropertyRandom.PropertyModel(this.currentPropertyId);
+            var propertyEntityToRead = this.mapper.Map<PropertyEntity>(this.propertyModelToRead);
+            await this.ImportData(propertyEntityToRead);
         }
 
         internal async Task GivenIHaveManyPropertiesToRead()
@@ -121,17 +105,40 @@ namespace Api.Tests.Component.Repository.Mongo.Core
             await this.ImportData(propertyEntitiesToRead);
         }
 
-        internal async Task GivenIHaveAPropertyToRead()
+        internal void ThenICanVerifyICanCreatePropertyAsync()
         {
-            this.currentPropertyId = TestRandom.String;
-            this.propertyModelToRead = PropertyRandom.PropertyModel(this.currentPropertyId);
-            var propertyEntityToRead = this.mapper.Map<PropertyEntity>(this.propertyModelToRead);
-            await this.ImportData(propertyEntityToRead);
+            Assert.Equal(this.propertyModelToCreate, this.resultModel);
         }
 
-        internal async Task WhenICallDeleteAsync()
+        internal async Task ThenICanVerifyICanDeletePropertyAsync()
         {
-            await this.mongoPropertyRepository.DeleteAsync(this.currentPropertyId);
+            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
+            Assert.Null(this.resultModel);
+        }
+
+        internal void ThenICanVerifyICanReadManyPropertyAsync()
+        {
+            foreach (var result in this.resultModels)
+            {
+                Assert.Contains(result, this.propertyModelsToRead);
+            }
+        }
+
+        internal void ThenICanVerifyICanReadPropertyAsync()
+        {
+            Assert.Equal(this.propertyModelToRead, this.resultModel);
+        }
+
+        internal async Task ThenICanVerifyICanUpdatePropertyAsync()
+        {
+            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
+            var originalModel = this.mapper.Map<PropertyModel>(this.propertyEntityToUpdate);
+
+            Assert.NotEqual(originalModel.ImageUri, this.resultModel.ImageUri);
+
+            this.resultModel.ImageUri = originalModel.ImageUri;
+
+            Assert.Equal(originalModel, this.resultModel);
         }
 
         internal async Task WhenICallCreateAsync()
@@ -139,29 +146,37 @@ namespace Api.Tests.Component.Repository.Mongo.Core
             this.resultModel = await this.mongoPropertyRepository.CreateAsync(this.propertyModelToCreate);
         }
 
-        internal async Task GivenIHaveAnPropertyToDelete()
+        internal async Task WhenICallDeleteAsync()
         {
-            this.currentPropertyId = TestRandom.String;
-            this.propertyModelToDelete = PropertyRandom.PropertyModel(this.currentPropertyId);
-            var propertyEntityToDelete = this.mapper.Map<PropertyEntity>(this.propertyModelToDelete);
-            await this.ImportData(propertyEntityToDelete);
+            await this.mongoPropertyRepository.DeleteAsync(this.currentPropertyId);
         }
+
+        internal async Task WhenICallReadAsync()
+        {
+            this.resultModel = await this.mongoPropertyRepository.ReadAsync(this.currentPropertyId);
+        }
+
+        internal async Task WhenICallReadManyAsync()
+        {
+            this.resultModels = await this.mongoPropertyRepository.ReadManyAsync(this.currentPropertyIds);
+        }
+
+        internal async Task WhenICallUpdateAsync()
+        {
+            this.propertyModelToUpdate.ImageUri = new Uri("http://this.is.new");
+            await this.mongoPropertyRepository.UpdateAsync(this.propertyModelToUpdate);
+        }
+
+        #endregion Internal Methods
+
+        #region Private Methods
 
         private async Task ImportData(params PropertyEntity[] propertyEntities)
         {
             await this.mongoFixture.Environment.ImportMongoDataAsync("Core", "Property", propertyEntities);
         }
 
-        internal void GivenIHaveAnPropertyToCreate()
-        {
-            this.currentPropertyId = TestRandom.String;
-            this.propertyModelToCreate = PropertyRandom.PropertyModel(this.currentPropertyId);
-        }
-
-        internal void GivenIHaveAMongoPropertyRepository()
-        {
-            this.mongoPropertyRepository = new MongoPropertyRepository(this.mongoCoreContext, OwnAptStartup.BuildMapper());
-        }
+        #endregion Private Methods
     }
 
     internal static class PropertyRandom

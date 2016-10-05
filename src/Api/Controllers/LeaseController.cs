@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
+using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
-using System;
 using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
@@ -13,6 +13,7 @@ namespace OwnApt.Api.Controllers
     public class LeaseController : ApiController
     {
         #region Private Fields
+
         private readonly string cachePrefix;
         private readonly ILeaseTermService leaseTermService;
 
@@ -20,7 +21,7 @@ namespace OwnApt.Api.Controllers
 
         #region Public Constructors
 
-        public LeaseController(ILeaseTermService leaseTermService, IMemoryCache cache) : base(cache)
+        public LeaseController(ILeaseTermService leaseTermService, IMemoryCacheService cache) : base(cache)
         {
             this.leaseTermService = leaseTermService;
             this.cachePrefix = nameof(LeaseController);
@@ -46,7 +47,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> ReadLeaseTermAsync(int leaseTermId)
         {
             LeaseTermModel model = null;
-            if(this.CheckCache($"{cachePrefix}:{leaseTermId}", out model))
+            if (this.CheckCache($"{cachePrefix}:{leaseTermId}", out model))
             {
                 return Ok(model);
             }
@@ -62,7 +63,7 @@ namespace OwnApt.Api.Controllers
         public async Task<IActionResult> ReadLeaseTermByPropertyAsync(string propertyId)
         {
             LeaseTermModel model = null;
-            if(this.CheckCache($"{cachePrefix}:{propertyId}", out model))
+            if (this.CheckCache($"{cachePrefix}:{propertyId}", out model))
             {
                 return Ok(model);
             }

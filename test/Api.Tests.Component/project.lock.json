@@ -2235,6 +2235,117 @@
           }
         }
       },
+      "Serilog/2.2.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Dynamic.Runtime": "4.0.11",
+          "System.Globalization": "4.0.11",
+          "System.Linq": "4.1.0",
+          "System.Reflection": "4.1.0",
+          "System.Reflection.Extensions": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Text.RegularExpressions": "4.1.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.dll": {}
+        }
+      },
+      "Serilog.Extensions.Logging/1.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
+          "Serilog": "2.0.0",
+          "System.Threading": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Extensions.Logging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Extensions.Logging.dll": {}
+        }
+      },
+      "Serilog.Sinks.Console/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0",
+          "System.Console": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.Console.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.Console.dll": {}
+        }
+      },
+      "Serilog.Sinks.File/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.2.0",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem": "4.0.1",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.File.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.File.dll": {}
+        }
+      },
+      "Serilog.Sinks.Logentries/3.0.0-dev-00020": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0",
+          "Serilog.Sinks.PeriodicBatching": "2.0.0",
+          "System.Net.Security": "4.0.0",
+          "System.Net.Sockets": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.Logentries.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.Logentries.dll": {}
+        }
+      },
+      "Serilog.Sinks.PeriodicBatching/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0",
+          "System.Collections.Concurrent": "4.0.12",
+          "System.Threading.Thread": "4.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll": {}
+        }
+      },
+      "Serilog.Sinks.RollingFile/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Serilog.Sinks.File": "3.0.1",
+          "System.IO": "4.1.0",
+          "System.IO.FileSystem.Primitives": "4.0.1",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Text.Encoding.Extensions": "4.0.11"
+        },
+        "compile": {
+          "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll": {}
+        }
+      },
       "Swashbuckle.Swagger/6.0.0-beta901": {
         "type": "package",
         "dependencies": {
@@ -4498,6 +4609,11 @@
           "MySql.Data.Core": "7.0.4-IR-191",
           "MySql.Data.EntityFrameworkCore": "7.0.4-IR-191",
           "OwnApt": "14.7503.951",
+          "Serilog": "2.2.1",
+          "Serilog.Extensions.Logging": "1.2.0",
+          "Serilog.Sinks.Console": "2.1.0",
+          "Serilog.Sinks.Logentries": "3.0.0-dev-00020",
+          "Serilog.Sinks.RollingFile": "3.0.1",
           "Swashbuckle.SwaggerGen": "6.0.0-beta901",
           "Swashbuckle.SwaggerUi": "6.0.0-beta901",
           "System.Reflection.TypeExtensions": "4.1.0",
@@ -6305,6 +6421,99 @@
         "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni.4.0.1.nupkg.sha512",
         "runtime.win7-x86.runtime.native.System.Data.SqlClient.sni.nuspec",
         "runtimes/win7-x86/native/sni.dll"
+      ]
+    },
+    "Serilog/2.2.1": {
+      "sha512": "rQcldf93blfFel7X66LCPzIxXUDvkwlkvb3NbZOziZo9TgqcSRrxx1DiMW/gMsTbd46iAr7ZJF2LgCUa/kR2ng==",
+      "type": "package",
+      "path": "Serilog/2.2.1",
+      "files": [
+        "Serilog.2.2.1.nupkg.sha512",
+        "Serilog.nuspec",
+        "lib/net45/Serilog.dll",
+        "lib/net45/Serilog.xml",
+        "lib/net46/Serilog.dll",
+        "lib/net46/Serilog.xml",
+        "lib/netstandard1.0/Serilog.dll",
+        "lib/netstandard1.0/Serilog.xml",
+        "lib/netstandard1.3/Serilog.dll",
+        "lib/netstandard1.3/Serilog.xml"
+      ]
+    },
+    "Serilog.Extensions.Logging/1.2.0": {
+      "sha512": "kAZoUF/U/X+/ep5ZytpydcURbt1tvhyArOrWct0QLW72j6cquu2JyJlzNAaKW1yBZcblx1PvzvFJADhBuaIiMQ==",
+      "type": "package",
+      "path": "Serilog.Extensions.Logging/1.2.0",
+      "files": [
+        "Serilog.Extensions.Logging.1.2.0.nupkg.sha512",
+        "Serilog.Extensions.Logging.nuspec",
+        "lib/net45/Serilog.Extensions.Logging.dll",
+        "lib/net45/Serilog.Extensions.Logging.xml",
+        "lib/netstandard1.3/Serilog.Extensions.Logging.dll",
+        "lib/netstandard1.3/Serilog.Extensions.Logging.xml"
+      ]
+    },
+    "Serilog.Sinks.Console/2.1.0": {
+      "sha512": "LqTjUgmfuKNgnkVY7S1ocotis9qpt+l7yvqTgvxi0GWCrtMW39W9L08mpxiA1mLVGbSDbxIlFRAnqo/fEEBX9Q==",
+      "type": "package",
+      "path": "Serilog.Sinks.Console/2.1.0",
+      "files": [
+        "Serilog.Sinks.Console.2.1.0.nupkg.sha512",
+        "Serilog.Sinks.Console.nuspec",
+        "lib/net45/Serilog.Sinks.Console.dll",
+        "lib/netstandard1.3/Serilog.Sinks.Console.dll"
+      ]
+    },
+    "Serilog.Sinks.File/3.0.1": {
+      "sha512": "9eCg2aGA9gSU2H3AeKcefXcEeHLpmvR3gMxiLqXRvqBNozZOd8Kdng24r7erEkC6E3FD7mCroUHclvDwdycc4A==",
+      "type": "package",
+      "path": "Serilog.Sinks.File/3.0.1",
+      "files": [
+        "Serilog.Sinks.File.3.0.1.nupkg.sha512",
+        "Serilog.Sinks.File.nuspec",
+        "lib/net45/Serilog.Sinks.File.dll",
+        "lib/net45/Serilog.Sinks.File.xml",
+        "lib/netstandard1.3/Serilog.Sinks.File.dll",
+        "lib/netstandard1.3/Serilog.Sinks.File.xml"
+      ]
+    },
+    "Serilog.Sinks.Logentries/3.0.0-dev-00020": {
+      "sha512": "mTQqMjsmKNGP0ee4UlzAxiuUC4GIn0XBRf892rT3LJCXEGYsYcOrSVwoGA4wXWDFLhH0T9Lj/k8gSHT0QYBhwA==",
+      "type": "package",
+      "path": "Serilog.Sinks.Logentries/3.0.0-dev-00020",
+      "files": [
+        "Serilog.Sinks.Logentries.3.0.0-dev-00020.nupkg.sha512",
+        "Serilog.Sinks.Logentries.nuspec",
+        "lib/net45/Serilog.Sinks.Logentries.dll",
+        "lib/netstandard1.3/Serilog.Sinks.Logentries.dll"
+      ]
+    },
+    "Serilog.Sinks.PeriodicBatching/2.0.0": {
+      "sha512": "gfG5MaAKdGw0CFPdoXV9I0m+s5CbUxihFeiRMD/nSPzP/S8Lmop0McQhz8o1tKBU/7SkM1UOjWsBdv5LObDBOg==",
+      "type": "package",
+      "path": "Serilog.Sinks.PeriodicBatching/2.0.0",
+      "files": [
+        "Serilog.Sinks.PeriodicBatching.2.0.0.nupkg.sha512",
+        "Serilog.Sinks.PeriodicBatching.nuspec",
+        "lib/net45/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/net45/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard1.1/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard1.1/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.xml"
+      ]
+    },
+    "Serilog.Sinks.RollingFile/3.0.1": {
+      "sha512": "l4Ei4+YmMGF3RoWYu8TanMPFdwd6hywYtNDv+PCG84sUxoba377B6YVSJJx/yaGuDRcH48ZhfLjITT7pJUqGrQ==",
+      "type": "package",
+      "path": "Serilog.Sinks.RollingFile/3.0.1",
+      "files": [
+        "Serilog.Sinks.RollingFile.3.0.1.nupkg.sha512",
+        "Serilog.Sinks.RollingFile.nuspec",
+        "lib/net45/Serilog.Sinks.RollingFile.dll",
+        "lib/net45/Serilog.Sinks.RollingFile.xml",
+        "lib/netstandard1.3/Serilog.Sinks.RollingFile.dll",
+        "lib/netstandard1.3/Serilog.Sinks.RollingFile.xml"
       ]
     },
     "Swashbuckle.Swagger/6.0.0-beta901": {

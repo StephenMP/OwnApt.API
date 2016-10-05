@@ -121,7 +121,7 @@ namespace Api.Tests.Component.Controllers
             Assert.Equal(leaseTermModel.LeaseTermId, this.leaseTermEntity.LeaseTermId);
             Assert.Equal(leaseTermModel.Active, this.leaseTermEntity.Active);
 
-            foreach(var periodModel in leaseTermModel.LeasePeriods)
+            foreach (var periodModel in leaseTermModel.LeasePeriods)
             {
                 var periodEntity = this.leaseTermEntity.LeasePeriods.FirstOrDefault(e => e.LeasePeriodId == periodModel.LeasePeriodId);
                 Assert.NotNull(periodEntity);
@@ -189,14 +189,6 @@ namespace Api.Tests.Component.Controllers
             Active = TestRandom.Boolean
         };
 
-        public static LeasePeriodEntity LeasePeriodEntity(int leaseTermId, LeasePeriodStatus status) => new LeasePeriodEntity
-        {
-            LeasePeriodId = TestRandom.Integer,
-            LeasePeriodStatusId = (int)status,
-            LeaseTermId = leaseTermId,
-            Period = TestRandom.String
-        };
-
         public static LeaseTermModel LeaseTermModel => new LeaseTermModel
         {
             EndDate = DateTime.UtcNow.AddDays(1),
@@ -209,5 +201,17 @@ namespace Api.Tests.Component.Controllers
         public static string String => Guid.NewGuid().ToString("N");
 
         #endregion Public Properties
+
+        #region Public Methods
+
+        public static LeasePeriodEntity LeasePeriodEntity(int leaseTermId, LeasePeriodStatus status) => new LeasePeriodEntity
+        {
+            LeasePeriodId = TestRandom.Integer,
+            LeasePeriodStatusId = (int)status,
+            LeaseTermId = leaseTermId,
+            Period = TestRandom.String
+        };
+
+        #endregion Public Methods
     }
 }

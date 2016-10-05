@@ -1,19 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Metadata
 {
     public class MongoRegisteredTokenRepositoryFeatures : IClassFixture<MongoEnvironmentClassFixture>
     {
+        #region Private Fields
+
         private readonly MongoRegisteredTokenRepositorySteps steps;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MongoRegisteredTokenRepositoryFeatures(MongoEnvironmentClassFixture mongoFixture)
         {
             this.steps = new MongoRegisteredTokenRepositorySteps(mongoFixture);
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         [Fact]
         public async Task CanCreateRegisteredToken()
@@ -23,6 +30,24 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
             this.steps.GivenIHaveARegisteredTokenToCreate();
             await this.steps.WhenICreateAsync();
             this.steps.ThenICanVerifyICanCreateRegisteredToken();
+        }
+
+        [Fact]
+        public async Task CannotDeleteRegisteredToken()
+        {
+            this.steps.GivenIHaveAMongoMetadataContext();
+            this.steps.GivenIHaveARegisteredTokenRepository();
+            this.steps.GivenIHaveADeleteRegisteredTokenAction();
+            await this.steps.ThenICanVerifyICannotDeleteRegisteredToken();
+        }
+
+        [Fact]
+        public async Task CannotUpdateRegisteredToken()
+        {
+            this.steps.GivenIHaveAMongoMetadataContext();
+            this.steps.GivenIHaveARegisteredTokenRepository();
+            this.steps.GivenIHaveAnUpdateRegisteredTokenAction();
+            await this.steps.ThenICanVerifyICannotUpdateRegisteredToken();
         }
 
         [Fact]
@@ -45,22 +70,6 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
             this.steps.ThenICanVerifyICanReadRegisteredToken();
         }
 
-        [Fact]
-        public async Task CannotUpdateRegisteredToken()
-        {
-            this.steps.GivenIHaveAMongoMetadataContext();
-            this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveAnUpdateRegisteredTokenAction();
-            await this.steps.ThenICanVerifyICannotUpdateRegisteredToken();
-        }
-
-        [Fact]
-        public async Task CannotDeleteRegisteredToken()
-        {
-            this.steps.GivenIHaveAMongoMetadataContext();
-            this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveADeleteRegisteredTokenAction();
-            await this.steps.ThenICanVerifyICannotDeleteRegisteredToken();
-        }
+        #endregion Public Methods
     }
 }

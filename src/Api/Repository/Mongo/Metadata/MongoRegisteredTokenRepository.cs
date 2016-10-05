@@ -1,22 +1,25 @@
-﻿using OwnApt.Api.Repository.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using OwnApt.Api.Contract.Model;
+﻿using AutoMapper;
 using MongoDB.Driver;
-using AutoMapper;
-using OwnApt.Api.Repository.Entity.Sql;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
-using OwnApt.Common.Utility.Data;
+using OwnApt.Api.Repository.Interface;
 using OwnApt.Common.Extension;
+using OwnApt.Common.Utility.Data;
+using System;
+using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Mongo.Metadata
 {
     public class MongoRegisteredTokenRepository : IRegisteredTokenRepository
     {
+        #region Private Fields
+
         private readonly IMapper mapper;
         private readonly IMongoMetadataContext mongoMetadataContext;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         public MongoRegisteredTokenRepository(IMongoMetadataContext mongoMetadataContext, IMapper mapper)
         {
@@ -24,6 +27,9 @@ namespace OwnApt.Api.Repository.Mongo.Metadata
             this.mapper = mapper;
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public async Task<RegisteredTokenModel> CreateAsync(RegisteredTokenModel model)
         {
@@ -61,5 +67,7 @@ namespace OwnApt.Api.Repository.Mongo.Metadata
         {
             throw new NotSupportedException("We do not update registered tokens");
         }
+
+        #endregion Public Methods
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OwnApt.Api.Repository.Entity.Sql;
 
 namespace OwnApt.Api.Repository.Sql.Core
 {

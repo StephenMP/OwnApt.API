@@ -45,7 +45,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Configure services for OwnApt
-            services.UseOwnAptServices();
+            services.AddOwnAptServices();
         }
 
         #endregion Public Methods

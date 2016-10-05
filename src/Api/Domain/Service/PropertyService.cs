@@ -2,7 +2,6 @@
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Repository.Interface;
 using System.Threading.Tasks;
-using System;
 
 namespace OwnApt.Api.Domain.Service
 {

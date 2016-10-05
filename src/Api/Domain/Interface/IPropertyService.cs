@@ -13,8 +13,9 @@ namespace OwnApt.Api.Domain.Interface
 
         Task<PropertyModel> ReadAsync(string id);
 
-        Task UpdateAsync(PropertyModel property);
         Task<PropertyModel[]> ReadManyAsync(string[] propertyIds);
+
+        Task UpdateAsync(PropertyModel property);
 
         #endregion Public Methods
     }
