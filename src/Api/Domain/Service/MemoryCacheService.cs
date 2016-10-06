@@ -8,7 +8,7 @@ namespace OwnApt.Api.Domain.Service
     {
         void Remove(object key);
         void Set<TItem>(object key, TItem value, MemoryCacheEntryOptions options);
-        bool TryGetValue<TItem>(object key, out TItem value);
+        bool TryGetValue<TItem>(object key, out TItem value) where TItem : class;
         void Invalidate();
     }
 
@@ -52,7 +52,7 @@ namespace OwnApt.Api.Domain.Service
             this.cacheKeys.Add(key);
         }
 
-        public bool TryGetValue<TItem>(object key, out TItem value)
+        public bool TryGetValue<TItem>(object key, out TItem value) where TItem : class
         {
             return this.memoryCache.TryGetValue(key, out value);
         }

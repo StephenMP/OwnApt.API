@@ -127,6 +127,7 @@ namespace OwnApt.Api.AppStart
         private static void AddMemoryCache(IServiceCollection services)
         {
             services.AddMemoryCache();
+            services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
         }
 
         private static void AddMongo(IServiceCollection services)
@@ -155,7 +156,6 @@ namespace OwnApt.Api.AppStart
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<ILeaseTermService, LeaseTermService>();
             services.AddTransient<IRegisteredTokenService, RegisteredTokenService>();
-            services.AddTransient<IMemoryCacheService, MemoryCacheService>();
         }
 
         private static void AddSql(IServiceCollection services)
