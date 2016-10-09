@@ -3,12 +3,12 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "ApiContract/14.7511.8851": {
+      "ApiContract/14.7603.8595": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "1.0.0",
           "NETStandard.Library": "1.6.0",
-          "OwnApt": "14.7478.3006"
+          "OwnApt": "14.7585.1093"
         },
         "compile": {
           "lib/netstandard1.6/ApiContract.dll": {}
@@ -1831,7 +1831,7 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OwnApt/14.7503.951": {
+      "OwnApt/14.7585.1093": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -4188,12 +4188,12 @@
     }
   },
   "libraries": {
-    "ApiContract/14.7511.8851": {
-      "sha512": "fCtahzy63tHC5YYIBfnuKIB3DcOTiN4DXrDa2jhwUgm2Nt5RgVh0vKQ3IvbD8Etd1hlX1xhX6al2PilGjiHVVw==",
+    "ApiContract/14.7603.8595": {
+      "sha512": "ISgKLZ0L0INzebatCs/IDW9wOcC5UaUqxS4Yxt6hVD5AK8FuGm5/TUlJN77UGAuNb1g8JdrXvbDU6TcrJyYcVg==",
       "type": "package",
-      "path": "ApiContract/14.7511.8851",
+      "path": "ApiContract/14.7603.8595",
       "files": [
-        "ApiContract.14.7511.8851.nupkg.sha512",
+        "ApiContract.14.7603.8595.nupkg.sha512",
         "ApiContract.nuspec",
         "lib/netstandard1.6/ApiContract.dll"
       ]
@@ -5637,12 +5637,12 @@
         "tools/install.ps1"
       ]
     },
-    "OwnApt/14.7503.951": {
-      "sha512": "M1SjtjIFc1VM2X3bSkVLRnyHkp67V+i1BvC9j3OclUN93VgGyQu1oA+Xevd+qnG4+9Wp1etnGHOhrunHYWL7Kg==",
+    "OwnApt/14.7585.1093": {
+      "sha512": "EaQF9l4o2M2Pjic60Dqeax+EmcAAOMYNZxdryi0XLETIYXQ1C9hFsNvI9RTX4IiQr8N5Nfa7yLmb7D63QAZLFA==",
       "type": "package",
-      "path": "OwnApt/14.7503.951",
+      "path": "OwnApt/14.7585.1093",
       "files": [
-        "OwnApt.14.7503.951.nupkg.sha512",
+        "OwnApt.14.7585.1093.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -10653,7 +10653,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "ApiContract >= 14.7511.8851",
+      "ApiContract >= 14.7603.8595",
       "Authentication >= 14.7524.6743",
       "AutoMapper >= 5.1.1",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
@@ -10673,7 +10673,7 @@
       "MongoDB.Driver >= 2.3.0",
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
-      "OwnApt >= 14.7503.951",
+      "OwnApt >= 14.7585.1093",
       "Serilog >= 2.2.1",
       "Serilog.Extensions.Logging >= 1.2.0",
       "Serilog.Sinks.Console >= 2.1.0",

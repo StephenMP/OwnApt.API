@@ -1,5 +1,5 @@
 ﻿using OwnApt.Common.Dto;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using System;
 using System.Collections.Generic;
 

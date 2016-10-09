@@ -1,4 +1,7 @@
-﻿using OwnApt.Api.AppStart;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
@@ -6,11 +9,8 @@ using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Entity.Sql;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Sql.Lease;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using OwnApt.TestEnvironment.Environment;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers

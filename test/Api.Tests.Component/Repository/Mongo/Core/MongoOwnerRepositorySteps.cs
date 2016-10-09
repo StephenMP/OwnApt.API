@@ -4,7 +4,7 @@ using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo.Core;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

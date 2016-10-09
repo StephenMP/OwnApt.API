@@ -5,7 +5,7 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
-using OwnApt.Common.Enum;
+using OwnApt.Common.Enums;
 using OwnApt.Common.Extension;
 using System;
 using System.Collections.Generic;
