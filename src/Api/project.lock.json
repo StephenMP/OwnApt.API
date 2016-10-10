@@ -1831,7 +1831,7 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "OwnApt/14.7585.1093": {
+      "OwnApt/14.7607.603": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
@@ -5637,12 +5637,12 @@
         "tools/install.ps1"
       ]
     },
-    "OwnApt/14.7585.1093": {
-      "sha512": "EaQF9l4o2M2Pjic60Dqeax+EmcAAOMYNZxdryi0XLETIYXQ1C9hFsNvI9RTX4IiQr8N5Nfa7yLmb7D63QAZLFA==",
+    "OwnApt/14.7607.603": {
+      "sha512": "HiEQKkGstkmBFETFgHfVu9+3YLa3kyZR3rdRFn75ABY3dh+OH3tfg879L1eb100R+tAYYRIENiJ9pIDFXo4uVA==",
       "type": "package",
-      "path": "OwnApt/14.7585.1093",
+      "path": "OwnApt/14.7607.603",
       "files": [
-        "OwnApt.14.7585.1093.nupkg.sha512",
+        "OwnApt.14.7607.603.nupkg.sha512",
         "OwnApt.nuspec",
         "lib/netstandard1.6/OwnApt.dll"
       ]
@@ -10673,7 +10673,7 @@
       "MongoDB.Driver >= 2.3.0",
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
-      "OwnApt >= 14.7585.1093",
+      "OwnApt >= 14.7607.603",
       "Serilog >= 2.2.1",
       "Serilog.Extensions.Logging >= 1.2.0",
       "Serilog.Sinks.Console >= 2.1.0",
