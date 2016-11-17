@@ -1,18 +1,21 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface IRepository<TModelIn, TModelOut, TPrimaryKey>
+    public interface IRepository<TModel, TPrimaryKey>
     {
         #region Public Methods
 
-        Task<TModelOut> CreateAsync(TModelIn model);
+        Task<TModel> CreateAsync(TModel model);
 
-        Task DeleteAsync(TPrimaryKey id);
+        Task DeleteAsync(TPrimaryKey model);
 
-        Task<TModelOut> ReadAsync(TPrimaryKey id);
+        Task<IEnumerable<TModel>> ReadAllAsync();
 
-        Task UpdateAsync(TModelIn model);
+        Task<TModel> ReadAsync(TPrimaryKey id);
+
+        Task UpdateAsync(TModel model);
 
         #endregion Public Methods
     }

@@ -1,11 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Threading.Tasks;
+using AutoMapper;
 using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo.Metadata;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Metadata
@@ -15,7 +14,6 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
         #region Private Fields
 
         private readonly MongoEnvironmentClassFixture mongoFixture;
-        private Func<Task> action;
         private string currentRegisteredToken;
         private string currentRegisteredTokenId;
         private IMapper mapper;
@@ -39,19 +37,9 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
 
         #region Internal Methods
 
-        internal void GivenIHaveADeleteRegisteredTokenAction()
-        {
-            this.action = async () => { await this.mongoRegisteredTokenRepository.UpdateAsync(RegisteredTokenRandom.RegisteredTokenModel()); };
-        }
-
         internal void GivenIHaveAMongoMetadataContext()
         {
             this.mongoMetadataContext = new MongoMetadataContext(this.mongoFixture.Environment.GetMongoClient());
-        }
-
-        internal void GivenIHaveAnUpdateRegisteredTokenAction()
-        {
-            this.action = async () => { await this.mongoRegisteredTokenRepository.UpdateAsync(RegisteredTokenRandom.RegisteredTokenModel()); };
         }
 
         internal void GivenIHaveARegisteredTokenRepository()
@@ -65,28 +53,18 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
             this.registeredTokenModelToCreate = RegisteredTokenRandom.RegisteredTokenModel(this.currentRegisteredTokenId);
         }
 
-        internal void GivenIHaveARegisteredTokenToRead()
+        internal async Task GivenIHaveARegisteredTokenToRead()
         {
             this.currentRegisteredTokenId = TestRandom.String;
             this.registeredTokenModelToRead = RegisteredTokenRandom.RegisteredTokenModel(this.currentRegisteredTokenId);
             this.currentRegisteredToken = this.registeredTokenModelToRead.Token;
             var registeredTokenEntityToRead = this.mapper.Map<RegisteredTokenEntity>(this.registeredTokenModelToRead);
-            this.mongoFixture.Environment.ImportMongoDataAsync("Metadata", "RegisteredToken", new[] { registeredTokenEntityToRead });
+            await this.mongoFixture.Environment.ImportMongoDataAsync("Metadata", "RegisteredToken", new[] { registeredTokenEntityToRead });
         }
 
         internal void ThenICanVerifyICanCreateRegisteredToken()
         {
             Assert.Equal(this.registeredTokenModelToCreate, this.resultModel);
-        }
-
-        internal async Task ThenICanVerifyICannotDeleteRegisteredToken()
-        {
-            await Assert.ThrowsAsync<NotSupportedException>(this.action);
-        }
-
-        internal async Task ThenICanVerifyICannotUpdateRegisteredToken()
-        {
-            await Assert.ThrowsAsync<NotSupportedException>(this.action);
         }
 
         internal void ThenICanVerifyICanReadRegisteredToken()

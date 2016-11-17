@@ -1,9 +1,9 @@
-﻿using OwnApt.Api.Contract.Model;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 
 namespace OwnApt.Api.Repository.Interface
 {
-    public interface ILeaseTermRepository : IRepository<LeaseTermModel, LeaseTermModel, int>
+    public interface ILeaseTermRepository : IRepository<LeaseTermModel, int>
     {
         #region Public Methods
 

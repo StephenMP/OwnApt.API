@@ -1,9 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Entity.Sql;
 using OwnApt.Common.Enums;
-using System;
 
 namespace OwnApt.Api.Domain.Mapping
 {

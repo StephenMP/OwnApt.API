@@ -1,13 +1,11 @@
-﻿using OwnApt.Common.Dto;
-using System;
+﻿using System;
 
 namespace OwnApt.Api.Repository.Entity.Mongo
 {
-    public class RegisteredTokenEntity : Equatable
+    public class RegisteredTokenEntity : MongoEntity
     {
         #region Public Properties
 
-        public string Id { get; set; }
         public string Nonce { get; set; }
         public string[] PropertyIds { get; set; }
         public string SuppliedNonce { get; set; }

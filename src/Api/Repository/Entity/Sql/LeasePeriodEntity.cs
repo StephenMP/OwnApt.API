@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OwnApt.Api.Repository.Entity.Sql
 {
     [Table("LeasePeriod")]
-    public class LeasePeriodEntity
+    public class LeasePeriodEntity : SqlEntity
     {
         #region Public Properties
+
+        public override int Id => this.LeasePeriodId;
 
         [Key, Column("LeasePeriodId")]
         public int LeasePeriodId { get; set; }

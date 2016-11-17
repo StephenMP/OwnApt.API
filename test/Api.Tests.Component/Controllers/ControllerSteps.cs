@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Net;
+using System.Reflection;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
-using System;
-using System.Net;
-using System.Reflection;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers
@@ -41,7 +41,7 @@ namespace Api.Tests.Component.Controllers
 
         #region Private Fields
 
-        private IMapper mapper;
+        private readonly IMapper mapper;
 
         #endregion Private Fields
 

@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,6 @@ using OwnApt.Api.Repository.Sql.Lease;
 using OwnApt.Authentication.Api.Filter;
 using Serilog;
 using Swashbuckle.Swagger.Model;
-using System;
 
 namespace OwnApt.Api.AppStart
 {
@@ -32,6 +32,18 @@ namespace OwnApt.Api.AppStart
         #endregion Private Fields
 
         #region Public Methods
+
+        public static void AddOwnAptServices(this IServiceCollection services)
+        {
+            AddMvc(services);
+            AddAutoMapper(services);
+            AddRepositories(services);
+            AddServices(services);
+            AddMongo(services);
+            AddSql(services);
+            AddSwagger(services);
+            AddMemoryCache(services);
+        }
 
         public static IMapper BuildMapper()
         {
@@ -58,70 +70,13 @@ namespace OwnApt.Api.AppStart
             UseSwagger(app);
         }
 
-        public static void AddOwnAptServices(this IServiceCollection services)
-        {
-            AddMvc(services);
-            AddAutoMapper(services);
-            AddRepositories(services);
-            AddServices(services);
-            AddMongo(services);
-            AddSql(services);
-            AddSwagger(services);
-            AddMemoryCache(services);
-        }
-
         #endregion Public Methods
 
         #region Private Methods
 
-        private static void ConfigureLogging(ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
-        {
-            /* Serilog Configuration */
-            var logentriesToken = Configuration["Logging:LogentriesToken"];
-            var loggerConfig = new LoggerConfiguration()
-                .Enrich.FromLogContext();
-
-            if (HostEnvironment.IsDevelopment())
-            {
-                loggerConfig
-                    .MinimumLevel.Information()
-                    .WriteTo.Console();
-            }
-            else
-            {
-                loggerConfig
-                    .MinimumLevel.Warning()
-                    .WriteTo.Logentries(logentriesToken)
-                    .WriteTo.Console();
-                //.MinimumLevel.Information()
-                //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
-                //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
-            }
-
-            Log.Logger = loggerConfig.CreateLogger();
-
-            loggerFactory.AddSerilog();
-            appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
-        }
-
         private static void AddAutoMapper(IServiceCollection services)
         {
             services.AddSingleton<IMapper>(BuildMapper());
-        }
-
-        private static void AddMvc(IServiceCollection services)
-        {
-            if (HostEnvironment.IsDevelopment())
-            {
-                services.AddMvc();
-            }
-            else
-            {
-                services.AddMvc(options =>
-                {
-                    options.Filters.Add(typeof(HmacAuthenticationFilter));
-                });
-            }
         }
 
         private static void AddMemoryCache(IServiceCollection services)
@@ -137,9 +92,19 @@ namespace OwnApt.Api.AppStart
             services.AddScoped<IMongoMetadataContext, MongoMetadataContext>();
         }
 
-        private static void UseMvc(IApplicationBuilder app)
+        private static void AddMvc(IServiceCollection services)
         {
-            app.UseMvc();
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddMvc();
+            }
+            else
+            {
+                services.AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(HmacAuthenticationFilter));
+                });
+            }
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -193,12 +158,6 @@ namespace OwnApt.Api.AppStart
             });
         }
 
-        private static void UseSwagger(IApplicationBuilder app)
-        {
-            app.UseSwagger("api/{apiVersion}/info.json");
-            app.UseSwaggerUi("api/v1/info", "/api/v1/info.json");
-        }
-
         private static void AddSwagger(IServiceCollection services)
         {
             services.AddSwaggerGen();
@@ -231,6 +190,47 @@ namespace OwnApt.Api.AppStart
             };
 
             return new MongoClient(mongoClientSettings);
+        }
+
+        private static void ConfigureLogging(ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        {
+            /* Serilog Configuration */
+            var logentriesToken = Configuration["Logging:LogentriesToken"];
+            var loggerConfig = new LoggerConfiguration()
+                .Enrich.FromLogContext();
+
+            if (HostEnvironment.IsDevelopment())
+            {
+                loggerConfig
+                    .MinimumLevel.Information()
+                    .WriteTo.Console();
+            }
+            else
+            {
+                loggerConfig
+                    .MinimumLevel.Warning()
+                    .WriteTo.Logentries(logentriesToken)
+                    .WriteTo.Console();
+                //.MinimumLevel.Information()
+                //.WriteTo.RollingFile("logs\\DotCom-{Date}.txt")
+                //.WriteTo.Logentries(logentriesToken, restrictedToMinimumLevel: LogEventLevel.Warning);
+            }
+
+            Log.Logger = loggerConfig.CreateLogger();
+
+            loggerFactory.AddSerilog();
+            appLifetime.ApplicationStopped.Register(Log.CloseAndFlush);
+        }
+
+        private static void UseMvc(IApplicationBuilder app)
+        {
+            app.UseMvc();
+        }
+
+        private static void UseSwagger(IApplicationBuilder app)
+        {
+            app.UseSwagger("api/{apiVersion}/info.json");
+            app.UseSwaggerUi("api/v1/info", "/api/v1/info.json");
         }
 
         #endregion Private Methods

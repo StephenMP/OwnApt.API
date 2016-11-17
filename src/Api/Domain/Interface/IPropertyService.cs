@@ -1,5 +1,6 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 
 namespace OwnApt.Api.Domain.Interface
 {
@@ -11,9 +12,11 @@ namespace OwnApt.Api.Domain.Interface
 
         Task DeleteAsync(string id);
 
+        Task<IEnumerable<PropertyModel>> ReadAllAsync();
+
         Task<PropertyModel> ReadAsync(string id);
 
-        Task<PropertyModel[]> ReadManyAsync(string[] propertyIds);
+        Task<IEnumerable<PropertyModel>> ReadManyAsync(string[] propertyIds);
 
         Task UpdateAsync(PropertyModel property);
 

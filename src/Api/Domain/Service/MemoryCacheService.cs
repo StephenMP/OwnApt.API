@@ -1,24 +1,31 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace OwnApt.Api.Domain.Service
 {
     public interface IMemoryCacheService : IDisposable
     {
-        void Remove(object key);
-        void Set<TItem>(object key, TItem value, MemoryCacheEntryOptions options);
-        bool TryGetValue<TItem>(object key, out TItem value) where TItem : class;
+        #region Public Methods
+
         void Invalidate();
+
+        void Remove(object key);
+
+        void Set<TItem>(object key, TItem value, MemoryCacheEntryOptions options);
+
+        bool TryGetValue<TItem>(object key, out TItem value) where TItem : class;
+
+        #endregion Public Methods
     }
 
     public class MemoryCacheService : IMemoryCacheService
     {
         #region Private Fields
 
-        private bool disposedValue;
-        private readonly IMemoryCache memoryCache;
         private readonly IList<object> cacheKeys;
+        private readonly IMemoryCache memoryCache;
+        private bool disposedValue;
 
         #endregion Private Fields
 
@@ -38,6 +45,16 @@ namespace OwnApt.Api.Domain.Service
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void Invalidate()
+        {
+            foreach (var key in this.cacheKeys)
+            {
+                this.memoryCache.Remove(key);
+            }
+
+            this.cacheKeys.Clear();
         }
 
         public void Remove(object key)
@@ -72,16 +89,6 @@ namespace OwnApt.Api.Domain.Service
 
                 disposedValue = true;
             }
-        }
-
-        public void Invalidate()
-        {
-            foreach(var key in this.cacheKeys)
-            {
-                this.memoryCache.Remove(key);
-            }
-
-            this.cacheKeys.Clear();
         }
 
         #endregion Protected Methods

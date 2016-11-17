@@ -1,11 +1,10 @@
-﻿using OwnApt.Common.Dto;
-using OwnApt.Common.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using OwnApt.Common.Enums;
 
 namespace OwnApt.Api.Repository.Entity.Mongo
 {
-    public class OwnerEntity : Equatable
+    public class OwnerEntity : MongoEntity
     {
         #region Public Properties
 
@@ -13,7 +12,6 @@ namespace OwnApt.Api.Repository.Entity.Mongo
         public ContactEntity Contact { get; set; }
         public ContactEntity EmergencyContact { get; set; }
         public Gender Gender { get; set; }
-        public string Id { get; set; }
         public NameEntity Name { get; set; }
         public IList<string> PropertyIds { get; set; }
 

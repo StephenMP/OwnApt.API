@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using OwnApt.Api.AppStart;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Entity.Mongo;
 using OwnApt.Api.Repository.Interface;
 using OwnApt.Api.Repository.Mongo.Core;
 using OwnApt.Common.Enums;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Core
@@ -29,7 +29,7 @@ namespace Api.Tests.Component.Repository.Mongo.Core
         private PropertyModel propertyModelToRead;
         private PropertyModel propertyModelToUpdate;
         private PropertyModel resultModel;
-        private PropertyModel[] resultModels;
+        private IEnumerable<PropertyModel> resultModels;
 
         #endregion Private Fields
 

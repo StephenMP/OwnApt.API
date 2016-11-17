@@ -1,5 +1,5 @@
-﻿using OwnApt.TestEnvironment.Environment;
-using System;
+﻿using System;
+using OwnApt.TestEnvironment.Environment;
 
 namespace Api.Tests.Component.Repository.Mongo
 {

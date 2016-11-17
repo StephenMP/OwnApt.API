@@ -1,6 +1,6 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Repository.Interface;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Domain.Service
 {
@@ -17,38 +17,25 @@ namespace OwnApt.Api.Domain.Service
         #endregion Public Methods
     }
 
-    public class RegisteredTokenService : IRegisteredTokenService
+    public class RegisteredTokenService : RepositoryService<RegisteredTokenModel, string, IRegisteredTokenRepository>, IRegisteredTokenService
     {
         #region Private Fields
-
-        private readonly IRegisteredTokenRepository registeredTokenRepository;
 
         #endregion Private Fields
 
         #region Public Constructors
 
-        public RegisteredTokenService(IRegisteredTokenRepository registeredTokenRepository)
+        public RegisteredTokenService(IRegisteredTokenRepository registeredTokenRepository) : base(registeredTokenRepository)
         {
-            this.registeredTokenRepository = registeredTokenRepository;
         }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public async Task<RegisteredTokenModel> CreateAsync(RegisteredTokenModel model)
-        {
-            return await this.registeredTokenRepository.CreateAsync(model);
-        }
-
-        public async Task<RegisteredTokenModel> ReadAsync(string id)
-        {
-            return await this.registeredTokenRepository.ReadAsync(id);
-        }
-
         public async Task<RegisteredTokenModel> ReadByTokenAsync(string token)
         {
-            return await this.registeredTokenRepository.ReadByTokenAsync(token);
+            return await this.repository.ReadByTokenAsync(token);
         }
 
         #endregion Public Methods

@@ -1,5 +1,5 @@
-﻿using OwnApt.Common.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using OwnApt.Common.Dto;
 
 namespace OwnApt.Api.Repository.Entity.Mongo
 {

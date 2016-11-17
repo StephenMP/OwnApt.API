@@ -1,11 +1,11 @@
-﻿using Moq;
+﻿using System;
+using System.Threading.Tasks;
+using Moq;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers

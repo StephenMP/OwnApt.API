@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using OwnApt.Api.Repository.Entity.Sql;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Repository.Sql.Lease
 {

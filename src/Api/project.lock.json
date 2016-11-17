@@ -981,7 +981,7 @@
           "lib/netstandard1.3/Microsoft.DotNet.InternalAbstractions.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/1.0.0": {
+      "Microsoft.EntityFrameworkCore/1.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Caching.Memory": "1.0.0",
@@ -1957,7 +1957,7 @@
           }
         }
       },
-      "Serilog/2.2.1": {
+      "Serilog/2.3.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -2006,14 +2006,15 @@
           "lib/netstandard1.3/Serilog.Sinks.Console.dll": {}
         }
       },
-      "Serilog.Sinks.File/3.0.1": {
+      "Serilog.Sinks.File/3.1.0": {
         "type": "package",
         "dependencies": {
-          "Serilog": "2.2.0",
+          "Serilog": "2.3.0",
           "System.IO": "4.1.0",
           "System.IO.FileSystem": "4.0.1",
           "System.IO.FileSystem.Primitives": "4.0.1",
-          "System.Text.Encoding.Extensions": "4.0.11"
+          "System.Text.Encoding.Extensions": "4.0.11",
+          "System.Threading.Timer": "4.0.1"
         },
         "compile": {
           "lib/netstandard1.3/Serilog.Sinks.File.dll": {}
@@ -2052,10 +2053,10 @@
           "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.dll": {}
         }
       },
-      "Serilog.Sinks.RollingFile/3.0.1": {
+      "Serilog.Sinks.RollingFile/3.2.0": {
         "type": "package",
         "dependencies": {
-          "Serilog.Sinks.File": "3.0.1",
+          "Serilog.Sinks.File": "3.1.0",
           "System.IO": "4.1.0",
           "System.IO.FileSystem.Primitives": "4.0.1",
           "System.Runtime.InteropServices": "4.1.0",
@@ -4941,12 +4942,12 @@
         "lib/netstandard1.3/Microsoft.DotNet.InternalAbstractions.dll"
       ]
     },
-    "Microsoft.EntityFrameworkCore/1.0.0": {
-      "sha512": "Vqg/v0cXRQZQH0gY3VHHqt0Bt5WZEkDReVpI1sNYKHVbVtnMYFKPp5SiNygosUJYrJk1rSGb8UVkplDNNUkEgg==",
+    "Microsoft.EntityFrameworkCore/1.0.1": {
+      "sha512": "bprn1t+6muzkNzh64Art4w20L1FKDFac/Tx4h+4d7Sd9ivRqAaec6MqU700CFo6h6CHjAjWeqzYjQFroCouECQ==",
       "type": "package",
-      "path": "Microsoft.EntityFrameworkCore/1.0.0",
+      "path": "Microsoft.EntityFrameworkCore/1.0.1",
       "files": [
-        "Microsoft.EntityFrameworkCore.1.0.0.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.1.0.1.nupkg.sha512",
         "Microsoft.EntityFrameworkCore.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.xml",
@@ -5761,12 +5762,12 @@
         "runtimes/win7-x86/native/sni.dll"
       ]
     },
-    "Serilog/2.2.1": {
-      "sha512": "rQcldf93blfFel7X66LCPzIxXUDvkwlkvb3NbZOziZo9TgqcSRrxx1DiMW/gMsTbd46iAr7ZJF2LgCUa/kR2ng==",
+    "Serilog/2.3.0": {
+      "sha512": "JJMEqTUGe/bA4OEMefGd8W6si9oStSa3CF47dIHzkRKJHqFWFOW8D2aZTOW6VIgNLY2hzruQXhvp2tX0NVkgsw==",
       "type": "package",
-      "path": "Serilog/2.2.1",
+      "path": "Serilog/2.3.0",
       "files": [
-        "Serilog.2.2.1.nupkg.sha512",
+        "Serilog.2.3.0.nupkg.sha512",
         "Serilog.nuspec",
         "lib/net45/Serilog.dll",
         "lib/net45/Serilog.xml",
@@ -5802,12 +5803,12 @@
         "lib/netstandard1.3/Serilog.Sinks.Console.dll"
       ]
     },
-    "Serilog.Sinks.File/3.0.1": {
-      "sha512": "9eCg2aGA9gSU2H3AeKcefXcEeHLpmvR3gMxiLqXRvqBNozZOd8Kdng24r7erEkC6E3FD7mCroUHclvDwdycc4A==",
+    "Serilog.Sinks.File/3.1.0": {
+      "sha512": "/ArxCBDAXzMNIYVxO+4QbfTnytQ1qBlNGv+8Lyx5z1+PTrp0+xjf4o5km+Gn8TbRNg5Kh137TSEKeNwCRCkp8w==",
       "type": "package",
-      "path": "Serilog.Sinks.File/3.0.1",
+      "path": "Serilog.Sinks.File/3.1.0",
       "files": [
-        "Serilog.Sinks.File.3.0.1.nupkg.sha512",
+        "Serilog.Sinks.File.3.1.0.nupkg.sha512",
         "Serilog.Sinks.File.nuspec",
         "lib/net45/Serilog.Sinks.File.dll",
         "lib/net45/Serilog.Sinks.File.xml",
@@ -5841,12 +5842,12 @@
         "lib/netstandard1.3/Serilog.Sinks.PeriodicBatching.xml"
       ]
     },
-    "Serilog.Sinks.RollingFile/3.0.1": {
-      "sha512": "l4Ei4+YmMGF3RoWYu8TanMPFdwd6hywYtNDv+PCG84sUxoba377B6YVSJJx/yaGuDRcH48ZhfLjITT7pJUqGrQ==",
+    "Serilog.Sinks.RollingFile/3.2.0": {
+      "sha512": "7jaXpVUofqjaPSgjFKGDExHx04xx9zrjm0XdFzSFDoocfkHtUuvLnFqFwja/CPIqnU1yFZ0iKPdGSy8jbRro6w==",
       "type": "package",
-      "path": "Serilog.Sinks.RollingFile/3.0.1",
+      "path": "Serilog.Sinks.RollingFile/3.2.0",
       "files": [
-        "Serilog.Sinks.RollingFile.3.0.1.nupkg.sha512",
+        "Serilog.Sinks.RollingFile.3.2.0.nupkg.sha512",
         "Serilog.Sinks.RollingFile.nuspec",
         "lib/net45/Serilog.Sinks.RollingFile.dll",
         "lib/net45/Serilog.Sinks.RollingFile.xml",
@@ -10661,7 +10662,7 @@
       "Microsoft.AspNetCore.Mvc >= 1.0.0",
       "Microsoft.AspNetCore.Server.IISIntegration >= 1.0.0",
       "Microsoft.AspNetCore.Server.Kestrel >= 1.0.0",
-      "Microsoft.EntityFrameworkCore >= 1.0.0",
+      "Microsoft.EntityFrameworkCore >= 1.0.1",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 1.0.0",
       "Microsoft.Extensions.Configuration.FileExtensions >= 1.0.0",
       "Microsoft.Extensions.Configuration.Json >= 1.0.0",
@@ -10674,11 +10675,11 @@
       "MySql.Data.Core >= 7.0.4-IR-191",
       "MySql.Data.EntityFrameworkCore >= 7.0.4-IR-191",
       "OwnApt >= 14.7607.603",
-      "Serilog >= 2.2.1",
+      "Serilog >= 2.3.0",
       "Serilog.Extensions.Logging >= 1.2.0",
       "Serilog.Sinks.Console >= 2.1.0",
       "Serilog.Sinks.Logentries >= 3.0.0-dev-00020",
-      "Serilog.Sinks.RollingFile >= 3.0.1",
+      "Serilog.Sinks.RollingFile >= 3.2.0",
       "Swashbuckle.SwaggerGen >= 6.0.0-beta901",
       "Swashbuckle.SwaggerUi >= 6.0.0-beta901",
       "System.Reflection.TypeExtensions >= 4.1.0",

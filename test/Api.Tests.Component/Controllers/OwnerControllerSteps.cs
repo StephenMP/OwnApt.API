@@ -1,9 +1,9 @@
-﻿using OwnApt.Api.Contract.Model;
+﻿using System;
+using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Controllers;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers

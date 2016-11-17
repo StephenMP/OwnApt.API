@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.Domain.Service;
 
 namespace OwnApt.Api.Controllers
@@ -11,9 +7,15 @@ namespace OwnApt.Api.Controllers
     [Route("api/v1/[controller]")]
     public class CacheController : ApiController
     {
+        #region Public Constructors
+
         public CacheController(IMemoryCacheService cache) : base(cache)
         {
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         [HttpPost("invalidate")]
         public async Task<IActionResult> Invalidate()
@@ -21,5 +23,7 @@ namespace OwnApt.Api.Controllers
             await Task.Factory.StartNew(() => this.InvalidateCache());
             return Ok();
         }
+
+        #endregion Public Methods
     }
 }

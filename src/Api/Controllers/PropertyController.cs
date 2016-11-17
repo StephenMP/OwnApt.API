@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using OwnApt.Api.Contract.Model;
 using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Service;
@@ -7,9 +9,6 @@ using OwnApt.Api.Extension;
 using OwnApt.Api.Filters;
 using OwnApt.Common.Enums;
 using OwnApt.Common.Extension;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OwnApt.Api.Controllers
 {
@@ -113,11 +112,27 @@ namespace OwnApt.Api.Controllers
             return Ok(propertyModel);
         }
 
+        [HttpGet("all")]
+        [ValidateModel]
+        public async Task<IActionResult> ReadAllPropertiesAsync()
+        {
+            IEnumerable<PropertyModel> models = null;
+
+            if (this.CheckCache(nameof(ReadAllPropertiesAsync), out models))
+            {
+                return Ok(models);
+            }
+
+            models = await this.propertyService.ReadAllAsync();
+            this.SetCache(nameof(ReadAllPropertiesAsync), models);
+            return Ok(models);
+        }
+
         [HttpGet]
         [ValidateModel]
         public async Task<IActionResult> ReadPropertiesAsync([FromQuery] string[] propertyIds)
         {
-            PropertyModel[] models = null;
+            IEnumerable<PropertyModel> models = null;
 
             if (this.CheckCache(propertyIds.GetHashCodeSafe(), out models))
             {

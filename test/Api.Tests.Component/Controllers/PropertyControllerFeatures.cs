@@ -1,7 +1,7 @@
-﻿using OwnApt.Api.Contract.Model;
-using System.Net;
+﻿using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 using Xunit;
 
 namespace Api.Tests.Component.Controllers

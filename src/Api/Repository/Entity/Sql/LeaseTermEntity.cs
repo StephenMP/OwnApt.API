@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OwnApt.Api.Repository.Entity.Sql
 {
     [Table("LeaseTerm")]
-    public class LeaseTermEntity
+    public class LeaseTermEntity : SqlEntity
     {
         #region Public Properties
 
@@ -15,6 +15,8 @@ namespace OwnApt.Api.Repository.Entity.Sql
 
         [Column("EndDate")]
         public DateTime EndDate { get; set; }
+
+        public override int Id => LeaseTermId;
 
         public List<LeasePeriodEntity> LeasePeriods { get; set; }
 

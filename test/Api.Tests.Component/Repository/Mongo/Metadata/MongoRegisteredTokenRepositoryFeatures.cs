@@ -33,29 +33,11 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
         }
 
         [Fact]
-        public async Task CannotDeleteRegisteredToken()
-        {
-            this.steps.GivenIHaveAMongoMetadataContext();
-            this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveADeleteRegisteredTokenAction();
-            await this.steps.ThenICanVerifyICannotDeleteRegisteredToken();
-        }
-
-        [Fact]
-        public async Task CannotUpdateRegisteredToken()
-        {
-            this.steps.GivenIHaveAMongoMetadataContext();
-            this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveAnUpdateRegisteredTokenAction();
-            await this.steps.ThenICanVerifyICannotUpdateRegisteredToken();
-        }
-
-        [Fact]
         public async Task CanReadRegisteredToken()
         {
             this.steps.GivenIHaveAMongoMetadataContext();
             this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveARegisteredTokenToRead();
+            await this.steps.GivenIHaveARegisteredTokenToRead();
             await this.steps.WhenIReadAsync();
             this.steps.ThenICanVerifyICanReadRegisteredToken();
         }
@@ -65,7 +47,7 @@ namespace Api.Tests.Component.Repository.Mongo.Metadata
         {
             this.steps.GivenIHaveAMongoMetadataContext();
             this.steps.GivenIHaveARegisteredTokenRepository();
-            this.steps.GivenIHaveARegisteredTokenToRead();
+            await this.steps.GivenIHaveARegisteredTokenToRead();
             await this.steps.WhenIReadByTokenAsync();
             this.steps.ThenICanVerifyICanReadRegisteredToken();
         }

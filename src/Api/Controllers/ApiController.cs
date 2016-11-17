@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using OwnApt.Api.Domain.Service;
-using System;
 
 namespace OwnApt.Api.Controllers
 {
@@ -39,14 +39,14 @@ namespace OwnApt.Api.Controllers
             return this.cache.TryGetValue(this.CacheKey(id), out value);
         }
 
-        protected void RemoveCache<TKey>(TKey id)
-        {
-            this.cache?.Remove(this.CacheKey(id));
-        }
-
         protected void InvalidateCache()
         {
             this.cache?.Invalidate();
+        }
+
+        protected void RemoveCache<TKey>(TKey id)
+        {
+            this.cache?.Remove(this.CacheKey(id));
         }
 
         protected void SetCache<TKey, TObj>(TKey id, TObj model)

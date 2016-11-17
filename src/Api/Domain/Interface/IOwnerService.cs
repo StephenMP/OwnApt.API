@@ -1,5 +1,5 @@
-﻿using OwnApt.Api.Contract.Model;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using OwnApt.Api.Contract.Model;
 
 namespace OwnApt.Api.Domain.Interface
 {

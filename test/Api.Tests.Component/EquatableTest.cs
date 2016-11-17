@@ -1,7 +1,7 @@
-﻿using OwnApt.Common.Dto;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
+using OwnApt.Common.Dto;
 using Xunit;
 
 namespace Api.Tests.Component
