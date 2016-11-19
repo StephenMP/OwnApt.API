@@ -11,8 +11,8 @@ namespace OwnApt.Api.Repository.Mongo
     {
         #region Protected Fields
 
-        protected readonly IMapper mapper;
         protected readonly IMongoCollection<TEntity> collection;
+        protected readonly IMapper mapper;
 
         #endregion Protected Fields
 
@@ -42,7 +42,8 @@ namespace OwnApt.Api.Repository.Mongo
 
         public async Task<IEnumerable<TModel>> ReadAllAsync()
         {
-            var entities = await this.collection.FindAsync(e => true);
+            var asyncCursor= await this.collection.FindAsync(e => true);
+            var entities = await asyncCursor.ToListAsync();
             var models = this.mapper.Map<List<TModel>>(entities);
 
             return models;

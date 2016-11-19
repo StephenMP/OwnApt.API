@@ -20,10 +20,21 @@ namespace OwnApt.Api.Repository.Sql.Lease
 
         #region Public Methods
 
+        public override async Task<LeaseTermModel> ReadAsync(int id)
+        {
+            var entity = await this.DbSet
+                                   .AsNoTracking()
+                                   .Include(e => e.LeasePeriods)
+                                   .SingleOrDefaultAsync(e => e.LeaseTermId == id);
+
+            var model = this.Mapper.Map<LeaseTermModel>(entity);
+
+            return model;
+        }
+
         public async Task<LeaseTermModel> ReadByPropertyIdAsync(string propertyId)
         {
-            var entity = await this.context
-                                   .LeaseTerm
+            var entity = await this.DbSet
                                    .AsNoTracking()
                                    .Include(e => e.LeasePeriods)
                                    .SingleOrDefaultAsync
@@ -32,7 +43,7 @@ namespace OwnApt.Api.Repository.Sql.Lease
                                          && e.PropertyId == propertyId
                                     );
 
-            var model = this.mapper.Map<LeaseTermModel>(entity);
+            var model = this.Mapper.Map<LeaseTermModel>(entity);
 
             return model;
         }

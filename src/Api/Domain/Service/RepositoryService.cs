@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using OwnApt.Api.Repository.Interface;
 
@@ -8,12 +6,22 @@ namespace OwnApt.Api.Domain.Service
 {
     public class RepositoryService<TModel, TPrimaryKey, TRepository> where TRepository : IRepository<TModel, TPrimaryKey>
     {
+        #region Protected Fields
+
         protected readonly TRepository repository;
+
+        #endregion Protected Fields
+
+        #region Public Constructors
 
         public RepositoryService(TRepository repository)
         {
             this.repository = repository;
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         public virtual async Task<TModel> CreateAsync(TModel model)
         {
@@ -39,5 +47,7 @@ namespace OwnApt.Api.Domain.Service
         {
             await this.repository.UpdateAsync(model);
         }
+
+        #endregion Public Methods
     }
 }

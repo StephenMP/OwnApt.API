@@ -10,73 +10,78 @@ namespace OwnApt.Api.Repository.Sql
 {
     public abstract class SqlRepository<TModel, TEntity, TContext> : IRepository<TModel, int> where TEntity : SqlEntity where TContext : DbContext
     {
-        #region Protected Fields
-
-        protected readonly TContext context;
-        protected readonly IMapper mapper;
-
-        #endregion Protected Fields
-
         #region Protected Constructors
 
         protected SqlRepository(TContext context, IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this.Context = context;
+            this.DbSet = context.Set<TEntity>();
+            this.Mapper = mapper;
         }
 
         #endregion Protected Constructors
 
+        #region Protected Properties
+
+        protected TContext Context { get; }
+        protected DbSet<TEntity> DbSet { get; }
+        protected IMapper Mapper { get; }
+
+        #endregion Protected Properties
+
         #region Public Methods
 
-        public async Task<TModel> CreateAsync(TModel model)
+        public virtual async Task<TModel> CreateAsync(TModel model)
         {
-            var entity = this.mapper.Map<TEntity>(model);
-            this.context.Set<TEntity>().Add(entity);
-            await this.context.SaveChangesAsync();
+            var entity = this.Mapper.Map<TEntity>(model);
+            this.DbSet.Add(entity);
 
-            model = this.mapper.Map<TModel>(entity);
+            await this.Context.SaveChangesAsync();
+
+            model = this.Mapper.Map<TModel>(entity);
             return model;
         }
 
-        public async Task DeleteAsync(int id)
+        public virtual async Task DeleteAsync(int id)
         {
             var model = await this.ReadAsync(id);
-            var entity = this.mapper.Map<TEntity>(model);
-            this.context.Set<TEntity>().Remove(entity);
-            await this.context.SaveChangesAsync();
+            var entity = this.Mapper.Map<TEntity>(model);
+
+            if (entity != null)
+            {
+                this.DbSet.Remove(entity);
+                await this.Context.SaveChangesAsync();
+            }
         }
 
-        public async Task<IEnumerable<TModel>> ReadAllAsync()
+        public virtual async Task<IEnumerable<TModel>> ReadAllAsync()
         {
-            var entities = await this.context
-                                     .Set<TEntity>()
+            var entities = await this.DbSet
                                      .AsNoTracking()
                                      .AsQueryable()
                                      .ToListAsync();
 
-            var models = this.mapper.Map<List<TModel>>(entities);
+            var models = this.Mapper.Map<List<TModel>>(entities);
 
             return models;
         }
 
-        public async Task<TModel> ReadAsync(int id)
+        public virtual async Task<TModel> ReadAsync(int id)
         {
-            var entity = await this.context
-                                   .Set<TEntity>()
+            var entity = await this.DbSet
                                    .AsNoTracking()
                                    .SingleOrDefaultAsync(e => e.Id == id);
 
-            var model = this.mapper.Map<TModel>(entity);
+            var model = this.Mapper.Map<TModel>(entity);
 
             return model;
         }
 
-        public async Task UpdateAsync(TModel model)
+        public virtual async Task UpdateAsync(TModel model)
         {
-            var entity = this.mapper.Map<TEntity>(model);
-            this.context.Update(entity);
-            await this.context.SaveChangesAsync();
+            var entity = this.Mapper.Map<TEntity>(model);
+            this.DbSet.Update(entity);
+            await this.Context.SaveChangesAsync();
         }
 
         #endregion Public Methods

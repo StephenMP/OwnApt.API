@@ -19,10 +19,6 @@ namespace OwnApt.Api.Domain.Service
 
     public class RegisteredTokenService : RepositoryService<RegisteredTokenModel, string, IRegisteredTokenRepository>, IRegisteredTokenService
     {
-        #region Private Fields
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public RegisteredTokenService(IRegisteredTokenRepository registeredTokenRepository) : base(registeredTokenRepository)

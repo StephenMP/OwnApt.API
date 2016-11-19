@@ -8,11 +8,6 @@ namespace OwnApt.Api.Domain.Service
 {
     public class PropertyService : RepositoryService<PropertyModel, string, IPropertyRepository>, IPropertyService
     {
-        #region Private Fields
-
-
-        #endregion Private Fields
-
         #region Public Constructors
 
         public PropertyService(IPropertyRepository propertyRepository) : base(propertyRepository)
