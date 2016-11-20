@@ -8,6 +8,11 @@ namespace OwnApt.Api.Repository.Entity.Sql
     [Table("LeaseTerm")]
     public class LeaseTermEntity : SqlEntity
     {
+        public LeaseTermEntity()
+        {
+            this.LeasePeriods = new List<LeasePeriodEntity>();
+        }
+
         #region Public Properties
 
         [Column("Active")]

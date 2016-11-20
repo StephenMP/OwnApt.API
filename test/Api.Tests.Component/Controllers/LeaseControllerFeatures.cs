@@ -30,7 +30,7 @@ namespace Api.Tests.Component.Controllers
         [Fact]
         public async Task CanCreateLeaseTerm()
         {
-            this.steps.GivenIHaveALeaseControllerEnvironment();
+            await this.steps.GivenIHaveALeaseControllerEnvironment();
             this.steps.GivenIHaveALeaseTermToCreate();
             await this.steps.WhenICallCreateLeaseTermAsync();
             this.steps.ThenICanVerifyIReceived<Missing>(HttpStatusCode.Created);
@@ -43,7 +43,7 @@ namespace Api.Tests.Component.Controllers
         [Fact]
         public async Task CanReadLeaseTerm()
         {
-            this.steps.GivenIHaveALeaseControllerEnvironment();
+            await this.steps.GivenIHaveALeaseControllerEnvironment();
             await this.steps.WhenICallReadLeaseTermAsync();
             this.steps.ThenICanVerifyIReceived<LeaseTermModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyICanReadLeaseTerm();
@@ -52,7 +52,7 @@ namespace Api.Tests.Component.Controllers
         [Fact]
         public async Task CanReadLeaseTermByPropertyId()
         {
-            this.steps.GivenIHaveALeaseControllerEnvironment();
+            await this.steps.GivenIHaveALeaseControllerEnvironment();
             await this.steps.WhenICallReadLeaseTermByPropertyIdAsync();
             this.steps.ThenICanVerifyIReceived<LeaseTermModel>(HttpStatusCode.OK);
             this.steps.ThenICanVerifyICanReadLeaseTerm();

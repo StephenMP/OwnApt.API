@@ -19,7 +19,7 @@ namespace OwnApt.Api.Repository.Mongo.Core
 
         #region Public Constructors
 
-        public MongoPropertyRepository(IMongoCoreContext mongoCoreContext, IMapper mapper) : base(mongoCoreContext.PropertiesCollection, mapper)
+        public MongoPropertyRepository(IMongoCoreContext mongoCoreContext, IMapper mapper) : base(mongoCoreContext.PropertyCollection, mapper)
         {
             this.mongoCoreContext = mongoCoreContext;
         }
@@ -30,7 +30,7 @@ namespace OwnApt.Api.Repository.Mongo.Core
 
         public async Task<IEnumerable<PropertyModel>> ReadManyAsync(string[] propertyIds)
         {
-            var asyncCursor = await this.mongoCoreContext.PropertiesCollection.FindAsync(p => propertyIds.Contains(p.Id));
+            var asyncCursor = await this.mongoCoreContext.PropertyCollection.FindAsync(p => propertyIds.Contains(p.Id));
             var propertyEntities = await asyncCursor.ToListAsync();
             return this.mapper.Map<List<PropertyModel>>(propertyEntities);
         }

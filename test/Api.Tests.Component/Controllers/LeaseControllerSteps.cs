@@ -54,12 +54,12 @@ namespace Api.Tests.Component.Controllers
             this.leaseController = new LeaseController(this.leaseTermService, null);
         }
 
-        internal void GivenIHaveALeaseControllerEnvironment()
+        internal async Task GivenIHaveALeaseControllerEnvironment()
         {
             this.GivenIHaveATestEnvironment();
             this.GivenIHaveALeaseContext();
-            this.GivenIHaveALeaseTermToRead();
             this.GivenIHaveALeaseTermRepository();
+            await this.GivenIHaveALeaseTermToRead();
             this.GivenIHaveALeaseTermService();
             this.GivenIHaveALeaseController();
         }
@@ -81,19 +81,22 @@ namespace Api.Tests.Component.Controllers
             this.currentPropertyId = this.newLeaseTermModel.PropertyId;
         }
 
-        internal void GivenIHaveALeaseTermToRead()
+        internal async Task GivenIHaveALeaseTermToRead()
         {
             this.leaseTermEntity = LeaseControllerRandom.LeaseTermEntity;
-            var leasePeriodClosedEntity = LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.Closed);
-            var leasePeriodPaymentDueEntity = LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.PaymentDue);
-            var leasePeriodPaymentReceivedEntity = LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.PaymentReceived);
+            var leasePeriods = new[]
+            {
+                LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.Closed),
+                LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.PaymentDue),
+                LeaseControllerRandom.LeasePeriodEntity(leaseTermEntity.LeaseTermId, LeasePeriodStatus.PaymentReceived)
+            };
+
+            await this.testEnvironment.ImportSqlDataAsync<LeaseContext, LeaseTermEntity>(new[] { leaseTermEntity });
+            await this.testEnvironment.ImportSqlDataAsync<LeaseContext, LeasePeriodEntity>(leasePeriods);
+
             this.currentLeaseTermId = this.leaseTermEntity.LeaseTermId;
             this.currentPropertyId = this.leaseTermEntity.PropertyId;
-            this.leaseContext.Add(leaseTermEntity);
-            this.leaseContext.Add(leasePeriodClosedEntity);
-            this.leaseContext.Add(leasePeriodPaymentDueEntity);
-            this.leaseContext.Add(leasePeriodPaymentReceivedEntity);
-            this.leaseContext.SaveChanges();
+            this.leaseTermEntity.LeasePeriods.AddRange(leasePeriods);
         }
 
         internal void GivenIHaveATestEnvironment()

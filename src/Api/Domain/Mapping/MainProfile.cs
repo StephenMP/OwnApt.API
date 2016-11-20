@@ -13,6 +13,7 @@ namespace OwnApt.Api.Domain.Mapping
 
         public MainProfile()
         {
+            ConfigureManagementAgreement();
             ConfigureRegisteredToken();
             ConfigureLeaseTerm();
             ConfigureLeasePeriod();
@@ -26,6 +27,15 @@ namespace OwnApt.Api.Domain.Mapping
             ConfigureZip();
             ConfigureProperty();
             ConfigureOwner();
+        }
+
+        private void ConfigureManagementAgreement()
+        {
+            CreateMap<ManagementAgreementModel, ManagementAgreementEntity>();
+            CreateMap<ManagementAgreementEntity, ManagementAgreementModel>();
+
+            CreateMap<ManagementAgreementSectionModel, ManagementAgreementSectionEntity>();
+            CreateMap<ManagementAgreementSectionEntity, ManagementAgreementSectionModel>();
         }
 
         #endregion Public Constructors

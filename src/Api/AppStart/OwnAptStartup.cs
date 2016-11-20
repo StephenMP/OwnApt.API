@@ -12,6 +12,7 @@ using OwnApt.Api.Domain.Interface;
 using OwnApt.Api.Domain.Mapping;
 using OwnApt.Api.Domain.Service;
 using OwnApt.Api.Repository.Interface;
+using OwnApt.Api.Repository.Mongo.Document;
 using OwnApt.Api.Repository.Mongo.Core;
 using OwnApt.Api.Repository.Mongo.Metadata;
 using OwnApt.Api.Repository.Sql.Core;
@@ -90,6 +91,7 @@ namespace OwnApt.Api.AppStart
             services.AddSingleton<IMongoClient>(BuildMongoClient());
             services.AddScoped<IMongoCoreContext, MongoCoreContext>();
             services.AddScoped<IMongoMetadataContext, MongoMetadataContext>();
+            services.AddScoped<IMongoDocumentContext, MongoDocumentContext>();
         }
 
         private static void AddMvc(IServiceCollection services)

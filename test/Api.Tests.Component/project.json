@@ -7,7 +7,8 @@
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Api": "1.0.0-*",
     "moq.netcore": "4.4.0-beta8",
-    "TestEnvironment": "14.7478.2391"
+    "TestEnvironment": "14.7478.2391",
+    "ApiContract": "14.7961.3607"
   },
   "frameworks": {
     "netcoreapp1.0": {
