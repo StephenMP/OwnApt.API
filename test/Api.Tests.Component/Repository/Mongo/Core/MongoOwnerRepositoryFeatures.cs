@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Core
 {
-    public class MongoOwnerRepositoryFeatures : MongoRepositoryFeatures<OwnerModel, OwnerEntity>
+    public class MongoOwnerRepositoryFeatures : RepositoryFeatures<OwnerModel, OwnerEntity>
     {
         public MongoOwnerRepositoryFeatures() : base(new MongoOwnerRepositorySteps())
         {

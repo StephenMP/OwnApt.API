@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Core
 {
-    public class MongoPropertyRepositoryFeatures : MongoRepositoryFeatures<PropertyModel, PropertyEntity>
+    public class MongoPropertyRepositoryFeatures : RepositoryFeatures<PropertyModel, PropertyEntity>
     {
         public MongoPropertyRepositoryFeatures() : base(new MongoPropertyRepositorySteps())
         {

@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Document
 {
-    public class ManagementAgreementRepositoryFeatures : MongoRepositoryFeatures<ManagementAgreementModel, ManagementAgreementEntity>
+    public class ManagementAgreementRepositoryFeatures : RepositoryFeatures<ManagementAgreementModel, ManagementAgreementEntity>
     {
         public ManagementAgreementRepositoryFeatures() : base(new ManagementAgreementRepositorySteps())
         {

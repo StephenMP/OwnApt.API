@@ -8,7 +8,11 @@ namespace OwnApt.Api.Repository.Entity.Sql
     {
         #region Public Properties
 
-        public override int Id => this.LeasePeriodId;
+        public override int Id
+        {
+            get { return this.LeasePeriodId; }
+            set { this.LeasePeriodId = value; }
+        }
 
         [Key, Column("LeasePeriodId")]
         public int LeasePeriodId { get; set; }

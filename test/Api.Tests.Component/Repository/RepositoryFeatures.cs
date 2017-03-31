@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using OwnApt.Api.Repository.Entity.Mongo;
 using Xunit;
 
-namespace Api.Tests.Component.Repository.Mongo
+namespace Api.Tests.Component.Repository
 {
-    public abstract class MongoRepositoryFeatures<TModel, TEntity> : IDisposable where TEntity : MongoEntity
+    public abstract class RepositoryFeatures<TModel, TEntity> : IDisposable
     {
         #region Protected Fields
 
-        protected readonly MongoRepositorySteps<TModel, TEntity> steps;
+        protected readonly RepositorySteps<TModel, TEntity> steps;
 
         #endregion Protected Fields
 
@@ -21,7 +22,7 @@ namespace Api.Tests.Component.Repository.Mongo
 
         #region Protected Constructors
 
-        protected MongoRepositoryFeatures(MongoRepositorySteps<TModel, TEntity> steps)
+        protected RepositoryFeatures(RepositorySteps<TModel, TEntity> steps)
         {
             this.steps = steps;
         }
@@ -33,7 +34,7 @@ namespace Api.Tests.Component.Repository.Mongo
         [Fact]
         public async Task CanCreateAsync()
         {
-            this.steps.GivenIHaveAMongoTestEnvironment();
+            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIHaveARepository();
             this.steps.GivenIHaveAnEntityToCreate();
             await this.steps.WhenICallCreateAsync();
@@ -43,7 +44,7 @@ namespace Api.Tests.Component.Repository.Mongo
         [Fact]
         public async Task CanDeleteAsync()
         {
-            this.steps.GivenIHaveAMongoTestEnvironment();
+            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIHaveARepository();
             this.steps.GivenIHaveAnEntityToDelete();
             await this.steps.WhenICallDeleteAsync();
@@ -53,7 +54,7 @@ namespace Api.Tests.Component.Repository.Mongo
         [Fact]
         public async Task CanReadAllAsync()
         {
-            this.steps.GivenIHaveAMongoTestEnvironment();
+            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIHaveARepository();
             this.steps.GivenIHaveAnEntitiesToRead();
             await this.steps.WhenICallReadAllAsync();
@@ -63,7 +64,7 @@ namespace Api.Tests.Component.Repository.Mongo
         [Fact]
         public async Task CanReadAsync()
         {
-            this.steps.GivenIHaveAMongoTestEnvironment();
+            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIHaveARepository();
             this.steps.GivenIHaveAnEntityToRead();
             await this.steps.WhenICallReadAsync();
@@ -73,7 +74,7 @@ namespace Api.Tests.Component.Repository.Mongo
         [Fact]
         public async Task CanUpdateAsync()
         {
-            this.steps.GivenIHaveAMongoTestEnvironment();
+            this.steps.GivenIHaveATestEnvironment();
             this.steps.GivenIHaveARepository();
             this.steps.GivenIHaveAnEntityToUpdate();
             await this.steps.WhenICallUpdateAsyncAction();

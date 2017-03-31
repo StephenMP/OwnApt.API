@@ -21,8 +21,11 @@ namespace OwnApt.Api.Repository.Entity.Sql
         [Column("EndDate")]
         public DateTime EndDate { get; set; }
 
-        public override int Id => LeaseTermId;
-
+        public override int Id
+        {
+            get { return this.LeaseTermId; }
+            set { this.LeaseTermId = value; }
+        }
         public List<LeasePeriodEntity> LeasePeriods { get; set; }
 
         [Key, Column("LeaseTermId")]

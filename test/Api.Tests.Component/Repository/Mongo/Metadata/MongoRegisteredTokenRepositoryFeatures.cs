@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Api.Tests.Component.Repository.Mongo.Metadata
 {
-    public class MongoRegisteredTokenRepositoryFeatures : MongoRepositoryFeatures<RegisteredTokenModel, RegisteredTokenEntity>
+    public class MongoRegisteredTokenRepositoryFeatures : RepositoryFeatures<RegisteredTokenModel, RegisteredTokenEntity>
     {
         public MongoRegisteredTokenRepositoryFeatures() : base(new MongoRegisteredTokenRepositorySteps())
         {

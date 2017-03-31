@@ -6,7 +6,7 @@ namespace OwnApt.Api.Repository.Entity.Sql
     {
         #region Public Properties
 
-        public virtual int Id { get; }
+        public virtual int Id { get; set; }
 
         #endregion Public Properties
     }

@@ -3,41 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using MongoDB.Driver;
+using Microsoft.EntityFrameworkCore;
 using OwnApt.Api.AppStart;
-using OwnApt.Api.Repository.Entity.Mongo;
-using OwnApt.Api.Repository.Mongo;
+using OwnApt.Api.Repository.Entity.Sql;
+using OwnApt.Api.Repository.Sql;
 using OwnApt.TestEnvironment.Environment;
 using Xunit;
 
-namespace Api.Tests.Component.Repository.Mongo
+namespace Api.Tests.Component.Repository.Sql
 {
-    public abstract class MongoRepositorySteps<TModel, TEntity> : RepositorySteps<TModel, TEntity> where TEntity : MongoEntity
+    public abstract class SqlRepositorySteps<TModel, TEntity, TContext> : RepositorySteps<TModel, TEntity> where TEntity : SqlEntity where TContext : DbContext
     {
         #region Protected Fields
 
         protected readonly string collectionName;
         protected readonly string dbName;
         protected readonly IMapper mapper;
-        protected IMongoCollection<TEntity> collection;
-        protected IMongoDatabase database;
         protected TEntity[] entitiesToRead;
         protected TEntity entityToRead;
         protected TModel modelCreated;
         protected TModel modelRead;
         protected IEnumerable<TModel> modelsRead;
         protected TModel modelToCreate;
-        protected MongoRepository<TModel, TEntity> repository;
+        protected SqlRepository<TModel, TEntity, TContext> repository;
 
         #endregion Protected Fields
 
         #region Protected Constructors
 
-        protected MongoRepositorySteps(string dbName, string collectionName)
+        protected SqlRepositorySteps()
         {
             this.mapper = OwnAptStartup.BuildMapper();
-            this.dbName = dbName;
-            this.collectionName = collectionName;
         }
 
         #endregion Protected Constructors
@@ -57,16 +53,16 @@ namespace Api.Tests.Component.Repository.Mongo
 
             foreach (var entity in this.entitiesToRead)
             {
-                entity.Id = TestRandom.String;
+                entity.Id = TestRandom.Integer;
             }
 
-            this.collection.InsertMany(this.entitiesToRead);
+            this.environment.ImportSqlDataAsync<TContext, TEntity>(this.entitiesToRead);
         }
 
         public override void GivenIHaveAnEntityToCreate()
         {
             var entity = Activator.CreateInstance<TEntity>();
-            entity.Id = TestRandom.String;
+            entity.Id = TestRandom.Integer;
 
             this.modelToCreate = this.mapper.Map<TModel>(entity);
         }
@@ -79,9 +75,9 @@ namespace Api.Tests.Component.Repository.Mongo
         public override void GivenIHaveAnEntityToRead()
         {
             this.entityToRead = Activator.CreateInstance<TEntity>();
-            this.entityToRead.Id = TestRandom.String;
+            this.entityToRead.Id = TestRandom.Integer;
 
-            this.collection.InsertOne(this.entityToRead);
+            this.environment.ImportSqlDataAsync<TContext, TEntity>(new[] { this.entityToRead });
         }
 
         public override void GivenIHaveAnEntityToUpdate()
@@ -92,12 +88,8 @@ namespace Api.Tests.Component.Repository.Mongo
         public override void GivenIHaveATestEnvironment()
         {
             this.environment = new OwnAptTestEnvironmentBuilder()
-                            .AddMongo()
+                            .AddSqlContext<TContext>()
                             .BuildEnvironment();
-
-            var client = this.environment.GetMongoClient();
-            this.database = client.GetDatabase(this.dbName);
-            this.collection = this.database.GetCollection<TEntity>(this.collectionName);
         }
 
         public override void ThenICanVerifyICanCreateAsync()
